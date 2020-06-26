@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		7715272924A6200F0075F744 /* CityData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 7715272724A6200F0075F744 /* CityData.xcdatamodeld */; };
 		77165D7B24A5E47B00FC8F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D7A24A5E47B00FC8F4F /* AppDelegate.swift */; };
 		77165D7D24A5E47B00FC8F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D7C24A5E47B00FC8F4F /* SceneDelegate.swift */; };
 		77165D8424A5E47D00FC8F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77165D8324A5E47D00FC8F4F /* Assets.xcassets */; };
@@ -40,11 +41,11 @@
 		77165DDB24A6043E00FC8F4F /* JSONDecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DDA24A6043E00FC8F4F /* JSONDecoderService.swift */; };
 		77165DDE24A605BC00FC8F4F /* CityData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DDD24A605BC00FC8F4F /* CityData.swift */; };
 		77165DE024A606EF00FC8F4F /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 77165DDF24A606EF00FC8F4F /* city.list.json */; };
-		77165DE224A6164300FC8F4F /* city.list.min.json in Resources */ = {isa = PBXBuildFile; fileRef = 77165DE124A6164300FC8F4F /* city.list.min.json */; };
 		872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		7715272824A6200F0075F744 /* CityData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CityData.xcdatamodel; sourceTree = "<group>"; };
 		77165D7724A5E47B00FC8F4F /* ApplicaturaTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplicaturaTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77165D7A24A5E47B00FC8F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77165D7C24A5E47B00FC8F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -80,7 +81,6 @@
 		77165DDA24A6043E00FC8F4F /* JSONDecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderService.swift; sourceTree = "<group>"; };
 		77165DDD24A605BC00FC8F4F /* CityData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityData.swift; sourceTree = "<group>"; };
 		77165DDF24A606EF00FC8F4F /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
-		77165DE124A6164300FC8F4F /* city.list.min.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.min.json; sourceTree = "<group>"; };
 		90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.debug.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.release.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.release.xcconfig"; sourceTree = "<group>"; };
 		CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApplicaturaTestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -195,7 +195,7 @@
 				77165D8524A5E47D00FC8F4F /* LaunchScreen.storyboard */,
 				77165D8824A5E47D00FC8F4F /* Info.plist */,
 				77165DDF24A606EF00FC8F4F /* city.list.json */,
-				77165DE124A6164300FC8F4F /* city.list.min.json */,
+				7715272724A6200F0075F744 /* CityData.xcdatamodeld */,
 			);
 			path = SupportingFiles;
 			sourceTree = "<group>";
@@ -431,7 +431,6 @@
 				77165D8724A5E47D00FC8F4F /* LaunchScreen.storyboard in Resources */,
 				77165D8424A5E47D00FC8F4F /* Assets.xcassets in Resources */,
 				77165DE024A606EF00FC8F4F /* city.list.json in Resources */,
-				77165DE224A6164300FC8F4F /* city.list.min.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -515,6 +514,7 @@
 				77165DB024A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift in Sources */,
 				77165D9F24A5E88800FC8F4F /* BaseScene.swift in Sources */,
 				77165DDE24A605BC00FC8F4F /* CityData.swift in Sources */,
+				7715272924A6200F0075F744 /* CityData.xcdatamodeld in Sources */,
 				77165DB424A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift in Sources */,
 				77165DA124A5E89000FC8F4F /* BaseRouter.swift in Sources */,
 				77165DDB24A6043E00FC8F4F /* JSONDecoderService.swift in Sources */,
@@ -721,6 +721,19 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCVersionGroup section */
+		7715272724A6200F0075F744 /* CityData.xcdatamodeld */ = {
+			isa = XCVersionGroup;
+			children = (
+				7715272824A6200F0075F744 /* CityData.xcdatamodel */,
+			);
+			currentVersion = 7715272824A6200F0075F744 /* CityData.xcdatamodel */;
+			path = CityData.xcdatamodeld;
+			sourceTree = "<group>";
+			versionGroupType = wrapper.xcdatamodel;
+		};
+/* End XCVersionGroup section */
 	};
 	rootObject = 77165D6F24A5E47B00FC8F4F /* Project object */;
 }
