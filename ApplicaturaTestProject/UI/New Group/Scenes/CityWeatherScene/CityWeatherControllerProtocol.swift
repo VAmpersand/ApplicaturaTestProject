@@ -1,0 +1,3 @@
+public protocol CityWeatherControllerProtocol: class {
+}
+
