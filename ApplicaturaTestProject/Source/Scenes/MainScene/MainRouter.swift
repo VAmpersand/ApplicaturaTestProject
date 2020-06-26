@@ -20,6 +20,8 @@ final class MainRouter: BaseRouter {
 extension MainRouter {
     func startApp(in scene: UIScene) {
         setupWindow(in: scene)
+        
+        
     }
         
     private func setupWindow(in scene: UIScene) {

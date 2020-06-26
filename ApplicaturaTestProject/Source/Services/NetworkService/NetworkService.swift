@@ -1,13 +1,15 @@
 import UIKit
 import Alamofire
 
-final class NetworkService { }
+final class NetworkService {
+    static let shared = NetworkService()
+}
 
 //MARK: - Get
 extension NetworkService {
     func getJSONData<T: Codable>(from url: String,
-                                 with codableStruct: T.Type,
-                                 complition: @escaping (T?, Bool, String) -> Void) {
+                                 with codableStruct: [T].Type,
+                                 complition: @escaping ([T]?, Bool, String) -> Void) {
         AF.request(url,
                    method: .get,
                    parameters: nil,
@@ -15,14 +17,14 @@ extension NetworkService {
                    headers: nil,
                    interceptor: nil).response { responseData in
                     guard let data = responseData.data else {
-                        complition(nil, false, "")
-                        return }
-                    do {
-                        let jsonData = try JSONDecoder().decode(codableStruct.self, from: data)
-                        complition(jsonData, true, "")
-                    } catch {
-                        complition(nil, false, "Error: \(error.localizedDescription)")
+                        complition(nil, false, "Data not received")
+                        return
                     }
+                    
+                    let jsonData = JSONDecoderService.shared.decodeData(fron: data,
+                                                                        with: codableStruct.self)
+                    complition(jsonData, true, "")
+                    
         }
     }
 }

@@ -2,36 +2,29 @@ import UIKit
 import CoreData
 
 @UIApplicationMain
-class AppDelegate: UIResponder {
-    lazy var persistentContainer: NSPersistentContainer = {
-        let container = NSPersistentContainer(name: "CityData")
-        container.loadPersistentStores(completionHandler: { (storeDescription, error) in
-            if let error = error as NSError? {
-                fatalError("Unresolved error \(error), \(error.userInfo)")
-            }
-        })
-        return container
-    }()
-}
+class AppDelegate: UIResponder { }
 
 extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        return true
-    }
-}
+        CoreDataManager.shared.applicationDocumentsDirectory()
 
-extension AppDelegate {
-    func saveContext () {
-        let context = persistentContainer.viewContext
-        if context.hasChanges {
+        if !UserDefaults.cityDataWasSetup {
+            let path = Bundle.main.path(forResource: "city.list", ofType: "json")
+            
             do {
-                try context.save()
+                let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
+                DispatchQueue.main.async {
+                    JSONDecoderService.shared.saveCityDataToCoreData(fron: data)
+                }
             } catch {
-                let nserror = error as NSError
-                fatalError("Unresolved error \(nserror), \(nserror.userInfo)")
+                print(error.localizedDescription)
             }
+            
+            UserDefaults.cityDataWasSetup = true
         }
+        
+        return true
     }
 }

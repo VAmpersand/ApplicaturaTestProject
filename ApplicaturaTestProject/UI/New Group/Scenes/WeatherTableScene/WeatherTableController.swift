@@ -5,7 +5,7 @@ public final class WeatherTableController: BaseController {
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
-    var result: [CityData]?
+//    var result: [CityData]?
     
     private var printButton: UIButton = {
         let button = UIButton()
@@ -25,29 +25,6 @@ extension WeatherTableController {
         
         view.backgroundColor = .red
         
-        let service = JSONDecoderService()
-        let path = Bundle.main.path(forResource: "city.list.min", ofType: "json")
-    
-        do {
-        let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
-            DispatchQueue.main.async {
-                self.result = service.decodeData(fron: data, with: [CityData].self)
-            }
-        } catch {
-            print(error.localizedDescription)
-        }
-        
-                           
-//        let navigationBarTuple = addStaticNavigationBar(
-//            StaticNavigationBar(title: Texts.NewsInfo.title,
-//                                rightButtonImage: Icons.NewsInfo.back,
-//                                rightAction: {
-//                                    self.viewModel.handleClose()
-//            })
-//        )
-//        navigationBar = navigationBarTuple.navigationBar
-//        navigationBar.textAligment = .center
-//        closeButton = navigationBarTuple.rightButton
     }
     
     override func addSubviews() {
@@ -68,9 +45,8 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
-
     @objc func buttonPressed() {
-        print(result)
+        
     }
     
 }
