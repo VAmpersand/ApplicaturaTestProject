@@ -3,27 +3,61 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
 		77165D7B24A5E47B00FC8F4F /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D7A24A5E47B00FC8F4F /* AppDelegate.swift */; };
 		77165D7D24A5E47B00FC8F4F /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D7C24A5E47B00FC8F4F /* SceneDelegate.swift */; };
-		77165D7F24A5E47B00FC8F4F /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D7E24A5E47B00FC8F4F /* ViewController.swift */; };
-		77165D8224A5E47B00FC8F4F /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77165D8024A5E47B00FC8F4F /* Main.storyboard */; };
 		77165D8424A5E47D00FC8F4F /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77165D8324A5E47D00FC8F4F /* Assets.xcassets */; };
 		77165D8724A5E47D00FC8F4F /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 77165D8524A5E47D00FC8F4F /* LaunchScreen.storyboard */; };
+		77165D9824A5E83C00FC8F4F /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D9724A5E83C00FC8F4F /* Scene.swift */; };
+		77165D9A24A5E84A00FC8F4F /* Router.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D9924A5E84A00FC8F4F /* Router.swift */; };
+		77165D9C24A5E86B00FC8F4F /* Presentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D9B24A5E86B00FC8F4F /* Presentation.swift */; };
+		77165D9F24A5E88800FC8F4F /* BaseScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165D9E24A5E88800FC8F4F /* BaseScene.swift */; };
+		77165DA124A5E89000FC8F4F /* BaseRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DA024A5E89000FC8F4F /* BaseRouter.swift */; };
+		77165DA424A5E8B800FC8F4F /* PopoverPresentation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DA324A5E8B800FC8F4F /* PopoverPresentation.swift */; };
+		77165DA724A5E8E300FC8F4F /* MainRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DA624A5E8E300FC8F4F /* MainRouter.swift */; };
+		77165DA924A5E95B00FC8F4F /* Weaver.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DA824A5E95B00FC8F4F /* Weaver.swift */; };
+		77165DAC24A5F0AC00FC8F4F /* WeatherTableScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DAB24A5F0AC00FC8F4F /* WeatherTableScene.swift */; };
+		77165DAE24A5F12000FC8F4F /* WeatherTableViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DAD24A5F12000FC8F4F /* WeatherTableViewModel.swift */; };
+		77165DB024A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DAF24A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift */; };
+		77165DB224A5F1A100FC8F4F /* WeatherTableRouter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DB124A5F1A100FC8F4F /* WeatherTableRouter.swift */; };
+		77165DB424A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DB324A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift */; };
+		77165DB824A5F24B00FC8F4F /* BaseController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DB724A5F24B00FC8F4F /* BaseController.swift */; };
+		77165DBB24A5F27A00FC8F4F /* StaticNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DBA24A5F27A00FC8F4F /* StaticNavigationBar.swift */; };
+		77165DC024A5F30D00FC8F4F /* WeatherTableController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DBF24A5F30D00FC8F4F /* WeatherTableController.swift */; };
+		77165DC224A5F3A200FC8F4F /* WeatherControllerProtocol.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DC124A5F3A200FC8F4F /* WeatherControllerProtocol.swift */; };
+		872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
 		77165D7724A5E47B00FC8F4F /* ApplicaturaTestProject.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = ApplicaturaTestProject.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		77165D7A24A5E47B00FC8F4F /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		77165D7C24A5E47B00FC8F4F /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
-		77165D7E24A5E47B00FC8F4F /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
-		77165D8124A5E47B00FC8F4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/Main.storyboard; sourceTree = "<group>"; };
 		77165D8324A5E47D00FC8F4F /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		77165D8624A5E47D00FC8F4F /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		77165D8824A5E47D00FC8F4F /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		77165D9724A5E83C00FC8F4F /* Scene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		77165D9924A5E84A00FC8F4F /* Router.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Router.swift; sourceTree = "<group>"; };
+		77165D9B24A5E86B00FC8F4F /* Presentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Presentation.swift; sourceTree = "<group>"; };
+		77165D9E24A5E88800FC8F4F /* BaseScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseScene.swift; sourceTree = "<group>"; };
+		77165DA024A5E89000FC8F4F /* BaseRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseRouter.swift; sourceTree = "<group>"; };
+		77165DA324A5E8B800FC8F4F /* PopoverPresentation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopoverPresentation.swift; sourceTree = "<group>"; };
+		77165DA624A5E8E300FC8F4F /* MainRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainRouter.swift; sourceTree = "<group>"; };
+		77165DA824A5E95B00FC8F4F /* Weaver.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Weaver.swift; sourceTree = "<group>"; };
+		77165DAB24A5F0AC00FC8F4F /* WeatherTableScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableScene.swift; sourceTree = "<group>"; };
+		77165DAD24A5F12000FC8F4F /* WeatherTableViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewModel.swift; sourceTree = "<group>"; };
+		77165DAF24A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableViewModelProtocol.swift; sourceTree = "<group>"; };
+		77165DB124A5F1A100FC8F4F /* WeatherTableRouter.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableRouter.swift; sourceTree = "<group>"; };
+		77165DB324A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableRouterProtocol.swift; sourceTree = "<group>"; };
+		77165DB724A5F24B00FC8F4F /* BaseController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseController.swift; sourceTree = "<group>"; };
+		77165DBA24A5F27A00FC8F4F /* StaticNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticNavigationBar.swift; sourceTree = "<group>"; };
+		77165DBF24A5F30D00FC8F4F /* WeatherTableController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherTableController.swift; sourceTree = "<group>"; };
+		77165DC124A5F3A200FC8F4F /* WeatherControllerProtocol.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherControllerProtocol.swift; sourceTree = "<group>"; };
+		90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.debug.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.debug.xcconfig"; sourceTree = "<group>"; };
+		AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.release.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.release.xcconfig"; sourceTree = "<group>"; };
+		CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApplicaturaTestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -31,17 +65,37 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		44B833A0ADCA6FE2FDB76C50 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		4A0C337829E62F48EA31B2E0 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */,
+				AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */,
+			);
+			path = Pods;
+			sourceTree = "<group>";
+		};
 		77165D6E24A5E47B00FC8F4F = {
 			isa = PBXGroup;
 			children = (
 				77165D7924A5E47B00FC8F4F /* ApplicaturaTestProject */,
 				77165D7824A5E47B00FC8F4F /* Products */,
+				4A0C337829E62F48EA31B2E0 /* Pods */,
+				44B833A0ADCA6FE2FDB76C50 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -56,15 +110,174 @@
 		77165D7924A5E47B00FC8F4F /* ApplicaturaTestProject */ = {
 			isa = PBXGroup;
 			children = (
+				77165D8E24A5E53E00FC8F4F /* Source */,
+				77165D9424A5E6F500FC8F4F /* SupportingFiles */,
+				77165DB524A5F22100FC8F4F /* UI */,
+			);
+			path = ApplicaturaTestProject;
+			sourceTree = "<group>";
+		};
+		77165D8E24A5E53E00FC8F4F /* Source */ = {
+			isa = PBXGroup;
+			children = (
+				77165D8F24A5E54800FC8F4F /* Dependencies */,
+				77165D9524A5E81100FC8F4F /* Scenes */,
+				77165D9324A5E6DB00FC8F4F /* Services */,
+			);
+			path = Source;
+			sourceTree = "<group>";
+		};
+		77165D8F24A5E54800FC8F4F /* Dependencies */ = {
+			isa = PBXGroup;
+			children = (
+				77165D9024A5E55B00FC8F4F /* Generated */,
+			);
+			path = Dependencies;
+			sourceTree = "<group>";
+		};
+		77165D9024A5E55B00FC8F4F /* Generated */ = {
+			isa = PBXGroup;
+			children = (
+				77165DA824A5E95B00FC8F4F /* Weaver.swift */,
+			);
+			path = Generated;
+			sourceTree = "<group>";
+		};
+		77165D9224A5E69A00FC8F4F /* Application */ = {
+			isa = PBXGroup;
+			children = (
 				77165D7A24A5E47B00FC8F4F /* AppDelegate.swift */,
 				77165D7C24A5E47B00FC8F4F /* SceneDelegate.swift */,
-				77165D7E24A5E47B00FC8F4F /* ViewController.swift */,
-				77165D8024A5E47B00FC8F4F /* Main.storyboard */,
+			);
+			path = Application;
+			sourceTree = "<group>";
+		};
+		77165D9324A5E6DB00FC8F4F /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				77165D9224A5E69A00FC8F4F /* Application */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		77165D9424A5E6F500FC8F4F /* SupportingFiles */ = {
+			isa = PBXGroup;
+			children = (
 				77165D8324A5E47D00FC8F4F /* Assets.xcassets */,
 				77165D8524A5E47D00FC8F4F /* LaunchScreen.storyboard */,
 				77165D8824A5E47D00FC8F4F /* Info.plist */,
 			);
-			path = ApplicaturaTestProject;
+			path = SupportingFiles;
+			sourceTree = "<group>";
+		};
+		77165D9524A5E81100FC8F4F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				77165D9624A5E82C00FC8F4F /* Protocols */,
+				77165DA524A5E8CB00FC8F4F /* MainScene */,
+				77165DAA24A5F08800FC8F4F /* WeatherTableScene */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		77165D9624A5E82C00FC8F4F /* Protocols */ = {
+			isa = PBXGroup;
+			children = (
+				77165DA224A5E89A00FC8F4F /* Presentation */,
+				77165D9D24A5E87300FC8F4F /* Base */,
+				77165D9724A5E83C00FC8F4F /* Scene.swift */,
+				77165D9924A5E84A00FC8F4F /* Router.swift */,
+				77165D9B24A5E86B00FC8F4F /* Presentation.swift */,
+			);
+			path = Protocols;
+			sourceTree = "<group>";
+		};
+		77165D9D24A5E87300FC8F4F /* Base */ = {
+			isa = PBXGroup;
+			children = (
+				77165D9E24A5E88800FC8F4F /* BaseScene.swift */,
+				77165DA024A5E89000FC8F4F /* BaseRouter.swift */,
+			);
+			path = Base;
+			sourceTree = "<group>";
+		};
+		77165DA224A5E89A00FC8F4F /* Presentation */ = {
+			isa = PBXGroup;
+			children = (
+				77165DA324A5E8B800FC8F4F /* PopoverPresentation.swift */,
+			);
+			path = Presentation;
+			sourceTree = "<group>";
+		};
+		77165DA524A5E8CB00FC8F4F /* MainScene */ = {
+			isa = PBXGroup;
+			children = (
+				77165DA624A5E8E300FC8F4F /* MainRouter.swift */,
+			);
+			path = MainScene;
+			sourceTree = "<group>";
+		};
+		77165DAA24A5F08800FC8F4F /* WeatherTableScene */ = {
+			isa = PBXGroup;
+			children = (
+				77165DAB24A5F0AC00FC8F4F /* WeatherTableScene.swift */,
+				77165DAD24A5F12000FC8F4F /* WeatherTableViewModel.swift */,
+				77165DAF24A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift */,
+				77165DB124A5F1A100FC8F4F /* WeatherTableRouter.swift */,
+				77165DB324A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift */,
+			);
+			path = WeatherTableScene;
+			sourceTree = "<group>";
+		};
+		77165DB524A5F22100FC8F4F /* UI */ = {
+			isa = PBXGroup;
+			children = (
+				77165DB624A5F22700FC8F4F /* Scenes */,
+			);
+			path = UI;
+			sourceTree = "<group>";
+		};
+		77165DB624A5F22700FC8F4F /* Scenes */ = {
+			isa = PBXGroup;
+			children = (
+				77165DBE24A5F29700FC8F4F /* WeatherTableScene */,
+				77165DB924A5F26500FC8F4F /* BaseUI */,
+			);
+			path = Scenes;
+			sourceTree = "<group>";
+		};
+		77165DB924A5F26500FC8F4F /* BaseUI */ = {
+			isa = PBXGroup;
+			children = (
+				77165DBD24A5F28D00FC8F4F /* Controllers */,
+				77165DBC24A5F28500FC8F4F /* Views */,
+			);
+			path = BaseUI;
+			sourceTree = "<group>";
+		};
+		77165DBC24A5F28500FC8F4F /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				77165DBA24A5F27A00FC8F4F /* StaticNavigationBar.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		77165DBD24A5F28D00FC8F4F /* Controllers */ = {
+			isa = PBXGroup;
+			children = (
+				77165DB724A5F24B00FC8F4F /* BaseController.swift */,
+			);
+			path = Controllers;
+			sourceTree = "<group>";
+		};
+		77165DBE24A5F29700FC8F4F /* WeatherTableScene */ = {
+			isa = PBXGroup;
+			children = (
+				77165DBF24A5F30D00FC8F4F /* WeatherTableController.swift */,
+				77165DC124A5F3A200FC8F4F /* WeatherControllerProtocol.swift */,
+			);
+			path = WeatherTableScene;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -74,9 +287,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 77165D8B24A5E47D00FC8F4F /* Build configuration list for PBXNativeTarget "ApplicaturaTestProject" */;
 			buildPhases = (
+				F69E1E530B6386F55B9348A7 /* [CP] Check Pods Manifest.lock */,
+				77165D9124A5E5DF00FC8F4F /* Veawer */,
 				77165D7324A5E47B00FC8F4F /* Sources */,
 				77165D7424A5E47B00FC8F4F /* Frameworks */,
 				77165D7524A5E47B00FC8F4F /* Resources */,
+				75A106774BBB8E0B6A5C9D0C /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -127,34 +343,101 @@
 			files = (
 				77165D8724A5E47D00FC8F4F /* LaunchScreen.storyboard in Resources */,
 				77165D8424A5E47D00FC8F4F /* Assets.xcassets in Resources */,
-				77165D8224A5E47B00FC8F4F /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		75A106774BBB8E0B6A5C9D0C /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		77165D9124A5E5DF00FC8F4F /* Veawer */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+			);
+			name = Veawer;
+			outputFileListPaths = (
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "$PODS_ROOT/WeaverDI/weaver/bin/weaver swift --project-path \"$PROJECT_DIR/$TARGET_NAME\" --output-path \"${SOURCE_ROOT}/$TARGET_NAME/Source/Dependencies/Generated\" --single-output\n";
+		};
+		F69E1E530B6386F55B9348A7 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-ApplicaturaTestProject-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		77165D7324A5E47B00FC8F4F /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				77165D7F24A5E47B00FC8F4F /* ViewController.swift in Sources */,
+				77165DAC24A5F0AC00FC8F4F /* WeatherTableScene.swift in Sources */,
+				77165D9A24A5E84A00FC8F4F /* Router.swift in Sources */,
+				77165DA924A5E95B00FC8F4F /* Weaver.swift in Sources */,
+				77165DC024A5F30D00FC8F4F /* WeatherTableController.swift in Sources */,
+				77165DB024A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift in Sources */,
+				77165D9F24A5E88800FC8F4F /* BaseScene.swift in Sources */,
+				77165DB424A5F1C900FC8F4F /* WeatherTableRouterProtocol.swift in Sources */,
+				77165DA124A5E89000FC8F4F /* BaseRouter.swift in Sources */,
+				77165DB224A5F1A100FC8F4F /* WeatherTableRouter.swift in Sources */,
+				77165DA424A5E8B800FC8F4F /* PopoverPresentation.swift in Sources */,
+				77165DAE24A5F12000FC8F4F /* WeatherTableViewModel.swift in Sources */,
+				77165D9C24A5E86B00FC8F4F /* Presentation.swift in Sources */,
 				77165D7B24A5E47B00FC8F4F /* AppDelegate.swift in Sources */,
+				77165DC224A5F3A200FC8F4F /* WeatherControllerProtocol.swift in Sources */,
 				77165D7D24A5E47B00FC8F4F /* SceneDelegate.swift in Sources */,
+				77165DBB24A5F27A00FC8F4F /* StaticNavigationBar.swift in Sources */,
+				77165D9824A5E83C00FC8F4F /* Scene.swift in Sources */,
+				77165DB824A5F24B00FC8F4F /* BaseController.swift in Sources */,
+				77165DA724A5E8E300FC8F4F /* MainRouter.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXSourcesBuildPhase section */
 
 /* Begin PBXVariantGroup section */
-		77165D8024A5E47B00FC8F4F /* Main.storyboard */ = {
-			isa = PBXVariantGroup;
-			children = (
-				77165D8124A5E47B00FC8F4F /* Base */,
-			);
-			name = Main.storyboard;
-			sourceTree = "<group>";
-		};
 		77165D8524A5E47D00FC8F4F /* LaunchScreen.storyboard */ = {
 			isa = PBXVariantGroup;
 			children = (
@@ -282,10 +565,11 @@
 		};
 		77165D8C24A5E47D00FC8F4F /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ApplicaturaTestProject/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ApplicaturaTestProject/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -293,16 +577,17 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "VP-P.ApplicaturaTestProject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Debug;
 		};
 		77165D8D24A5E47D00FC8F4F /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
-				INFOPLIST_FILE = ApplicaturaTestProject/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/ApplicaturaTestProject/SupportingFiles/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -310,7 +595,7 @@
 				PRODUCT_BUNDLE_IDENTIFIER = "VP-P.ApplicaturaTestProject";
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 5.0;
-				TARGETED_DEVICE_FAMILY = "1,2";
+				TARGETED_DEVICE_FAMILY = 1;
 			};
 			name = Release;
 		};
