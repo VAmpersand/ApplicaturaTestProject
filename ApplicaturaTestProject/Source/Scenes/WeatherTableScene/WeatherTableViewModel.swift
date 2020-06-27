@@ -1,5 +1,3 @@
-import UIKit
-
 final class WeatherTableViewModel {
     
     var router: WeatherTableRouterProtocol!

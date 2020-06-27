@@ -43,6 +43,31 @@ final class MainRouterDependencyContainer: MainRouterDependencyResolver {
     init() {
     }
 }
+// MARK: - AddCityScene
+protocol AddCitySceneDependencyResolver {
+    var parentRouter: Router { get }
+    var addCityRouter: AddCityRouter { get }
+    var addCityViewModel: AddCityViewModel { get }
+    var addCityController: AddCityController { get }
+}
+final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
+    let parentRouter: Router
+    var addCityRouter: AddCityRouter {
+        let value = AddCityRouter()
+        return value
+    }
+    var addCityViewModel: AddCityViewModel {
+        let value = AddCityViewModel()
+        return value
+    }
+    var addCityController: AddCityController {
+        let value = AddCityController()
+        return value
+    }
+    init(parentRouter: Router) {
+        self.parentRouter = parentRouter
+    }
+}
 // MARK: - CityWeatherScene
 protocol CityWeatherSceneDependencyResolver {
     var parentRouter: Router { get }

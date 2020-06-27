@@ -1,5 +1,3 @@
-import UIKit
-
 final class CityWeatherViewModel {
     
     var router: CityWeatherRouterProtocol!
