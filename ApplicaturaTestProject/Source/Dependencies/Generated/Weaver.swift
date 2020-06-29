@@ -5,6 +5,60 @@ import CoreData
 import Foundation
 import SnapKit
 import UIKit
+// MARK: - AddCityViewModel
+protocol AddCityViewModelDependencyResolver {
+    var coreDataService: CoreDataService { get }
+}
+final class AddCityViewModelDependencyContainer: AddCityViewModelDependencyResolver {
+    private var _coreDataService: CoreDataService?
+    var coreDataService: CoreDataService {
+        if let value = _coreDataService { return value }
+        let value = CoreDataService()
+        _coreDataService = value
+        return value
+    }
+    init() {
+        _ = coreDataService
+    }
+}
+// MARK: - AddCityScene
+protocol AddCitySceneDependencyResolver {
+    var parentRouter: Router { get }
+    var addCityRouter: AddCityRouter { get }
+    var addCityViewModel: AddCityViewModel { get }
+    var addCityController: AddCityController { get }
+}
+final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
+    let parentRouter: Router
+    var addCityRouter: AddCityRouter {
+        let value = AddCityRouter()
+        return value
+    }
+    var addCityViewModel: AddCityViewModel {
+        let value = AddCityViewModel(injecting: AddCityViewModelDependencyContainer())
+        return value
+    }
+    var addCityController: AddCityController {
+        let value = AddCityController()
+        return value
+    }
+    init(parentRouter: Router) {
+        self.parentRouter = parentRouter
+    }
+}
+// MARK: - WeatherTableRouter
+protocol WeatherTableRouterDependencyResolver {
+    func addCityScene(parentRouter: Router) -> AddCityScene
+}
+final class WeatherTableRouterDependencyContainer: WeatherTableRouterDependencyResolver {
+    func addCityScene(parentRouter: Router) -> AddCityScene {
+        let dependencies = AddCitySceneDependencyContainer(parentRouter: parentRouter)
+        let value = AddCityScene(injecting: dependencies)
+        return value
+    }
+    init() {
+    }
+}
 // MARK: - WeatherTableScene
 protocol WeatherTableSceneDependencyResolver {
     var parentRouter: Router { get }
@@ -15,7 +69,7 @@ protocol WeatherTableSceneDependencyResolver {
 final class WeatherTableSceneDependencyContainer: WeatherTableSceneDependencyResolver {
     let parentRouter: Router
     var weatherTableRouter: WeatherTableRouter {
-        let value = WeatherTableRouter()
+        let value = WeatherTableRouter(injecting: WeatherTableRouterDependencyContainer())
         return value
     }
     var weatherTableViewModel: WeatherTableViewModel {
@@ -41,31 +95,6 @@ final class MainRouterDependencyContainer: MainRouterDependencyResolver {
         return value
     }
     init() {
-    }
-}
-// MARK: - AddCityScene
-protocol AddCitySceneDependencyResolver {
-    var parentRouter: Router { get }
-    var addCityRouter: AddCityRouter { get }
-    var addCityViewModel: AddCityViewModel { get }
-    var addCityController: AddCityController { get }
-}
-final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
-    let parentRouter: Router
-    var addCityRouter: AddCityRouter {
-        let value = AddCityRouter()
-        return value
-    }
-    var addCityViewModel: AddCityViewModel {
-        let value = AddCityViewModel()
-        return value
-    }
-    var addCityController: AddCityController {
-        let value = AddCityController()
-        return value
-    }
-    init(parentRouter: Router) {
-        self.parentRouter = parentRouter
     }
 }
 // MARK: - CityWeatherScene

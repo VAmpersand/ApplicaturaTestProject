@@ -20,11 +20,11 @@ extension JSONDecoderService {
     func saveCityDataToCoreData(fron jsonData: Data){
         do {
             let decoder = JSONDecoder(
-                context: CoreDataManager.shared.persistentContainer.viewContext
+                context: CoreDataService.shared.persistentContainer.viewContext
             )
 
             let resultData = try decoder.decode([CityData].self, from: jsonData)
-            CoreDataManager.shared.saveInCoreDataWith(array: resultData)
+            CoreDataService.shared.saveInCoreDataWith(array: resultData)
 
         } catch {
             print("Error: \(error.localizedDescription)")

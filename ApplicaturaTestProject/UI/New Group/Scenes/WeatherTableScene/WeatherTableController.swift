@@ -5,17 +5,14 @@ public final class WeatherTableController: BaseController {
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
-//    var result: [CityData]?
-    
     public lazy var weatherTableView: UITableView = {
         let table = UITableView()
         table.register(CityWeatherCell.self,
                        forCellReuseIdentifier: CityWeatherCell.cellID)
-        table.register(HeaderCell.self,
-                       forHeaderFooterViewReuseIdentifier: HeaderCell.cellID)
+        table.register(WeatherHeaderCell.self,
+                       forHeaderFooterViewReuseIdentifier: WeatherHeaderCell.cellID)
         table.delegate = self
         table.dataSource = self
-//        table.refreshControl = self.refreshControll
         table.showsVerticalScrollIndicator = false
         
         return table
@@ -27,28 +24,29 @@ extension WeatherTableController {
         super.setupSelf()
         
         view.backgroundColor = .red
-        //        let navigationBarTuple = addStaticNavigationBar(
-        //            StaticNavigationBar(title: Texts.NewsInfo.title,
-        //                                rightButtonImage: Icons.NewsInfo.back,
-        //                                rightAction: {
-        //                                    self.viewModel.handleClose()
-        //            })
-        //        )
-        //        navigationBar = navigationBarTuple.navigationBar
-        //        navigationBar.textAligment = .center
-        //        closeButton = navigationBarTuple.rightButton
-        
+    }
+    
+    override func addNavigationBar() {
+        super.addNavigationBar()
+        let navigationBarTuple = addStaticNavigationBar(
+            StaticNavigationBar(title: Texts.WeatherTable.title)
+        )
+        navigationBar = navigationBarTuple.navigationBar
+        navigationBar.textAligment = .center
     }
     
     override func addSubviews() {
         super.addSubviews()
-
+        view.addSubview(weatherTableView)
 
     }
     
     override func constraintSubviews() {
         super.constraintSubviews()
- 
+        weatherTableView.snp.makeConstraints { make in
+            make.top.equalTo(navigationBar.snp.bottom)
+            make.left.right.bottom.equalToSuperview()
+        }
     }
 }
 
@@ -71,7 +69,7 @@ extension WeatherTableController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView,
                           viewForHeaderInSection section: Int) -> UIView? {
-        let cell = HeaderCell()
+        let cell = WeatherHeaderCell()
         cell.delegate = self
         
         return cell
@@ -92,16 +90,18 @@ extension WeatherTableController: UITableViewDataSource {
     
     public func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cellID",
-                                                 for: indexPath)
+        guard let cell = tableView.dequeueReusableCell(
+            withIdentifier: CityWeatherCell.cellID,
+            for: indexPath
+            ) as? CityWeatherCell else { return UITableViewCell() }
         
         return cell
     }
 }
 
-// MARK: - HeaderCellDelegate
-extension WeatherTableController: HeaderCellDelegate {
+// MARK: - WeatherHeaderCellDelegate
+extension WeatherTableController: WeatherHeaderCellDelegate {
     public func addButtonPressed() {
-        
+        viewModel.presentAddCityScene()
     }
 }

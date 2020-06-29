@@ -1,7 +1,7 @@
 import UIKit
 
 extension WeatherTableController {
-    public class HeaderCell: UITableViewHeaderFooterView {
+    public class WeatherHeaderCell: UITableViewHeaderFooterView {
         override public init(reuseIdentifier: String?) {
             super.init(reuseIdentifier: reuseIdentifier)
             
@@ -12,8 +12,8 @@ extension WeatherTableController {
             fatalError("init(coder:) has not been implemented")
         }
         
-        weak var delegate: HeaderCellDelegate?
-        public static let cellID = String(describing: HeaderCell.self)
+        weak var delegate: WeatherHeaderCellDelegate?
+        public static let cellID = String(describing: WeatherHeaderCell.self)
         
         private lazy var containerView: UIView = {
             let view = UIView()
@@ -36,7 +36,7 @@ extension WeatherTableController {
     }
 }
 
-extension WeatherTableController.HeaderCell {
+extension WeatherTableController.WeatherHeaderCell {
     func setupSelf() {
         addSubviews()
         constraintSubviews()
@@ -59,7 +59,7 @@ extension WeatherTableController.HeaderCell {
     }
 }
 
-private extension WeatherTableController.HeaderCell {
+private extension WeatherTableController.WeatherHeaderCell {
     @objc func buttonPressed() {
         delegate?.addButtonPressed()
     }

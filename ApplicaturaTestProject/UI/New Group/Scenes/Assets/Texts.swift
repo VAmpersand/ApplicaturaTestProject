@@ -16,6 +16,20 @@ extension Texts {
     }
 }
 
+//MARK:- AddCity
+extension Texts {
+    enum AddCity {
+        static var title: String {
+            return "Add city"
+        }
+        
+        static var searchBarPlaceholder: String {
+            return "Search"
+        }
+
+    }
+}
+
 
 //MARK:- CityWeather
 extension Texts {

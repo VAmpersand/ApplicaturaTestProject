@@ -1,7 +1,7 @@
 import CoreData
 
-struct CoreDataManager {
-    static let shared = CoreDataManager()
+struct CoreDataService {
+    static let shared = CoreDataService()
 
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CityData")
@@ -21,7 +21,7 @@ struct CoreDataManager {
     }
 }
 
-extension CoreDataManager {
+extension CoreDataService {
     func saveInCoreDataWith(array: [CityData]) {
         array.forEach { cityData in
             do {
@@ -31,7 +31,7 @@ extension CoreDataManager {
             }
         }
     }
-
+    
     @discardableResult
     func createCityData(id: Int32,
                         name: String,
@@ -59,7 +59,6 @@ extension CoreDataManager {
 
     func fetchCityData() -> [CityData]? {
         let context = persistentContainer.viewContext
-
         let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
 
         do {
@@ -74,7 +73,6 @@ extension CoreDataManager {
 
     func fetchCityData(withName name: String) -> CityData? {
         let context = persistentContainer.viewContext
-
         let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "name == %@", name)

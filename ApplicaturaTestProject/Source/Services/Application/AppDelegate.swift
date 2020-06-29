@@ -8,7 +8,7 @@ extension AppDelegate: UIApplicationDelegate {
     func application(_ application: UIApplication,
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
-        CoreDataManager.shared.applicationDocumentsDirectory()
+        CoreDataService.shared.applicationDocumentsDirectory()
 
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")

@@ -13,5 +13,7 @@ final class WeatherTableViewModel {
 
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
-
+    func presentAddCityScene() {
+        router.presentAddCityScene()
+    }
 }

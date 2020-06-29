@@ -11,6 +11,7 @@ public class BaseController: UIViewController {
 
 extension BaseController {
     @objc func setupSelf() {
+        addNavigationBar()
         addSubviews()
         constraintSubviews()
         
@@ -21,6 +22,9 @@ extension BaseController {
     }
     
     @objc func constraintSubviews() {
+    }
+    
+    @objc func addNavigationBar() {
     }
 }
 

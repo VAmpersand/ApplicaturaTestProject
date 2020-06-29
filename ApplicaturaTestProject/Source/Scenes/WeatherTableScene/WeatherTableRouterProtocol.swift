@@ -1,3 +1,3 @@
 protocol WeatherTableRouterProtocol {
-
+    func presentAddCityScene()
 }
