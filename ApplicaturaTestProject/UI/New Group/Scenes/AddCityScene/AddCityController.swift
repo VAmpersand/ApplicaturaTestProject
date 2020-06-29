@@ -2,12 +2,6 @@ import UIKit
 import CoreData
 
 public final class AddCityController: BaseController {
-    public override func viewDidLoad() {
-        super.viewDidLoad()
-        
-        viewModel.viewDidLoad()
-    }
-    
     public var viewModel: AddCityViewModelProtocol!
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
@@ -66,10 +60,7 @@ extension AddCityController {
 
 // MARK: - AddCityControllerProtocol
 extension AddCityController: AddCityControllerProtocol {
-    public func setupCityData(_ cityData: [CityData]?) {
-//        guard let cityData = cityData else { return }
-//        self.cityData = cityData
-    }
+
 }
 
 // MARK: - UITableViewDataSource
@@ -123,8 +114,10 @@ extension AddCityController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-//        categoriesView.moveOut()
-//        viewModel.presentNewsInfoScene(with: sortedNewsList[indexPath.row])
+        let cityData = fetchResultsController.object(at: indexPath)
+        CoreDataService.shared.savePresentedCity(cityDate: cityData)
+        tableView.deselectRow(at: indexPath, animated: true)
+        viewModel.handleClose()
     }
 }
 
@@ -183,7 +176,5 @@ extension AddCityController: UISearchBarDelegate {
         } else {
             loadData()
         }
-        
-        
     }
 }

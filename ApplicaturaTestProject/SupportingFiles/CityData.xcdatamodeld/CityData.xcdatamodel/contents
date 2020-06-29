@@ -12,8 +12,12 @@
         <attribute name="lon" optional="YES" attributeType="Double" defaultValueString="0.0" usesScalarValueType="YES"/>
         <relationship name="cityData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityData" inverseName="coord" inverseEntity="CityData"/>
     </entity>
+    <entity name="PresentedCity" representedClassName=".PresentedCity" syncable="YES">
+        <relationship name="cityData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityData"/>
+    </entity>
     <elements>
         <element name="CityData" positionX="-63" positionY="-18" width="128" height="118"/>
         <element name="Coord" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="PresentedCity" positionX="-54" positionY="27" width="128" height="58"/>
     </elements>
 </model>

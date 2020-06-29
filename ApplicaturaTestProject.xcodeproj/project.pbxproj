@@ -63,6 +63,8 @@
 		77F3646C24A76E0E00C240CF /* CityHeaderCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3646B24A76E0E00C240CF /* CityHeaderCell.swift */; };
 		77F3646F24A7701A00C240CF /* Icons.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3646E24A7701A00C240CF /* Icons.swift */; };
 		77F3647124A7702300C240CF /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F3647024A7702300C240CF /* Icons.xcassets */; };
+		77F3647624A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647424A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift */; };
+		77F3647724A9E94B00C240CF /* PresentedCity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647524A9E94B00C240CF /* PresentedCity+CoreDataClass.swift */; };
 		872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -125,6 +127,8 @@
 		77F3646B24A76E0E00C240CF /* CityHeaderCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityHeaderCell.swift; sourceTree = "<group>"; };
 		77F3646E24A7701A00C240CF /* Icons.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Icons.swift; sourceTree = "<group>"; };
 		77F3647024A7702300C240CF /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
+		77F3647424A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
+		77F3647524A9E94B00C240CF /* PresentedCity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.debug.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.release.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.release.xcconfig"; sourceTree = "<group>"; };
 		CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApplicaturaTestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -430,6 +434,8 @@
 		77F3644C24A763A000C240CF /* CityData */ = {
 			isa = PBXGroup;
 			children = (
+				77F3647524A9E94B00C240CF /* PresentedCity+CoreDataClass.swift */,
+				77F3647424A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift */,
 				77F3644224A6374800C240CF /* CityData+CoreDataClass.swift */,
 				77F3644024A6374700C240CF /* CityData+CoreDataProperties.swift */,
 				77F3644124A6374700C240CF /* Coord+CoreDataClass.swift */,
@@ -674,6 +680,7 @@
 				77165DD124A5F95800FC8F4F /* CityWetherController.swift in Sources */,
 				77165DB024A5F17900FC8F4F /* WeatherTableViewModelProtocol.swift in Sources */,
 				77F3645A24A768C400C240CF /* AddCityScene.swift in Sources */,
+				77F3647624A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift in Sources */,
 				77165D9F24A5E88800FC8F4F /* BaseScene.swift in Sources */,
 				7715272924A6200F0075F744 /* CityData.xcdatamodeld in Sources */,
 				77C8699124A6287F007BA750 /* CoreDataService.swift in Sources */,
@@ -682,6 +689,7 @@
 				77165DDB24A6043E00FC8F4F /* JSONDecoderService.swift in Sources */,
 				77F3644924A6445F00C240CF /* UserDefaults+Keys.swift in Sources */,
 				77F3642F24A62DE500C240CF /* JSONDecoder.swift in Sources */,
+				77F3647724A9E94B00C240CF /* PresentedCity+CoreDataClass.swift in Sources */,
 				77F3646F24A7701A00C240CF /* Icons.swift in Sources */,
 				77F3644524A6374800C240CF /* Coord+CoreDataClass.swift in Sources */,
 				77165DD624A5FDC100FC8F4F /* NetworkService.swift in Sources */,

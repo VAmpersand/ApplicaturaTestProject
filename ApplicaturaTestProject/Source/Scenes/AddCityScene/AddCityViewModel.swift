@@ -17,11 +17,6 @@ final class AddCityViewModel {
 
 // MARK: - AddCityViewModelProtocol
 extension AddCityViewModel: AddCityViewModelProtocol {
-    func viewDidLoad() {
-        let cityData = self.dependencies.coreDataService.fetchCityData()
-        self.controller?.setupCityData(cityData)
-    }
-    
     func handleClose() {
         router.handleClose()
     }

@@ -1,9 +1,13 @@
 import UIKit
+import CoreData
 
 public final class WeatherTableController: BaseController {
     public var viewModel: WeatherTableViewModelProtocol!
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
+    
+    private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
+    private var context = CoreDataService.shared.persistentContainer.viewContext
     
     public lazy var weatherTableView: UITableView = {
         let table = UITableView()

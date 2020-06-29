@@ -29,8 +29,6 @@ extension AddCityController.CityCell {
     func setupSelf() {
         addSubviews()
         constraintSubviews()
-        
-        selectionStyle = .none
     }
     
     func addSubviews() {
