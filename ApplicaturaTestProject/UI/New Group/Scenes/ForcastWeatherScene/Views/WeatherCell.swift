@@ -1,6 +1,6 @@
 import UIKit
 
-extension CityWeatherController {
+extension ForcastWeatherController {
     public class WeatherCell: UICollectionViewCell {
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -30,7 +30,7 @@ extension CityWeatherController {
     }
 }
 
-private extension CityWeatherController.WeatherCell {
+private extension ForcastWeatherController.WeatherCell {
     func setupSelf() {
         addSubviews()
         constraintSubviews()
@@ -51,7 +51,7 @@ private extension CityWeatherController.WeatherCell {
 }
 
 // MARK: - UITableViewDataSource
-extension CityWeatherController.WeatherCell: UITableViewDataSource {
+extension ForcastWeatherController.WeatherCell: UITableViewDataSource {
     public func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
         return 12
@@ -60,9 +60,9 @@ extension CityWeatherController.WeatherCell: UITableViewDataSource {
     public func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: CityWeatherController.ParameterTableCell.cellID,
+            withIdentifier: ForcastWeatherController.ParameterTableCell.cellID,
             for: indexPath
-            ) as! CityWeatherController.ParameterTableCell
+            ) as! ForcastWeatherController.ParameterTableCell
         
         guard let forcastWeather = forcastWeather else { return cell }
         
@@ -108,14 +108,14 @@ extension CityWeatherController.WeatherCell: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension CityWeatherController.WeatherCell: UITableViewDelegate {
+extension ForcastWeatherController.WeatherCell: UITableViewDelegate {
     public func tableView(_ tableView: UITableView,
                           heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
 }
 
-public extension CityWeatherController.WeatherCell {
+public extension ForcastWeatherController.WeatherCell {
     func setupForcastWeather(_ forcastWeather: ForcastWeather) {
         self.forcastWeather = forcastWeather
     }

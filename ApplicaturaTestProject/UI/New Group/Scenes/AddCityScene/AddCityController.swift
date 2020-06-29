@@ -18,6 +18,7 @@ public final class AddCityController: BaseController {
                        forHeaderFooterViewReuseIdentifier: CityHeaderCell.cellID)
         table.delegate = self
         table.dataSource = self
+        table.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
         table.showsVerticalScrollIndicator = false
         
         return table
@@ -39,9 +40,11 @@ extension AddCityController {
             )
         )
         navigationBar = navigationBarTuple.navigationBar
-        navigationBar.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.2)
+        navigationBar.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        navigationBar.titleColor = .white
         navigationBar.textAligment = .center
         closeButton = navigationBarTuple.rightButton
+        closeButton.tintColor = .white
     }
     
     override func addSubviews() {

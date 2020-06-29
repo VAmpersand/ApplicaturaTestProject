@@ -1,6 +1,6 @@
 import UIKit
 
-extension CityWeatherController {
+extension ForcastWeatherController {
     public class ParameterTableCell: UITableViewCell {
         
         override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
@@ -34,7 +34,7 @@ extension CityWeatherController {
     }
 }
 
-private extension CityWeatherController.ParameterTableCell {
+private extension ForcastWeatherController.ParameterTableCell {
     func setupSelf() {
         addSubviews()
         constraintSubviews()
@@ -60,7 +60,7 @@ private extension CityWeatherController.ParameterTableCell {
     }
 }
 
-extension CityWeatherController.ParameterTableCell {
+extension ForcastWeatherController.ParameterTableCell {
     func setupCell(with paramerter: String, value: String) {
         parameterLabel.text = paramerter
         valueLabel.text = value

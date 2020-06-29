@@ -3,8 +3,8 @@ final class WeatherTableRouter: BaseRouter {
     // weaver: addCityScene = AddCityScene
     // weaver: addCityScene.scope = .transient
     
-    // weaver: cityWeatherScene = CityWeatherScene
-    // weaver: cityWeatherScene.scope = .transient
+    // weaver: forcastWeatherScene = ForcastWeatherScene
+    // weaver: forcastWeatherScene.scope = .transient
 
     private let dependencies: WeatherTableRouterDependencyResolver
     
@@ -21,8 +21,8 @@ extension WeatherTableRouter: WeatherTableRouterProtocol {
     }
     
     func presentCityWeatherScene(with cityData: CityData) {
-        let cityWeatherScene = dependencies.cityWeatherScene(parentRouter: self,
-                                                             cityData: cityData)
-        present(cityWeatherScene, using: PopoverPresentation())
+        let forcastWeatherScene = dependencies.forcastWeatherScene(parentRouter: self,
+                                                                   cityData: cityData)
+        present(forcastWeatherScene, using: PopoverPresentation())
     }
 }

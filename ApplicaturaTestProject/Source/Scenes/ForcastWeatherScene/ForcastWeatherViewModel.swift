@@ -1,21 +1,21 @@
-final class CityWeatherViewModel {
+final class ForcastWeatherViewModel {
     
     // weaver: cityData <= CityData
     
     // weaver: networkService = NetworkService
     
-    var router: CityWeatherRouterProtocol!
+    var router: ForcastWeatherRouterProtocol!
     var parentRouter: Router!
-    weak var controller: CityWeatherControllerProtocol?
+    weak var controller: ForcastWeatherControllerProtocol?
     
-    private let dependencies: CityWeatherViewModelDependencyResolver
-    init(injecting dependencies: CityWeatherViewModelDependencyResolver) {
+    private let dependencies: ForcastWeatherViewModelDependencyResolver
+    init(injecting dependencies: ForcastWeatherViewModelDependencyResolver) {
         self.dependencies = dependencies
     }
 }
 
-// MARK: - CityWeatherViewModelProtocol
-extension CityWeatherViewModel: CityWeatherViewModelProtocol {
+// MARK: - ForcastWeatherViewModelProtocol
+extension ForcastWeatherViewModel: ForcastWeatherViewModelProtocol {
     func viewDidLoad() {
         controller?.setCityData(dependencies.cityData)
         

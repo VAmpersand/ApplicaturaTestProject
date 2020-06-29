@@ -1,3 +1,0 @@
-protocol CityWeatherRouterProtocol {
-    func handleClose()
-}

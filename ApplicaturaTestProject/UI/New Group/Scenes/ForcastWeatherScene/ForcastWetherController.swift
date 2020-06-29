@@ -1,13 +1,13 @@
 import UIKit
 
-public final class CityWeatherController: BaseController {
+public final class ForcastWeatherController: BaseController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.viewDidLoad()
     }
     
-    public var viewModel: CityWeatherViewModelProtocol!
+    public var viewModel: ForcastWeatherViewModelProtocol!
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
@@ -45,7 +45,7 @@ public final class CityWeatherController: BaseController {
     }()
 }
 
-extension CityWeatherController {
+extension ForcastWeatherController {
     override func addNavigationBar() {
         super.addNavigationBar()
         let navigationBarTuple = addStaticNavigationBar(
@@ -56,8 +56,10 @@ extension CityWeatherController {
         )
         navigationBar = navigationBarTuple.navigationBar
         navigationBar.textAligment = .center
-        navigationBar.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.2)
+        navigationBar.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1)
+        navigationBar.titleColor = .white
         closeButton = navigationBarTuple.rightButton
+        closeButton.tintColor = .white
     }
     
     override func addSubviews() {
@@ -74,8 +76,8 @@ extension CityWeatherController {
     }
 }
 
-// MARK: - CityWeatherControllerProtocol
-extension CityWeatherController: CityWeatherControllerProtocol {
+// MARK: - ForcastWeatherControllerProtocol
+extension ForcastWeatherController: ForcastWeatherControllerProtocol {
     public func setCityData(_ cityData: CityData) {
         self.cityData = cityData
     }
@@ -86,7 +88,7 @@ extension CityWeatherController: CityWeatherControllerProtocol {
 }
 
 //MARK:- UICollectionViewDataSource
-extension CityWeatherController: UICollectionViewDataSource {
+extension ForcastWeatherController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return forcastWeathers.count
     }
@@ -102,7 +104,7 @@ extension CityWeatherController: UICollectionViewDataSource {
 }
 
 //MARK:- UICollectionViewDelegateFlowLayout
-extension CityWeatherController: UICollectionViewDelegateFlowLayout {
+extension ForcastWeatherController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView,
                                layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAt indexPath: IndexPath) -> CGSize {
