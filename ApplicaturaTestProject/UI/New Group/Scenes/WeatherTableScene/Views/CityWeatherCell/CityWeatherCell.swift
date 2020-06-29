@@ -101,27 +101,26 @@ extension WeatherTableController.CityWeatherCell: UICollectionViewDataSource {
             withReuseIdentifier: WeatherTableController.ParameterCell.cellID,
             for: indexPath
             ) as! WeatherTableController.ParameterCell
-
+        
         guard let cityWeather = cityWeather else { return cell }
         
         switch indexPath.row {
         case 0:
-            cell.setupCell(with: "Temperature:", value: "\((cityWeather.main.temp - 273).rounded()) C")
+            cell.setupCell(with: "Temperature:", value: "\(((cityWeather.main.temp ?? 273) - 273).rounded()) C")
         case 1:
-            cell.setupCell(with: "Feels like:", value: "\((cityWeather.main.feels_like - 273).rounded()) C")
+            cell.setupCell(with: "Feels like:", value: "\(((cityWeather.main.feels_like ?? 273) - 273).rounded()) C")
         case 2:
-            cell.setupCell(with: "Clouds:", value: "\(cityWeather.clouds.all) %")
+            cell.setupCell(with: "Clouds:", value: "\(cityWeather.clouds.all ?? 0) %")
         case 3:
-            cell.setupCell(with: "Humidity", value: "\(cityWeather.main.humidity) %")
+            cell.setupCell(with: "Humidity", value: "\(cityWeather.main.humidity ?? 0) %")
         case 4:
-            cell.setupCell(with: "Wind speed", value: "\(cityWeather.wind.speed) m/s")
+            cell.setupCell(with: "Wind speed", value: "\(cityWeather.wind.speed ?? 0) m/s")
         case 5:
-            cell.setupCell(with: "Pressure", value: "\(cityWeather.main.pressure) hPa")
-            
+            cell.setupCell(with: "Pressure", value: "\(cityWeather.main.pressure ?? 0) hPa")
         default:
             break
         }
-     
+        
         return cell
     }
 }

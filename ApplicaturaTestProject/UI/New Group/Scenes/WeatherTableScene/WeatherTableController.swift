@@ -5,7 +5,7 @@ public final class WeatherTableController: BaseController {
     public var viewModel: WeatherTableViewModelProtocol!
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
-
+    
     private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
     
@@ -30,6 +30,7 @@ public final class WeatherTableController: BaseController {
                        forHeaderFooterViewReuseIdentifier: WeatherHeaderCell.cellID)
         table.delegate = self
         table.dataSource = self
+        table.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.3)
         table.showsVerticalScrollIndicator = false
         
         return table
@@ -56,7 +57,7 @@ extension WeatherTableController {
         super.addSubviews()
         view.addSubview(containerView)
         containerView.addSubview(weatherTableView)
-
+        
     }
     
     override func constraintSubviews() {
@@ -103,11 +104,12 @@ extension WeatherTableController: UITableViewDataSource {
         cell.setCityLabel(cityData)
         
         let currentWeather = cityWeathers.first { cityWeather in
-            cityWeather.id == cityData.id
+            guard let id = cityWeather.id else { return false }
+            return id == cityData.id
         }
         guard let weatherData = currentWeather else { return cell }
         cell.setWeatherData(weatherData)
-    
+        
         return cell
     }
 }
@@ -161,6 +163,7 @@ extension WeatherTableController: UITableViewDelegate {
 extension WeatherTableController: NSFetchedResultsControllerDelegate {
     func loadData() {
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
+        
         fetchRequest.sortDescriptors = []
         fetchRequest.fetchBatchSize = 20
         

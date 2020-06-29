@@ -2,7 +2,7 @@ import CoreData
 
 struct CoreDataService {
     static let shared = CoreDataService()
-
+    
     let persistentContainer: NSPersistentContainer = {
         let container = NSPersistentContainer(name: "CityData")
         container.loadPersistentStores { (storeDescription, error) in
@@ -31,12 +31,12 @@ extension CoreDataService {
             }
         }
     }
-
+    
     func savePresentedCity(cityDate: CityData, comletion: (() -> Void)? = nil) {
         let context = persistentContainer.viewContext
         let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
                                                                 into: context) as! PresentedCity
-
+        
         presentedCity.cityData = cityDate
         
         do {
@@ -47,18 +47,18 @@ extension CoreDataService {
         
         comletion?()
     }
-
+    
     func fetchPresentedCity() -> [PresentedCity]? {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-
+        
         do {
             let presentedCity = try context.fetch(fetchRequest)
             return presentedCity
         } catch let fetchError {
             print("Failed to fetch companies: \(fetchError)")
         }
-
+        
         return nil
     }
     
@@ -74,33 +74,5 @@ extension CoreDataService {
         
         comletion?()
     }
-
-//    func fetchCityData(withName name: String) -> CityData? {
-//        let context = persistentContainer.viewContext
-//        let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
-//        fetchRequest.fetchLimit = 1
-//        fetchRequest.predicate = NSPredicate(format: "name == %@", name)
-//
-//        do {
-//            let cityData = try context.fetch(fetchRequest)
-//            return cityData.first
-//        } catch let fetchError {
-//            print("Failed to fetch: \(fetchError)")
-//        }
-//
-//        return nil
-//    }
-
-//    func updateCityData(cityData: CityData) {
-//        let context = persistentContainer.viewContext
-//
-//        do {
-//            try context.save()
-//        } catch let createError {
-//            print("Failed to update: \(createError)")
-//        }
-//    }
-    
-
 }
 

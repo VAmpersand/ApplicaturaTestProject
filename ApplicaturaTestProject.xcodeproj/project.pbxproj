@@ -69,7 +69,6 @@
 		77F3647D24AA0FF100C240CF /* CityWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647C24AA0FF100C240CF /* CityWeather.swift */; };
 		77F3648024AA170C00C240CF /* ParametrCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647F24AA170C00C240CF /* ParametrCell.swift */; };
 		77F3648324AA2A6E00C240CF /* WeatherCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3648224AA2A6E00C240CF /* WeatherCell.swift */; };
-		77F3648524AA365B00C240CF /* ForcastWeather.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3648424AA365B00C240CF /* ForcastWeather.swift */; };
 		77F3648724AA3B5B00C240CF /* ParametrTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3648624AA3B5B00C240CF /* ParametrTableCell.swift */; };
 		872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */; };
 /* End PBXBuildFile section */
@@ -139,7 +138,6 @@
 		77F3647C24AA0FF100C240CF /* CityWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CityWeather.swift; sourceTree = "<group>"; };
 		77F3647F24AA170C00C240CF /* ParametrCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrCell.swift; sourceTree = "<group>"; };
 		77F3648224AA2A6E00C240CF /* WeatherCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WeatherCell.swift; sourceTree = "<group>"; };
-		77F3648424AA365B00C240CF /* ForcastWeather.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForcastWeather.swift; sourceTree = "<group>"; };
 		77F3648624AA3B5B00C240CF /* ParametrTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ParametrTableCell.swift; sourceTree = "<group>"; };
 		90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.debug.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.release.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.release.xcconfig"; sourceTree = "<group>"; };
@@ -242,7 +240,7 @@
 		77165D9324A5E6DB00FC8F4F /* Services */ = {
 			isa = PBXGroup;
 			children = (
-				77F3647224A7739000C240CF /* DecoderService */,
+				77F3647224A7739000C240CF /* JSONDecoderService */,
 				77F3647324A773AB00C240CF /* CoreDataService */,
 				77165DD424A5FD7E00FC8F4F /* NetworkService */,
 				77165D9224A5E69A00FC8F4F /* Application */,
@@ -431,7 +429,6 @@
 			children = (
 				77F3644C24A763A000C240CF /* CityData */,
 				77F3647C24AA0FF100C240CF /* CityWeather.swift */,
-				77F3648424AA365B00C240CF /* ForcastWeather.swift */,
 			);
 			path = Model;
 			sourceTree = "<group>";
@@ -527,12 +524,12 @@
 			path = Icons;
 			sourceTree = "<group>";
 		};
-		77F3647224A7739000C240CF /* DecoderService */ = {
+		77F3647224A7739000C240CF /* JSONDecoderService */ = {
 			isa = PBXGroup;
 			children = (
 				77165DDA24A6043E00FC8F4F /* JSONDecoderService.swift */,
 			);
-			path = DecoderService;
+			path = JSONDecoderService;
 			sourceTree = "<group>";
 		};
 		77F3647324A773AB00C240CF /* CoreDataService */ = {
@@ -739,7 +736,6 @@
 				77F3648024AA170C00C240CF /* ParametrCell.swift in Sources */,
 				77165DCB24A5F80C00FC8F4F /* ForcastWeatherRouter.swift in Sources */,
 				77165DAE24A5F12000FC8F4F /* WeatherTableViewModel.swift in Sources */,
-				77F3648524AA365B00C240CF /* ForcastWeather.swift in Sources */,
 				77F3646724A769ED00C240CF /* AddCityControllerProtocol.swift in Sources */,
 				77F3647B24AA016C00C240CF /* Notification+names.swift in Sources */,
 				77165D9C24A5E86B00FC8F4F /* Presentation.swift in Sources */,

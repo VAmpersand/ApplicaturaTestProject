@@ -130,6 +130,7 @@ extension AddCityController: UITableViewDelegate {
 extension AddCityController: NSFetchedResultsControllerDelegate {
     func loadData() {
         let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
+        
         let countryDescriptor = NSSortDescriptor(key: "country", ascending: true)
         let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [countryDescriptor, cityDescriptor]

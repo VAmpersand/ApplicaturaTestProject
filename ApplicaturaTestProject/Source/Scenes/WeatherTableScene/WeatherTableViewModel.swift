@@ -28,20 +28,6 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
                 print(error)
             }
         }
-
-//        let url2 = URLs.urlForForcastWeatherIn5day(for: CoreDataService.shared.fetchPresentedCity()?.first)
-//
-//        print(url2)
-//        dependencies.networkService.getJSONData(
-//            from: url2,
-//            with: ForcastWeathers.self
-//        ) { result, status, error in
-//            if status, let cityWeaters = result?.list {
-//               print(cityWeaters)
-//            } else {
-//                print(error)
-//            }
-//        }
     }
     
     func presentAddCityScene() {

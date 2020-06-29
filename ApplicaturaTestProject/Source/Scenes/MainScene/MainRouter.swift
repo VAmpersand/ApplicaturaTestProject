@@ -1,7 +1,7 @@
 import UIKit
 
 final class MainRouter: BaseRouter {
-
+    
     // weaver: weatherTableScene = WeatherTableScene
     // weaver: weatherTableScene.scope = .transient
     
@@ -21,9 +21,9 @@ extension MainRouter {
     func startApp(in scene: UIScene) {
         setupWindow(in: scene)
         
-        
+        setupDefaultCityData()
     }
-        
+    
     private func setupWindow(in scene: UIScene) {
         guard let windowScene = (scene as? UIWindowScene) else {
             fatalError("Failed to configure windowScene")
@@ -35,5 +35,24 @@ extension MainRouter {
         window?.windowScene = windowScene
         window?.makeKeyAndVisible()
         window.rootViewController = weatherTableScene.viewController
+    }
+}
+
+extension MainRouter {
+    func setupDefaultCityData() {
+        if !UserDefaults.cityDataWasSetup {
+            let path = Bundle.main.path(forResource: "city.list", ofType: "json")
+            
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
+                DispatchQueue.main.async {
+                    JSONDecoderService.shared.saveCityDataToCoreData(fron: data)
+                }
+            } catch {
+                print(error.localizedDescription)
+            }
+            
+            UserDefaults.cityDataWasSetup = true
+        }
     }
 }

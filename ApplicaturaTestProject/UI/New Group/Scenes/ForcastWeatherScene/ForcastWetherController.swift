@@ -21,7 +21,7 @@ public final class ForcastWeatherController: BaseController {
         }
     }
     
-    private var forcastWeathers: [ForcastWeather] = [] {
+    private var forcastWeathers: [CityWeather] = [] {
         didSet {
             weathersCollectionView.reloadData()
         }
@@ -82,7 +82,7 @@ extension ForcastWeatherController: ForcastWeatherControllerProtocol {
         self.cityData = cityData
     }
     
-    public func setForcastWeathers(_ forcastWeathers: [ForcastWeather]) {
+    public func setForcastWeathers(_ forcastWeathers: [CityWeather]) {
         self.forcastWeathers = forcastWeathers
     }
 }

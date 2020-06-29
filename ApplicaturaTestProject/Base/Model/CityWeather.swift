@@ -13,13 +13,14 @@ public struct CityWeathers: Codable {
 }
 
 public struct CityWeather: Codable {
-    public var id: Int
+    public var id: Int?
     public var sys: System
     public var weather: [Weather]
     public var main: Main
     public var wind: Wind
     public var clouds: Clouds
-    public var visibility: Int
+    public var visibility: Int?
+    public var dt_txt: String?
     
     init(id: Int,
          sys: System,
@@ -27,7 +28,8 @@ public struct CityWeather: Codable {
          main: Main,
          wind: Wind,
          clouds: Clouds,
-         visibility: Int) {
+         visibility: Int,
+         dt_txt: String) {
         self.id = id
         self.sys = sys
         self.weather = weather
@@ -35,6 +37,7 @@ public struct CityWeather: Codable {
         self.wind = wind
         self.clouds = clouds
         self.visibility = visibility
+        self.dt_txt = dt_txt
     }
     
     enum CodingKeys: String, CodingKey {
@@ -45,15 +48,16 @@ public struct CityWeather: Codable {
         case wind = "wind"
         case clouds = "clouds"
         case visibility = "visibility"
+        case dt_txt = "dt_txt"
     }
 }
 
 
 public struct System: Codable {
-    public var timezone: Int
-    public var sunrise: Int
-    public var sunset: Int
-    
+    public var timezone: Int?
+    public var sunrise: Int?
+    public var sunset: Int?
+
     init(timezone: Int,
          sunrise: Int,
          sunset: Int) {
@@ -71,9 +75,9 @@ public struct System: Codable {
 
 
 public struct Weather: Codable {
-    public var main: String
-    public var description: String
-    public var icon: String
+    public var main: String?
+    public var description: String?
+    public var icon: String?
     
     init(main: String,
          description: String,
@@ -92,15 +96,15 @@ public struct Weather: Codable {
 
 
 public struct Main: Codable {
-    public var temp: Double
-    public var feels_like: Double
-    public var pressure: Double
-    public var humidity: Double
-    public var temp_min: Double
-    public var temp_max: Double
+    public var temp: Double?
+    public var feels_like: Double?
+    public var pressure: Double?
+    public var humidity: Double?
+    public var temp_min: Double?
+    public var temp_max: Double?
     public var sea_level: Double?
     public var grnd_level: Double?
-    
+
     init(temp: Double,
          feels_like: Double,
          pressure: Double,
@@ -118,7 +122,7 @@ public struct Main: Codable {
         self.sea_level = sea_level
         self.grnd_level = grnd_level
     }
-    
+
     enum CodingKeys: String, CodingKey {
         case temp = "temp"
         case feels_like = "feels_like"
@@ -133,11 +137,11 @@ public struct Main: Codable {
 
 
 public struct Wind: Codable {
-    public var speed: Double
-    public var deg: Double
+    public var speed: Double?
+    public var deg: Double?
     
     init(speed: Double,
-         deg: Double) {
+         deg: Double?) {
         self.speed = speed
         self.deg = deg
     }
@@ -150,7 +154,7 @@ public struct Wind: Codable {
 
 
 public struct Clouds: Codable {
-    public var all: Double
+    public var all: Double?
     
     init(all: Double) { self.all = all }
     

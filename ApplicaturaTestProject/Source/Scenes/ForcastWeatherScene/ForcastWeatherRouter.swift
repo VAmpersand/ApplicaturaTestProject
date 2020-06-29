@@ -1,5 +1,4 @@
 final class ForcastWeatherRouter: BaseRouter {
-
 }
 
 // MARK: - ForcastWeatherRouterProtocol

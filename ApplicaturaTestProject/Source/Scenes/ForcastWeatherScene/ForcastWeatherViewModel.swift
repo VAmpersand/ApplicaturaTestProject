@@ -23,7 +23,7 @@ extension ForcastWeatherViewModel: ForcastWeatherViewModelProtocol {
         
         dependencies.networkService.getJSONData(
             from: url,
-            with: ForcastWeathers.self
+            with: CityWeathers.self
         ) { result, status, error in
             if status, let forcastWeather = result?.list {
                 self.controller?.setForcastWeathers(forcastWeather)
