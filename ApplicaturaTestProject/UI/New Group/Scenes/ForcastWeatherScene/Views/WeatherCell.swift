@@ -1,6 +1,6 @@
 import UIKit
 
-extension ForcastWeatherController {
+extension ForecastWeatherController {
     public class WeatherCell: UICollectionViewCell {
         override init(frame: CGRect) {
             super.init(frame: frame)
@@ -13,7 +13,7 @@ extension ForcastWeatherController {
         }
         
         public static let cellID = String(describing: WeatherCell.self)
-        private var forcastWeather: CityWeather!
+        private var forecastWeather: CityWeather!
         
         public lazy var parameterTableView: UITableView = {
             let table = UITableView()
@@ -30,7 +30,7 @@ extension ForcastWeatherController {
     }
 }
 
-private extension ForcastWeatherController.WeatherCell {
+private extension ForecastWeatherController.WeatherCell {
     func setupSelf() {
         addSubviews()
         constraintSubviews()
@@ -51,7 +51,7 @@ private extension ForcastWeatherController.WeatherCell {
 }
 
 // MARK: - UITableViewDataSource
-extension ForcastWeatherController.WeatherCell: UITableViewDataSource {
+extension ForecastWeatherController.WeatherCell: UITableViewDataSource {
     public func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
         return 12
@@ -60,43 +60,43 @@ extension ForcastWeatherController.WeatherCell: UITableViewDataSource {
     public func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(
-            withIdentifier: ForcastWeatherController.ParameterTableCell.cellID,
+            withIdentifier: ForecastWeatherController.ParameterTableCell.cellID,
             for: indexPath
-            ) as! ForcastWeatherController.ParameterTableCell
+            ) as! ForecastWeatherController.ParameterTableCell
         
-        guard let forcastWeather = forcastWeather else { return cell }
+        guard let forecastWeather = forecastWeather else { return cell }
         
         switch indexPath.row {
         case 0:
-            if let dataStr = forcastWeather.dt_txt,
+            if let dataStr = forecastWeather.dt_txt,
                 let date = dataStr.split(separator: " ").first.map(String.init) {
                 cell.setupCell(with: "Data", value: date)
             }
         case 1:
-            if let dataStr = forcastWeather.dt_txt,
+            if let dataStr = forecastWeather.dt_txt,
                 let time = dataStr.split(separator: " ").last.map(String.init) {
                 cell.setupCell(with: "Time", value: time)
             }
         case 2:
-            cell.setupCell(with: "Temperature:", value: "\(((forcastWeather.main.temp ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Temperature:", value: "\(((forecastWeather.main.temp ?? 273) - 273).rounded()) C")
         case 3:
-            cell.setupCell(with: "Feels like:", value: "\(((forcastWeather.main.feels_like ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Feels like:", value: "\(((forecastWeather.main.feels_like ?? 273) - 273).rounded()) C")
         case 4:
-            cell.setupCell(with: "Mim temperature", value: "\(((forcastWeather.main.temp_min ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Mim temperature", value: "\(((forecastWeather.main.temp_min ?? 273) - 273).rounded()) C")
         case 5:
-            cell.setupCell(with: "Max temperature", value: "\(((forcastWeather.main.temp_max ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Max temperature", value: "\(((forecastWeather.main.temp_max ?? 273) - 273).rounded()) C")
         case 6:
-            cell.setupCell(with: "Pressure", value: "\(forcastWeather.main.pressure ?? 0) hPa")
+            cell.setupCell(with: "Pressure", value: "\(forecastWeather.main.pressure ?? 0) hPa")
         case 7:
-            cell.setupCell(with: "Pressure in\nsea level", value: "\(forcastWeather.main.sea_level ?? 0)  hPa")
+            cell.setupCell(with: "Pressure in\nsea level", value: "\(forecastWeather.main.sea_level ?? 0)  hPa")
         case 8:
-            cell.setupCell(with: "Pressure in\nground level", value: "\(forcastWeather.main.grnd_level ?? 0) hPa")
+            cell.setupCell(with: "Pressure in\nground level", value: "\(forecastWeather.main.grnd_level ?? 0) hPa")
         case 9:
-            cell.setupCell(with: "Humidity", value: "\(forcastWeather.main.humidity ?? 0) %")
+            cell.setupCell(with: "Humidity", value: "\(forecastWeather.main.humidity ?? 0) %")
         case 10:
-            cell.setupCell(with: "Wind speed", value: "\(forcastWeather.wind.speed ?? 0) m/s")
+            cell.setupCell(with: "Wind speed", value: "\(forecastWeather.wind.speed ?? 0) m/s")
         case 11:
-            cell.setupCell(with: "Clouds:", value: "\(forcastWeather.clouds.all ?? 0) %")
+            cell.setupCell(with: "Clouds:", value: "\(forecastWeather.clouds.all ?? 0) %")
         default:
             break
         }
@@ -106,16 +106,16 @@ extension ForcastWeatherController.WeatherCell: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-extension ForcastWeatherController.WeatherCell: UITableViewDelegate {
+extension ForecastWeatherController.WeatherCell: UITableViewDelegate {
     public func tableView(_ tableView: UITableView,
                           heightForRowAt indexPath: IndexPath) -> CGFloat {
         return 50
     }
 }
 
-public extension ForcastWeatherController.WeatherCell {
-    func setupForcastWeather(_ forcastWeather: CityWeather) {
-        self.forcastWeather = forcastWeather
+public extension ForecastWeatherController.WeatherCell {
+    func setupforecastWeather(_ forecastWeather: CityWeather) {
+        self.forecastWeather = forecastWeather
     }
 }
 

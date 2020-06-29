@@ -5,12 +5,12 @@ import CoreData
 import Foundation
 import SnapKit
 import UIKit
-// MARK: - ForcastWeatherViewModel
-protocol ForcastWeatherViewModelDependencyResolver {
+// MARK: - ForecastWeatherViewModel
+protocol ForecastWeatherViewModelDependencyResolver {
     var cityData: CityData { get }
     var networkService: NetworkService { get }
 }
-final class ForcastWeatherViewModelDependencyContainer: ForcastWeatherViewModelDependencyResolver {
+final class ForecastWeatherViewModelDependencyContainer: ForecastWeatherViewModelDependencyResolver {
     let cityData: CityData
     private var _networkService: NetworkService?
     var networkService: NetworkService {
@@ -49,28 +49,28 @@ final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
         self.parentRouter = parentRouter
     }
 }
-// MARK: - ForcastWeatherScene
-protocol ForcastWeatherSceneDependencyResolver {
+// MARK: - ForecastWeatherScene
+protocol ForecastWeatherSceneDependencyResolver {
     var parentRouter: Router { get }
     var cityData: CityData { get }
-    var forcastWeatherRouter: ForcastWeatherRouter { get }
-    func forcastWeatherViewModel(cityData: CityData) -> ForcastWeatherViewModel
-    var forcastWeatherController: ForcastWeatherController { get }
+    var forecastWeatherRouter: ForecastWeatherRouter { get }
+    func forecastWeatherViewModel(cityData: CityData) -> ForecastWeatherViewModel
+    var forecastWeatherController: ForecastWeatherController { get }
 }
-final class ForcastWeatherSceneDependencyContainer: ForcastWeatherSceneDependencyResolver {
+final class ForecastWeatherSceneDependencyContainer: ForecastWeatherSceneDependencyResolver {
     let parentRouter: Router
     let cityData: CityData
-    var forcastWeatherRouter: ForcastWeatherRouter {
-        let value = ForcastWeatherRouter()
+    var forecastWeatherRouter: ForecastWeatherRouter {
+        let value = ForecastWeatherRouter()
         return value
     }
-    func forcastWeatherViewModel(cityData: CityData) -> ForcastWeatherViewModel {
-        let dependencies = ForcastWeatherViewModelDependencyContainer(cityData: cityData)
-        let value = ForcastWeatherViewModel(injecting: dependencies)
+    func forecastWeatherViewModel(cityData: CityData) -> ForecastWeatherViewModel {
+        let dependencies = ForecastWeatherViewModelDependencyContainer(cityData: cityData)
+        let value = ForecastWeatherViewModel(injecting: dependencies)
         return value
     }
-    var forcastWeatherController: ForcastWeatherController {
-        let value = ForcastWeatherController()
+    var forecastWeatherController: ForecastWeatherController {
+        let value = ForecastWeatherController()
         return value
     }
     init(parentRouter: Router, cityData: CityData) {
@@ -81,7 +81,7 @@ final class ForcastWeatherSceneDependencyContainer: ForcastWeatherSceneDependenc
 // MARK: - WeatherTableRouter
 protocol WeatherTableRouterDependencyResolver {
     func addCityScene(parentRouter: Router) -> AddCityScene
-    func forcastWeatherScene(parentRouter: Router, cityData: CityData) -> ForcastWeatherScene
+    func forecastWeatherScene(parentRouter: Router, cityData: CityData) -> ForecastWeatherScene
 }
 final class WeatherTableRouterDependencyContainer: WeatherTableRouterDependencyResolver {
     func addCityScene(parentRouter: Router) -> AddCityScene {
@@ -89,9 +89,9 @@ final class WeatherTableRouterDependencyContainer: WeatherTableRouterDependencyR
         let value = AddCityScene(injecting: dependencies)
         return value
     }
-    func forcastWeatherScene(parentRouter: Router, cityData: CityData) -> ForcastWeatherScene {
-        let dependencies = ForcastWeatherSceneDependencyContainer(parentRouter: parentRouter, cityData: cityData)
-        let value = ForcastWeatherScene(injecting: dependencies)
+    func forecastWeatherScene(parentRouter: Router, cityData: CityData) -> ForecastWeatherScene {
+        let dependencies = ForecastWeatherSceneDependencyContainer(parentRouter: parentRouter, cityData: cityData)
+        let value = ForecastWeatherScene(injecting: dependencies)
         return value
     }
     init() {

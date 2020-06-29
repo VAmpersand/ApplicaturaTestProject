@@ -21,7 +21,7 @@ public enum URLs {
         return beginningOfUrlForSeveralCitysId + citysIDStr.joined(separator: ",") + apiKey
     }
     
-    static func urlForForcastWeatherIn5day(for cityData: CityData?) -> String {
+    static func urlForForecastWeatherIn5day(for cityData: CityData?) -> String {
         guard let cityData = cityData else { return "" }
         return "https://api.openweathermap.org/data/2.5/forecast?id=" + "\(cityData.id)" + apiKey
     }    

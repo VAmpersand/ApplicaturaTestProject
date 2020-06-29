@@ -1,5 +1,5 @@
-public protocol ForcastWeatherControllerProtocol: class {
+public protocol ForecastWeatherControllerProtocol: class {
     func setCityData(_ cityData: CityData)
-    func setForcastWeathers(_ forcastWeathers: [CityWeather])
+    func setforecastWeathers(_ forecastWeathers: [CityWeather])
 }
 

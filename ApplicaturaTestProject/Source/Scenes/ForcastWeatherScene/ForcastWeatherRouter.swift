@@ -1,8 +1,8 @@
-final class ForcastWeatherRouter: BaseRouter {
+final class ForecastWeatherRouter: BaseRouter {
 }
 
-// MARK: - ForcastWeatherRouterProtocol
-extension ForcastWeatherRouter: ForcastWeatherRouterProtocol {
+// MARK: - ForecastWeatherRouterProtocol
+extension ForecastWeatherRouter: ForecastWeatherRouterProtocol {
     func handleClose() {
         dismissSelf(using: PopoverPresentation())
     }

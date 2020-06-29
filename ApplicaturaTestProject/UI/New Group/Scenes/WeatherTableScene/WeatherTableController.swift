@@ -30,7 +30,6 @@ public final class WeatherTableController: BaseController {
                        forHeaderFooterViewReuseIdentifier: WeatherHeaderCell.cellID)
         table.delegate = self
         table.dataSource = self
-        table.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.3)
         table.showsVerticalScrollIndicator = false
         
         return table

@@ -1,13 +1,13 @@
 import UIKit
 
-public final class ForcastWeatherController: BaseController {
+public final class ForecastWeatherController: BaseController {
     public override func viewDidLoad() {
         super.viewDidLoad()
         
         viewModel.viewDidLoad()
     }
     
-    public var viewModel: ForcastWeatherViewModelProtocol!
+    public var viewModel: ForecastWeatherViewModelProtocol!
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
@@ -21,7 +21,7 @@ public final class ForcastWeatherController: BaseController {
         }
     }
     
-    private var forcastWeathers: [CityWeather] = [] {
+    private var forecastWeathers: [CityWeather] = [] {
         didSet {
             weathersCollectionView.reloadData()
         }
@@ -45,7 +45,7 @@ public final class ForcastWeatherController: BaseController {
     }()
 }
 
-extension ForcastWeatherController {
+extension ForecastWeatherController {
     override func addNavigationBar() {
         super.addNavigationBar()
         let navigationBarTuple = addStaticNavigationBar(
@@ -76,35 +76,35 @@ extension ForcastWeatherController {
     }
 }
 
-// MARK: - ForcastWeatherControllerProtocol
-extension ForcastWeatherController: ForcastWeatherControllerProtocol {
+// MARK: - ForecastWeatherControllerProtocol
+extension ForecastWeatherController: ForecastWeatherControllerProtocol {
     public func setCityData(_ cityData: CityData) {
         self.cityData = cityData
     }
     
-    public func setForcastWeathers(_ forcastWeathers: [CityWeather]) {
-        self.forcastWeathers = forcastWeathers
+    public func setforecastWeathers(_ forecastWeathers: [CityWeather]) {
+        self.forecastWeathers = forecastWeathers
     }
 }
 
 //MARK:- UICollectionViewDataSource
-extension ForcastWeatherController: UICollectionViewDataSource {
+extension ForecastWeatherController: UICollectionViewDataSource {
     public func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return forcastWeathers.count
+        return forecastWeathers.count
     }
     
     public func collectionView(_ collectionView: UICollectionView,
                                cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: WeatherCell.cellID,
                                                       for: indexPath) as! WeatherCell
-        cell.setupForcastWeather(forcastWeathers[indexPath.row])
+        cell.setupforecastWeather(forecastWeathers[indexPath.row])
         
         return cell
     }
 }
 
 //MARK:- UICollectionViewDelegateFlowLayout
-extension ForcastWeatherController: UICollectionViewDelegateFlowLayout {
+extension ForecastWeatherController: UICollectionViewDelegateFlowLayout {
     public func collectionView(_ collectionView: UICollectionView,
                                layout collectionViewLayout: UICollectionViewLayout,
                                sizeForItemAt indexPath: IndexPath) -> CGSize {

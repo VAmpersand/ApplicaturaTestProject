@@ -1,4 +1,4 @@
-public protocol ForcastWeatherViewModelProtocol: class {
+public protocol ForecastWeatherViewModelProtocol: class {
     func viewDidLoad()
     func handleClose()
 }

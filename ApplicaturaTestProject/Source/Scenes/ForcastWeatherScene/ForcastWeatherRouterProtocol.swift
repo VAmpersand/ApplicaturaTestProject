@@ -1,3 +1,3 @@
-protocol ForcastWeatherRouterProtocol {
+protocol ForecastWeatherRouterProtocol {
     func handleClose()
 }

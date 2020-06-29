@@ -1,32 +1,32 @@
-final class ForcastWeatherViewModel {
+final class ForecastWeatherViewModel {
     
     // weaver: cityData <= CityData
     
     // weaver: networkService = NetworkService
     
-    var router: ForcastWeatherRouterProtocol!
+    var router: ForecastWeatherRouterProtocol!
     var parentRouter: Router!
-    weak var controller: ForcastWeatherControllerProtocol?
+    weak var controller: ForecastWeatherControllerProtocol?
     
-    private let dependencies: ForcastWeatherViewModelDependencyResolver
-    init(injecting dependencies: ForcastWeatherViewModelDependencyResolver) {
+    private let dependencies: ForecastWeatherViewModelDependencyResolver
+    init(injecting dependencies: ForecastWeatherViewModelDependencyResolver) {
         self.dependencies = dependencies
     }
 }
 
-// MARK: - ForcastWeatherViewModelProtocol
-extension ForcastWeatherViewModel: ForcastWeatherViewModelProtocol {
+// MARK: - ForecastWeatherViewModelProtocol
+extension ForecastWeatherViewModel: ForecastWeatherViewModelProtocol {
     func viewDidLoad() {
         controller?.setCityData(dependencies.cityData)
         
-        let url = URLs.urlForForcastWeatherIn5day(for: dependencies.cityData)
+        let url = URLs.urlForForecastWeatherIn5day(for: dependencies.cityData)
         
         dependencies.networkService.getJSONData(
             from: url,
             with: CityWeathers.self
         ) { result, status, error in
-            if status, let forcastWeather = result?.list {
-                self.controller?.setForcastWeathers(forcastWeather)
+            if status, let forecastWeather = result?.list {
+                self.controller?.setforecastWeathers(forecastWeather)
             } else {
                 print(error)
             }
