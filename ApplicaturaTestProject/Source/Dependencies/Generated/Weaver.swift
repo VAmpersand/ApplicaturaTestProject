@@ -8,11 +8,20 @@ import UIKit
 // MARK: - CityWeatherViewModel
 protocol CityWeatherViewModelDependencyResolver {
     var cityData: CityData { get }
+    var networkService: NetworkService { get }
 }
 final class CityWeatherViewModelDependencyContainer: CityWeatherViewModelDependencyResolver {
     let cityData: CityData
+    private var _networkService: NetworkService?
+    var networkService: NetworkService {
+        if let value = _networkService { return value }
+        let value = NetworkService()
+        _networkService = value
+        return value
+    }
     init(cityData: CityData) {
         self.cityData = cityData
+        _ = networkService
     }
 }
 // MARK: - AddCityScene
@@ -102,7 +111,7 @@ final class WeatherTableSceneDependencyContainer: WeatherTableSceneDependencyRes
         return value
     }
     var weatherTableViewModel: WeatherTableViewModel {
-        let value = WeatherTableViewModel()
+        let value = WeatherTableViewModel(injecting: WeatherTableViewModelDependencyContainer())
         return value
     }
     var weatherTableController: WeatherTableController {
@@ -111,6 +120,22 @@ final class WeatherTableSceneDependencyContainer: WeatherTableSceneDependencyRes
     }
     init(parentRouter: Router) {
         self.parentRouter = parentRouter
+    }
+}
+// MARK: - WeatherTableViewModel
+protocol WeatherTableViewModelDependencyResolver {
+    var networkService: NetworkService { get }
+}
+final class WeatherTableViewModelDependencyContainer: WeatherTableViewModelDependencyResolver {
+    private var _networkService: NetworkService?
+    var networkService: NetworkService {
+        if let value = _networkService { return value }
+        let value = NetworkService()
+        _networkService = value
+        return value
+    }
+    init() {
+        _ = networkService
     }
 }
 // MARK: - MainRouter

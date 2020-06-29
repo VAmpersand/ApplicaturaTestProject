@@ -28,7 +28,6 @@ extension AddCityController {
     override func setupSelf() {
         super.setupSelf()
         loadData()
-        view.backgroundColor = .red
     }
     
     override func addNavigationBar() {
@@ -40,6 +39,7 @@ extension AddCityController {
             )
         )
         navigationBar = navigationBarTuple.navigationBar
+        navigationBar.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.2)
         navigationBar.textAligment = .center
         closeButton = navigationBarTuple.rightButton
     }

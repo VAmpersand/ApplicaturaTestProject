@@ -9,6 +9,19 @@ public final class WeatherTableController: BaseController {
     private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
     
+    private var cityWeathers: [CityWeather] = [] {
+        didSet {
+            weatherTableView.reloadData()
+        }
+    }
+    
+    private var containerView: UIView = {
+        let view = UIView()
+        view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.3)
+        
+        return view
+    }()
+    
     public lazy var weatherTableView: UITableView = {
         let table = UITableView()
         table.register(CityWeatherCell.self,
@@ -28,8 +41,6 @@ extension WeatherTableController {
         super.setupSelf()
         loadData()
         addObservers()
-        
-        view.backgroundColor = .red
     }
     
     override func addNavigationBar() {
@@ -43,12 +54,17 @@ extension WeatherTableController {
     
     override func addSubviews() {
         super.addSubviews()
-        view.addSubview(weatherTableView)
+        view.addSubview(containerView)
+        containerView.addSubview(weatherTableView)
 
     }
     
     override func constraintSubviews() {
         super.constraintSubviews()
+        containerView.snp.makeConstraints { make in
+            make.edges.equalToSuperview()
+        }
+        
         weatherTableView.snp.makeConstraints { make in
             make.top.equalTo(navigationBar.snp.bottom)
             make.left.right.bottom.equalToSuperview()
@@ -58,7 +74,9 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
- 
+    public func setWeatherData(_ cityWeathers: [CityWeather]) {
+        self.cityWeathers = cityWeathers
+    }
 }
 
 // MARK: - UITableViewDataSource
@@ -84,6 +102,12 @@ extension WeatherTableController: UITableViewDataSource {
         guard let cityData = presentedCity.cityData else { return cell }
         cell.setCityLabel(cityData)
         
+        let currentWeather = cityWeathers.first { cityWeather in
+            cityWeather.id == cityData.id
+        }
+        guard let weatherData = currentWeather else { return cell }
+        cell.setWeatherData(weatherData)
+    
         return cell
     }
 }
@@ -92,7 +116,7 @@ extension WeatherTableController: UITableViewDataSource {
 extension WeatherTableController: UITableViewDelegate {
     public func tableView(_ tableView: UITableView,
                           heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return 120
+        return 170
     }
     
     public func tableView(_ tableView: UITableView,
@@ -110,6 +134,7 @@ extension WeatherTableController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let presentedCity = fetchResultsController.object(at: indexPath)
+        
         guard let cityData = presentedCity.cityData else { return }
         viewModel.presentCityWeatherScene(with: cityData)
         
@@ -150,6 +175,8 @@ extension WeatherTableController: NSFetchedResultsControllerDelegate {
         } catch {
             print("Failed to fetch companies: \(error)")
         }
+        
+        viewModel.viewDidLoad()
         weatherTableView.reloadData()
     }
 }

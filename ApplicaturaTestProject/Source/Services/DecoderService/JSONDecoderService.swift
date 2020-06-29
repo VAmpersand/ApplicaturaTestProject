@@ -6,7 +6,7 @@ final class JSONDecoderService {
 
 extension JSONDecoderService {
     func decodeData<T: Codable>(fron jsonData: Data,
-                                with codableStruct: [T].Type) -> [T]? {        
+                                with codableStruct: T.Type) -> T? {        
         do {
             let resultData = try JSONDecoder().decode(codableStruct.self, from: jsonData)
             return resultData
