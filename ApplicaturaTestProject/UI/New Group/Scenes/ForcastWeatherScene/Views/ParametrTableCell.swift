@@ -1,18 +1,7 @@
 import UIKit
 
 extension ForecastWeatherController {
-    public class ParameterTableCell: UITableViewCell {
-        
-        override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
-            setupSelf()
-        }
-
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
+    public class ParameterTableCell: BaseTableCell {
         public static let cellID = String(describing: ParameterTableCell.self)
         
         public lazy var parameterLabel: UILabel = {
@@ -34,20 +23,21 @@ extension ForecastWeatherController {
     }
 }
 
-private extension ForecastWeatherController.ParameterTableCell {
-    func setupSelf() {
-        addSubviews()
-        constraintSubviews()
+extension ForecastWeatherController.ParameterTableCell {
+    override func setupSelf() {
+        super.setupSelf()
         
         backgroundColor = .clear
     }
     
-    func addSubviews() {
+    override func addSubviews() {
+        super.addSubviews()
         addSubview(parameterLabel)
         addSubview(valueLabel)
     }
     
-    func constraintSubviews() {
+    override func constraintSubviews() {
+        super.constraintSubviews()
         parameterLabel.snp.makeConstraints { make in
             make.left.equalToSuperview().inset(10)
             make.centerY.equalToSuperview()

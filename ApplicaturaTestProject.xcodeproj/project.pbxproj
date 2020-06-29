@@ -41,6 +41,8 @@
 		77165DDB24A6043E00FC8F4F /* JSONDecoderService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77165DDA24A6043E00FC8F4F /* JSONDecoderService.swift */; };
 		77165DE024A606EF00FC8F4F /* city.list.json in Resources */ = {isa = PBXBuildFile; fileRef = 77165DDF24A606EF00FC8F4F /* city.list.json */; };
 		77C8699124A6287F007BA750 /* CoreDataService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77C8699024A6287F007BA750 /* CoreDataService.swift */; };
+		77D5BCF324AA6CA4000BEABF /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BCF224AA6CA4000BEABF /* BaseTableCell.swift */; };
+		77D5BCF524AA7451000BEABF /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */; };
 		77F3642D24A62DBD00C240CF /* CodingUserInfoKey.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3642C24A62DBD00C240CF /* CodingUserInfoKey.swift */; };
 		77F3642F24A62DE500C240CF /* JSONDecoder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3642E24A62DE500C240CF /* JSONDecoder.swift */; };
 		77F3644424A6374800C240CF /* CityData+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3644024A6374700C240CF /* CityData+CoreDataProperties.swift */; };
@@ -110,6 +112,8 @@
 		77165DDA24A6043E00FC8F4F /* JSONDecoderService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoderService.swift; sourceTree = "<group>"; };
 		77165DDF24A606EF00FC8F4F /* city.list.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = city.list.json; sourceTree = "<group>"; };
 		77C8699024A6287F007BA750 /* CoreDataService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoreDataService.swift; sourceTree = "<group>"; };
+		77D5BCF224AA6CA4000BEABF /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
+		77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		77F3642C24A62DBD00C240CF /* CodingUserInfoKey.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CodingUserInfoKey.swift; sourceTree = "<group>"; };
 		77F3642E24A62DE500C240CF /* JSONDecoder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONDecoder.swift; sourceTree = "<group>"; };
 		77F3644024A6374700C240CF /* CityData+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "CityData+CoreDataProperties.swift"; sourceTree = "<group>"; };
@@ -244,6 +248,7 @@
 				77F3647324A773AB00C240CF /* CoreDataService */,
 				77165DD424A5FD7E00FC8F4F /* NetworkService */,
 				77165D9224A5E69A00FC8F4F /* Application */,
+				77D5BCF624AA7455000BEABF /* RepeatingTimer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -354,6 +359,7 @@
 			isa = PBXGroup;
 			children = (
 				77165DBA24A5F27A00FC8F4F /* StaticNavigationBar.swift */,
+				77D5BCF224AA6CA4000BEABF /* BaseTableCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -431,6 +437,14 @@
 				77F3647C24AA0FF100C240CF /* CityWeather.swift */,
 			);
 			path = Model;
+			sourceTree = "<group>";
+		};
+		77D5BCF624AA7455000BEABF /* RepeatingTimer */ = {
+			isa = PBXGroup;
+			children = (
+				77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */,
+			);
+			path = RepeatingTimer;
 			sourceTree = "<group>";
 		};
 		77F3642B24A62D9F00C240CF /* Extension */ = {
@@ -730,7 +744,9 @@
 				77165DA424A5E8B800FC8F4F /* PopoverPresentation.swift in Sources */,
 				77F3648324AA2A6E00C240CF /* WeatherCell.swift in Sources */,
 				77F3645C24A7690E00C240CF /* AddCityViewModel.swift in Sources */,
+				77D5BCF324AA6CA4000BEABF /* BaseTableCell.swift in Sources */,
 				77F3644F24A763F900C240CF /* Texts.swift in Sources */,
+				77D5BCF524AA7451000BEABF /* RepeatingTimer.swift in Sources */,
 				77F3645124A7657800C240CF /* CityWeatherCell.swift in Sources */,
 				77F3647D24AA0FF100C240CF /* CityWeather.swift in Sources */,
 				77F3648024AA170C00C240CF /* ParametrCell.swift in Sources */,

@@ -1,17 +1,7 @@
 import UIKit
 
 extension AddCityController {
-    public class CityCell: UITableViewCell {
-        override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
-            setupSelf()
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
+    public class CityCell: BaseTableCell {
         public static let cellID = String(describing: CityCell.self)
         
         private lazy var cityLabel: UILabel = {
@@ -26,16 +16,13 @@ extension AddCityController {
 }
 
 extension AddCityController.CityCell {
-    func setupSelf() {
-        addSubviews()
-        constraintSubviews()
-    }
-    
-    func addSubviews() {
+    override func addSubviews() {
+        super.addSubviews()
         addSubview(cityLabel)
     }
     
-    func constraintSubviews() {
+    override func constraintSubviews() {
+        super.constraintSubviews()
         cityLabel.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
             make.left.right.equalToSuperview().inset(15)

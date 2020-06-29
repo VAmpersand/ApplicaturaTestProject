@@ -1,17 +1,7 @@
 import UIKit
 
 extension WeatherTableController {
-    public class CityWeatherCell: UITableViewCell {
-        override public init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
-            super.init(style: style, reuseIdentifier: reuseIdentifier)
-            
-            setupSelf()
-        }
-        
-        required init?(coder: NSCoder) {
-            fatalError("init(coder:) has not been implemented")
-        }
-        
+    public class CityWeatherCell: BaseTableCell {
         public static let cellID = String(describing: CityWeatherCell.self)
         
         private var cityWeather: CityWeather! {
@@ -49,19 +39,14 @@ extension WeatherTableController {
 }
 
 extension WeatherTableController.CityWeatherCell {
-    func setupSelf() {
-        addSubviews()
-        constraintSubviews()
-        
-        selectionStyle = .none
-    }
-    
-    func addSubviews() {
+    override func addSubviews() {
+        super.addSubviews()
         addSubview(cityLabel)
         addSubview(parametersCollectionView)
     }
     
-    func constraintSubviews() {
+    override func constraintSubviews() {
+        super.constraintSubviews()
         cityLabel.snp.makeConstraints { make in
             make.top.left.right.equalToSuperview().inset(15)
         }
