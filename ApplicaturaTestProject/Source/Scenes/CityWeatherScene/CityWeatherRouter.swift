@@ -9,5 +9,7 @@ final class CityWeatherRouter: BaseRouter {
 
 // MARK: - CityWeatherRouterProtocol
 extension CityWeatherRouter: CityWeatherRouterProtocol {
-
+    func handleClose() {
+        dismissSelf(using: PopoverPresentation())
+    }
 }

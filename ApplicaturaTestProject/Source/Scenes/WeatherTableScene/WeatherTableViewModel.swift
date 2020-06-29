@@ -5,15 +5,19 @@ final class WeatherTableViewModel {
 
     weak var controller: WeatherTableControllerProtocol?
     
-//    private let dependencies: WeatherTableViewModelDependencyResolver
-//    init(injecting dependencies: WeatherTableViewModelDependencyResolver) {
-//        self.dependencies = dependencies
-//    }
+    //    private let dependencies: WeatherTableViewModelDependencyResolver
+    //    init(injecting dependencies: WeatherTableViewModelDependencyResolver) {
+    //        self.dependencies = dependencies
+    //    }
 }
 
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
     func presentAddCityScene() {
         router.presentAddCityScene()
+    }
+    
+    func presentCityWeatherScene(with cityData: CityData) {
+        router.presentCityWeatherScene(with: cityData)
     }
 }

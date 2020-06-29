@@ -32,7 +32,7 @@ extension CoreDataService {
         }
     }
 
-    func savePresentedCity(cityDate: CityData) {
+    func savePresentedCity(cityDate: CityData, comletion: (() -> Void)? = nil) {
         let context = persistentContainer.viewContext
         let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
                                                                 into: context) as! PresentedCity
@@ -45,6 +45,7 @@ extension CoreDataService {
             print("Failed to create: \(createError)")
         }
         
+        comletion?()
     }
 
     func fetchPresentedCity() -> [PresentedCity]? {
@@ -61,16 +62,18 @@ extension CoreDataService {
         return nil
     }
     
-    func deletePresentedCity(presentedCity: PresentedCity) {
-         let context = persistentContainer.viewContext
-         context.delete(presentedCity)
-
-         do {
-             try context.save()
-         } catch let saveError {
-             print("Failed to delete: \(saveError)")
-         }
-     }
+    func deletePresentedCity(presentedCity: PresentedCity, comletion: (() -> Void)? = nil) {
+        let context = persistentContainer.viewContext
+        context.delete(presentedCity)
+        
+        do {
+            try context.save()
+        } catch let saveError {
+            print("Failed to delete: \(saveError)")
+        }
+        
+        comletion?()
+    }
 
 //    func fetchCityData(withName name: String) -> CityData? {
 //        let context = persistentContainer.viewContext

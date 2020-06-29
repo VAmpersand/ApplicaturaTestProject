@@ -5,20 +5,14 @@ import CoreData
 import Foundation
 import SnapKit
 import UIKit
-// MARK: - AddCityViewModel
-protocol AddCityViewModelDependencyResolver {
-    var coreDataService: CoreDataService { get }
+// MARK: - CityWeatherViewModel
+protocol CityWeatherViewModelDependencyResolver {
+    var cityData: CityData { get }
 }
-final class AddCityViewModelDependencyContainer: AddCityViewModelDependencyResolver {
-    private var _coreDataService: CoreDataService?
-    var coreDataService: CoreDataService {
-        if let value = _coreDataService { return value }
-        let value = CoreDataService()
-        _coreDataService = value
-        return value
-    }
-    init() {
-        _ = coreDataService
+final class CityWeatherViewModelDependencyContainer: CityWeatherViewModelDependencyResolver {
+    let cityData: CityData
+    init(cityData: CityData) {
+        self.cityData = cityData
     }
 }
 // MARK: - AddCityScene
@@ -35,7 +29,7 @@ final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
         return value
     }
     var addCityViewModel: AddCityViewModel {
-        let value = AddCityViewModel(injecting: AddCityViewModelDependencyContainer())
+        let value = AddCityViewModel()
         return value
     }
     var addCityController: AddCityController {
@@ -46,14 +40,49 @@ final class AddCitySceneDependencyContainer: AddCitySceneDependencyResolver {
         self.parentRouter = parentRouter
     }
 }
+// MARK: - CityWeatherScene
+protocol CityWeatherSceneDependencyResolver {
+    var parentRouter: Router { get }
+    var cityData: CityData { get }
+    var cityWeatherRouter: CityWeatherRouter { get }
+    func cityWeatherViewModel(cityData: CityData) -> CityWeatherViewModel
+    var cityWeatherController: CityWeatherController { get }
+}
+final class CityWeatherSceneDependencyContainer: CityWeatherSceneDependencyResolver {
+    let parentRouter: Router
+    let cityData: CityData
+    var cityWeatherRouter: CityWeatherRouter {
+        let value = CityWeatherRouter()
+        return value
+    }
+    func cityWeatherViewModel(cityData: CityData) -> CityWeatherViewModel {
+        let dependencies = CityWeatherViewModelDependencyContainer(cityData: cityData)
+        let value = CityWeatherViewModel(injecting: dependencies)
+        return value
+    }
+    var cityWeatherController: CityWeatherController {
+        let value = CityWeatherController()
+        return value
+    }
+    init(parentRouter: Router, cityData: CityData) {
+        self.parentRouter = parentRouter
+        self.cityData = cityData
+    }
+}
 // MARK: - WeatherTableRouter
 protocol WeatherTableRouterDependencyResolver {
     func addCityScene(parentRouter: Router) -> AddCityScene
+    func cityWeatherScene(parentRouter: Router, cityData: CityData) -> CityWeatherScene
 }
 final class WeatherTableRouterDependencyContainer: WeatherTableRouterDependencyResolver {
     func addCityScene(parentRouter: Router) -> AddCityScene {
         let dependencies = AddCitySceneDependencyContainer(parentRouter: parentRouter)
         let value = AddCityScene(injecting: dependencies)
+        return value
+    }
+    func cityWeatherScene(parentRouter: Router, cityData: CityData) -> CityWeatherScene {
+        let dependencies = CityWeatherSceneDependencyContainer(parentRouter: parentRouter, cityData: cityData)
+        let value = CityWeatherScene(injecting: dependencies)
         return value
     }
     init() {
@@ -95,31 +124,6 @@ final class MainRouterDependencyContainer: MainRouterDependencyResolver {
         return value
     }
     init() {
-    }
-}
-// MARK: - CityWeatherScene
-protocol CityWeatherSceneDependencyResolver {
-    var parentRouter: Router { get }
-    var cityWeatherRouter: CityWeatherRouter { get }
-    var cityWeatherViewModel: CityWeatherViewModel { get }
-    var cityWeatherController: CityWeatherController { get }
-}
-final class CityWeatherSceneDependencyContainer: CityWeatherSceneDependencyResolver {
-    let parentRouter: Router
-    var cityWeatherRouter: CityWeatherRouter {
-        let value = CityWeatherRouter()
-        return value
-    }
-    var cityWeatherViewModel: CityWeatherViewModel {
-        let value = CityWeatherViewModel()
-        return value
-    }
-    var cityWeatherController: CityWeatherController {
-        let value = CityWeatherController()
-        return value
-    }
-    init(parentRouter: Router) {
-        self.parentRouter = parentRouter
     }
 }
 // MARK: - SceneDelegate

@@ -35,7 +35,7 @@ extension AddCityController {
         super.addNavigationBar()
         let navigationBarTuple = addStaticNavigationBar(
             StaticNavigationBar(title: Texts.AddCity.title,
-                                rightButtonImage: Icons.AddCity.close,
+                                rightButtonImage: Icons.close,
                                 rightAction: { self.viewModel.handleClose() }
             )
         )
@@ -115,9 +115,11 @@ extension AddCityController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cityData = fetchResultsController.object(at: indexPath)
-        CoreDataService.shared.savePresentedCity(cityDate: cityData)
+        CoreDataService.shared.savePresentedCity(cityDate: cityData) {
+            NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+            self.viewModel.handleClose()
+        }
         tableView.deselectRow(at: indexPath, animated: true)
-        viewModel.handleClose()
     }
 }
 
@@ -149,7 +151,6 @@ extension AddCityController: NSFetchedResultsControllerDelegate {
 extension AddCityController: UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            
             let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
             
             let countryDescriptor = NSSortDescriptor(key: "country", ascending: true)

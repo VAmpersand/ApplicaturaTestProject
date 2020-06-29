@@ -11,9 +11,11 @@ final class CityWeatherScene: BaseScene {
     // weaver: cityWeatherController = CityWeatherController
     // weaver: cityWeatherController.scope = .transient
     
+    // weaver: cityData <= CityData
+    
     init(injecting dependencies: CityWeatherSceneDependencyResolver) {
         let router = dependencies.cityWeatherRouter
-        let viewModel = dependencies.cityWeatherViewModel
+        let viewModel = dependencies.cityWeatherViewModel(cityData: dependencies.cityData)
         let controller = dependencies.cityWeatherController
         
         controller.viewModel = viewModel

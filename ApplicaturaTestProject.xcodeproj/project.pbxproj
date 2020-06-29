@@ -65,6 +65,7 @@
 		77F3647124A7702300C240CF /* Icons.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 77F3647024A7702300C240CF /* Icons.xcassets */; };
 		77F3647624A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647424A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift */; };
 		77F3647724A9E94B00C240CF /* PresentedCity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647524A9E94B00C240CF /* PresentedCity+CoreDataClass.swift */; };
+		77F3647B24AA016C00C240CF /* Notification+names.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77F3647A24AA016C00C240CF /* Notification+names.swift */; };
 		872B9DDBA8C6CCC4662A6717 /* Pods_ApplicaturaTestProject.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */; };
 /* End PBXBuildFile section */
 
@@ -129,6 +130,7 @@
 		77F3647024A7702300C240CF /* Icons.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Icons.xcassets; sourceTree = "<group>"; };
 		77F3647424A9E94B00C240CF /* PresentedCity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		77F3647524A9E94B00C240CF /* PresentedCity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataClass.swift"; sourceTree = "<group>"; };
+		77F3647A24AA016C00C240CF /* Notification+names.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Notification+names.swift"; sourceTree = "<group>"; };
 		90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.debug.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.debug.xcconfig"; sourceTree = "<group>"; };
 		AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-ApplicaturaTestProject.release.xcconfig"; path = "Target Support Files/Pods-ApplicaturaTestProject/Pods-ApplicaturaTestProject.release.xcconfig"; sourceTree = "<group>"; };
 		CD88438D09E2AD66AC0B0718 /* Pods_ApplicaturaTestProject.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_ApplicaturaTestProject.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -427,6 +429,7 @@
 				77F3642C24A62DBD00C240CF /* CodingUserInfoKey.swift */,
 				77F3642E24A62DE500C240CF /* JSONDecoder.swift */,
 				77F3644824A6445F00C240CF /* UserDefaults+Keys.swift */,
+				77F3647A24AA016C00C240CF /* Notification+names.swift */,
 			);
 			path = Extension;
 			sourceTree = "<group>";
@@ -702,6 +705,7 @@
 				77165DCB24A5F80C00FC8F4F /* CityWeatherRouter.swift in Sources */,
 				77165DAE24A5F12000FC8F4F /* WeatherTableViewModel.swift in Sources */,
 				77F3646724A769ED00C240CF /* AddCityControllerProtocol.swift in Sources */,
+				77F3647B24AA016C00C240CF /* Notification+names.swift in Sources */,
 				77165D9C24A5E86B00FC8F4F /* Presentation.swift in Sources */,
 				77165D7B24A5E47B00FC8F4F /* AppDelegate.swift in Sources */,
 				77165DC224A5F3A200FC8F4F /* WeatherControllerProtocol.swift in Sources */,
