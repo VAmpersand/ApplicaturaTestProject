@@ -1,17 +1,7 @@
-//
-//  PresentedCity+CoreDataProperties.swift
-//  
-//
-//  Created by Viktor on 30.06.2020.
-//
-//
-
 import Foundation
 import CoreData
 
-
 extension PresentedCity {
-
     @nonobjc public class func fetchRequest() -> NSFetchRequest<PresentedCity> {
         return NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
     }
@@ -20,6 +10,4 @@ extension PresentedCity {
     @NSManaged public var name: String?
     @NSManaged public var cityData: CityData?
     @NSManaged public var cityWeather: CityWeather?
-    @NSManaged public var coord: Coord?
-
 }

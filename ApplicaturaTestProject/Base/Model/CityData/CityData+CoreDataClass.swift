@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 public class CityData: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {
         case id = "id"

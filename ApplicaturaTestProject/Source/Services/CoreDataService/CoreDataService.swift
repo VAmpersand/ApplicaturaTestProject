@@ -43,24 +43,6 @@ extension CoreDataService {
         }
     }
     
-    func savePresentedCity(cityDate: CityData, comletion: (() -> Void)? = nil) {
-        let context = persistentContainer.viewContext
-        let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
-                                                                into: context) as! PresentedCity
-        
-        presentedCity.cityData = cityDate
-        presentedCity.coord = cityDate.coord
-        presentedCity.id = cityDate.id
-        
-        do {
-            try context.save()
-        } catch let createError {
-            print("Failed to create: \(createError)")
-        }
-        
-        comletion?()
-    }
-    
     func fetchPresentedCities() -> [PresentedCity]? {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")

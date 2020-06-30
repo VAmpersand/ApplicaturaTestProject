@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 extension CityData {
     @nonobjc public class func fetchRequest() -> NSFetchRequest<CityData> {
         return NSFetchRequest<CityData>(entityName: "CityData")
@@ -12,5 +11,4 @@ extension CityData {
     @NSManaged public var name: String?
     @NSManaged public var state: String?
     @NSManaged public var coord: Coord?
-
 }

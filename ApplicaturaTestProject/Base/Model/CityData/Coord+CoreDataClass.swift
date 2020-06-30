@@ -1,7 +1,6 @@
 import Foundation
 import CoreData
 
-
 public class Coord: NSManagedObject, Decodable {
     enum CodingKeys: String, CodingKey {
         case lon = "lon"
