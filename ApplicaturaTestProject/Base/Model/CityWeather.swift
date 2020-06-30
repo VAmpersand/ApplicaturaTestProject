@@ -13,7 +13,7 @@ public struct CityWeathers: Codable {
 }
 
 public struct CityWeatherApi: Codable {
-    public var id: Int?
+    public var id: Int32?
     public var sys: System
     public var weather: [Weather]
     public var main: Main
@@ -23,7 +23,7 @@ public struct CityWeatherApi: Codable {
     public var date: String?
     public var name: String?
     
-    init(id: Int,
+    init(id: Int32,
          sys: System,
          weather: [Weather],
          main: Main,

@@ -104,5 +104,28 @@ extension CoreDataService {
         
         comletion?()
     }
+    
+    
+    func setDefaultCity(_ cityWeather: CityWeatherApi, comletion: (() -> Void)? = nil) {
+        let context = persistentContainer.viewContext
+        
+        let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
+                                                                into: context) as! PresentedCity
+        presentedCity.id = cityWeather.id ?? 0
+        presentedCity.cityWeather?.clouds = cityWeather.clouds.all ?? 0
+        presentedCity.cityWeather?.feelsLike = cityWeather.main.feelsLike ?? 273
+        presentedCity.cityWeather?.temp = cityWeather.main.temp ?? 273
+        presentedCity.cityWeather?.pressure = cityWeather.main.pressure ?? 0
+        presentedCity.cityWeather?.humidity = cityWeather.main.humidity ?? 0
+        presentedCity.cityWeather?.windSpeed = cityWeather.wind.speed ?? 0
+        
+        do {
+            try context.save()
+        } catch let saveError {
+            print("Failed to delete: \(saveError)")
+        }
+        
+        comletion?()
+    }
+    
 }
-
