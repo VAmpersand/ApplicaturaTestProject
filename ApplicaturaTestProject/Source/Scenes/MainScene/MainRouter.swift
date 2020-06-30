@@ -5,6 +5,8 @@ final class MainRouter: BaseRouter {
     // weaver: weatherTableScene = WeatherTableScene
     // weaver: weatherTableScene.scope = .transient
     
+    // weaver: networkService = NetworkService
+    
     private let dependencies: MainRouterDependencyResolver
     
     private var window: UIWindow!
@@ -62,8 +64,30 @@ extension MainRouter {
     }
     
     func setupDefaultCity() {
-        CoreDataService.shared.setDefaultCity(withLat: UserDefaults.lat ?? 52.761902,
-                                              and: UserDefaults.lon ?? 12.22478)
+        let presentedCities = CoreDataService.shared.fetchPresentedCities()
+        
+        if let presentedCities = presentedCities,
+            presentedCities.isEmpty {
+            let url = URLs.urlForCityWeatherByCoord(withLat: UserDefaults.lat,
+                                                    and: UserDefaults.lat)
+            
+            print(url)
+            
+            dependencies.networkService.getJSONData(
+                from: url,
+                with: CityWeatherApi.self
+            ) { result, status, error in
+                
+                
+                
+                print(result)
+                
+            }
+            
+        }
+        
+        
+        
         
     }
 }

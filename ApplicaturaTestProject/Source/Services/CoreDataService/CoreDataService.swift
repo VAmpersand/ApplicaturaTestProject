@@ -104,27 +104,5 @@ extension CoreDataService {
         
         comletion?()
     }
-    
-    
-    
-    
-    func setDefaultCity(withLat lat: Double,and lon: Double) {
-        let context = persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
-        fetchRequest.fetchLimit = 1
-        let lonPredicate = NSPredicate(format: "coord.lon == %@", lon)
-        let latPredicate = NSPredicate(format: "coord.lat == %@", lat)
-        fetchRequest.predicate = NSCompoundPredicate(
-            andPredicateWithSubpredicates: [lonPredicate, latPredicate]
-        )
-        
-        do {
-            let cityData = try context.fetch(fetchRequest)
-            print(cityData)
-        } catch let fetchError {
-            print("Failed to fetch: \(fetchError)")
-        }
-    }
 }
 

@@ -142,6 +142,7 @@ final class WeatherTableViewModelDependencyContainer: WeatherTableViewModelDepen
 // MARK: - MainRouter
 protocol MainRouterDependencyResolver {
     func weatherTableScene(parentRouter: Router) -> WeatherTableScene
+    var networkService: NetworkService { get }
 }
 final class MainRouterDependencyContainer: MainRouterDependencyResolver {
     func weatherTableScene(parentRouter: Router) -> WeatherTableScene {
@@ -149,7 +150,15 @@ final class MainRouterDependencyContainer: MainRouterDependencyResolver {
         let value = WeatherTableScene(injecting: dependencies)
         return value
     }
+    private var _networkService: NetworkService?
+    var networkService: NetworkService {
+        if let value = _networkService { return value }
+        let value = NetworkService()
+        _networkService = value
+        return value
+    }
     init() {
+        _ = networkService
     }
 }
 // MARK: - SceneDelegate
