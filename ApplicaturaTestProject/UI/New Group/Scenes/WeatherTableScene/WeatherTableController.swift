@@ -1,5 +1,6 @@
 import UIKit
 import CoreData
+import CoreLocation
 
 public final class WeatherTableController: BaseController {
     public var viewModel: WeatherTableViewModelProtocol!
@@ -9,7 +10,9 @@ public final class WeatherTableController: BaseController {
     private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
     
-    private var cityWeathers: [CityWeather] = [] {
+    private let locationManager = CLLocationManager()
+    
+    private var cityWeathers: [CityWeatherApi] = [] {
         didSet {
             weatherTableView.reloadData()
         }
@@ -40,7 +43,7 @@ extension WeatherTableController {
     override func setupSelf() {
         super.setupSelf()
         loadData()
-        addObservers()
+        addObservers()  
     }
     
     override func addNavigationBar() {
@@ -74,7 +77,7 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
-    public func setWeatherData(_ cityWeathers: [CityWeather]) {
+    public func setWeatherData(_ cityWeathers: [CityWeatherApi]) {
         self.cityWeathers = cityWeathers
     }
 }
@@ -99,12 +102,10 @@ extension WeatherTableController: UITableViewDataSource {
                                                   for: indexPath) as! CityWeatherCell
         
         let presentedCity = fetchResultsController.object(at: indexPath)
-        guard let cityData = presentedCity.cityData else { return cell }
-        cell.setCityLabel(cityData)
-        
+
         let currentWeather = cityWeathers.first { cityWeather in
             guard let id = cityWeather.id else { return false }
-            return id == cityData.id
+            return id == presentedCity.id
         }
         guard let weatherData = currentWeather else { return cell }
         cell.setWeatherData(weatherData)
@@ -146,7 +147,7 @@ extension WeatherTableController: UITableViewDelegate {
         let delete = UIContextualAction(style: .destructive , title: "Delete") { (_, action, completion) in
             
             let presentedCity = self.fetchResultsController.object(at: indexPath)
-            CoreDataService.shared.deletePresentedCity(presentedCity: presentedCity) {
+            CoreDataService.shared.deletePresentedCity(presentedCity) {
                 self.loadData()
             }
             

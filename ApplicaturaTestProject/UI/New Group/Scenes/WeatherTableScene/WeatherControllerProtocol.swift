@@ -1,4 +1,4 @@
 public protocol WeatherTableControllerProtocol: class {
-    func setWeatherData(_ cityWeathers: [CityWeather])
+    func setWeatherData(_ cityWeathers: [CityWeatherApi])
 }
 

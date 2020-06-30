@@ -2,6 +2,7 @@
 /// DO NOT EDIT!
 import Alamofire
 import CoreData
+import CoreLocation
 import Foundation
 import SnapKit
 import UIKit

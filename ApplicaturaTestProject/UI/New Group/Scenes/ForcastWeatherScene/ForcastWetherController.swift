@@ -21,7 +21,7 @@ public final class ForecastWeatherController: BaseController {
         }
     }
     
-    private var forecastWeathers: [CityWeather] = [] {
+    private var forecastWeathers: [CityWeatherApi] = [] {
         didSet {
             weathersCollectionView.reloadData()
         }
@@ -82,7 +82,7 @@ extension ForecastWeatherController: ForecastWeatherControllerProtocol {
         self.cityData = cityData
     }
     
-    public func setforecastWeathers(_ forecastWeathers: [CityWeather]) {
+    public func setforecastWeathers(_ forecastWeathers: [CityWeatherApi]) {
         self.forecastWeathers = forecastWeathers
     }
 }

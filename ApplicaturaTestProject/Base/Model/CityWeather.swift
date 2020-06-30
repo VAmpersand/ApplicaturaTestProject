@@ -1,9 +1,9 @@
 import Foundation
 
 public struct CityWeathers: Codable {
-    public var list: [CityWeather]
+    public var list: [CityWeatherApi]
     
-    init(list: [CityWeather]) {
+    init(list: [CityWeatherApi]) {
         self.list = list
     }
     
@@ -12,7 +12,7 @@ public struct CityWeathers: Codable {
     }
 }
 
-public struct CityWeather: Codable {
+public struct CityWeatherApi: Codable {
     public var id: Int?
     public var sys: System
     public var weather: [Weather]
@@ -20,7 +20,8 @@ public struct CityWeather: Codable {
     public var wind: Wind
     public var clouds: Clouds
     public var visibility: Int?
-    public var dt_txt: String?
+    public var date: String?
+    public var name: String?
     
     init(id: Int,
          sys: System,
@@ -29,7 +30,8 @@ public struct CityWeather: Codable {
          wind: Wind,
          clouds: Clouds,
          visibility: Int,
-         dt_txt: String) {
+         date: String,
+         name: String) {
         self.id = id
         self.sys = sys
         self.weather = weather
@@ -37,7 +39,8 @@ public struct CityWeather: Codable {
         self.wind = wind
         self.clouds = clouds
         self.visibility = visibility
-        self.dt_txt = dt_txt
+        self.date = date
+        self.name = name
     }
     
     enum CodingKeys: String, CodingKey {
@@ -48,25 +51,30 @@ public struct CityWeather: Codable {
         case wind = "wind"
         case clouds = "clouds"
         case visibility = "visibility"
-        case dt_txt = "dt_txt"
+        case date = "dt_txt"
+        case name = "name"
     }
 }
 
 
 public struct System: Codable {
+    public var country: String?
     public var timezone: Int?
     public var sunrise: Int?
     public var sunset: Int?
 
-    init(timezone: Int,
+    init(country: String,
+        timezone: Int,
          sunrise: Int,
          sunset: Int) {
+        self.country = country
         self.timezone = timezone
         self.sunrise = sunrise
         self.sunset = sunset
     }
     
     enum CodingKeys: String, CodingKey {
+        case country = "country"
         case timezone = "timezone"
         case sunrise = "sunrise"
         case sunset = "sunset"
@@ -97,41 +105,41 @@ public struct Weather: Codable {
 
 public struct Main: Codable {
     public var temp: Double?
-    public var feels_like: Double?
+    public var feelsLike: Double?
     public var pressure: Double?
     public var humidity: Double?
-    public var temp_min: Double?
-    public var temp_max: Double?
-    public var sea_level: Double?
-    public var grnd_level: Double?
+    public var tempMin: Double?
+    public var tempMax: Double?
+    public var seaLevel: Double?
+    public var grndLevel: Double?
 
     init(temp: Double,
-         feels_like: Double,
+         feelsLike: Double,
          pressure: Double,
          humidity: Double,
-         temp_min: Double,
-         temp_max: Double,
-         sea_level: Double?,
-         grnd_level: Double?) {
+         tempMin: Double,
+         tempMax: Double,
+         seaLevel: Double?,
+         grndLevel: Double?) {
         self.temp = temp
-        self.feels_like = feels_like
+        self.feelsLike = feelsLike
         self.pressure = pressure
         self.humidity = humidity
-        self.temp_min = temp_min
-        self.temp_max = temp_max
-        self.sea_level = sea_level
-        self.grnd_level = grnd_level
+        self.tempMin = tempMin
+        self.tempMax = tempMax
+        self.seaLevel = seaLevel
+        self.grndLevel = grndLevel
     }
 
     enum CodingKeys: String, CodingKey {
         case temp = "temp"
-        case feels_like = "feels_like"
+        case feelsLike = "feels_like"
         case pressure = "pressure"
         case humidity = "humidity"
-        case temp_min = "temp_min"
-        case temp_max = "temp_max"
-        case sea_level = "sea_level"
-        case grnd_level = "grnd_level"
+        case tempMin = "temp_min"
+        case tempMax = "temp_max"
+        case seaLevel = "sea_level"
+        case grndLevel = "grnd_level"
     }
 }
 

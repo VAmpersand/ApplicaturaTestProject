@@ -4,8 +4,13 @@ extension WeatherTableController {
     public class CityWeatherCell: BaseTableCell {
         public static let cellID = String(describing: CityWeatherCell.self)
         
-        private var cityWeather: CityWeather! {
+        private var cityWeather: CityWeatherApi! {
             didSet {
+                let city = cityWeather.name ?? "The city is not defined"
+                let country = cityWeather.sys.country ?? "Сountry not defined"
+                
+                cityLabel.text = [country, city].joined(separator: " ")
+                
                 parametersCollectionView.reloadData()
             }
         }
@@ -60,16 +65,7 @@ extension WeatherTableController.CityWeatherCell {
 }
 
 extension WeatherTableController.CityWeatherCell {
-    public func setCityLabel(_ cityData: CityData) {
-        guard let city = cityData.name,
-            let state = cityData.state,
-            let country = cityData.country else { return }
-        
-        cityLabel.text = state.isEmpty ? [country, city].joined(separator: " ") :
-            [country, state, city].joined(separator: " ")
-    }
-    
-    public func setWeatherData(_ cityWeather: CityWeather) {
+    public func setWeatherData(_ cityWeather: CityWeatherApi) {
         self.cityWeather = cityWeather
     }
 }
@@ -93,7 +89,7 @@ extension WeatherTableController.CityWeatherCell: UICollectionViewDataSource {
         case 0:
             cell.setupCell(with: "Temperature:", value: "\(((cityWeather.main.temp ?? 273) - 273).rounded()) C")
         case 1:
-            cell.setupCell(with: "Feels like:", value: "\(((cityWeather.main.feels_like ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Feels like:", value: "\(((cityWeather.main.feelsLike ?? 273) - 273).rounded()) C")
         case 2:
             cell.setupCell(with: "Clouds:", value: "\(cityWeather.clouds.all ?? 0) %")
         case 3:

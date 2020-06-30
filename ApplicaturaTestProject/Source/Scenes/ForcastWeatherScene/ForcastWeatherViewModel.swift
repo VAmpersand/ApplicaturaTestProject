@@ -21,6 +21,7 @@ extension ForecastWeatherViewModel: ForecastWeatherViewModelProtocol {
         
         let url = URLs.urlForForecastWeatherIn5day(for: dependencies.cityData)
         
+        print(url)
         dependencies.networkService.getJSONData(
             from: url,
             with: CityWeathers.self

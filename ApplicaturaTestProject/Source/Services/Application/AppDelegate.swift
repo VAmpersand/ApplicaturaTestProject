@@ -9,6 +9,7 @@ extension AppDelegate: UIApplicationDelegate {
                      didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         
         CoreDataService.shared.applicationDocumentsDirectory()
+        LocationService.shared
 
         return true
     }

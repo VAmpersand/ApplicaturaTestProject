@@ -21,7 +21,11 @@ extension MainRouter {
     func startApp(in scene: UIScene) {
         setupWindow(in: scene)
         
-        setupDefaultCityData()
+        setupDefaultCityData() {
+            self.setupDefaultCity()
+        }
+        
+        setupDefaultCity()
     }
     
     private func setupWindow(in scene: UIScene) {
@@ -39,7 +43,7 @@ extension MainRouter {
 }
 
 extension MainRouter {
-    func setupDefaultCityData() {
+    func setupDefaultCityData(completon: () -> Void) {
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")
             
@@ -53,6 +57,13 @@ extension MainRouter {
             }
             
             UserDefaults.cityDataWasSetup = true
+            completon()
         }
+    }
+    
+    func setupDefaultCity() {
+        CoreDataService.shared.setDefaultCity(withLat: UserDefaults.lat ?? 52.761902,
+                                              and: UserDefaults.lon ?? 12.22478)
+        
     }
 }
