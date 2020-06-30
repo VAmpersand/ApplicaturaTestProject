@@ -5,20 +5,20 @@ public enum URLs {
         return "&appid=c5063c53a0152534ff32c42a78c29372"
     }
     
-    static var beginningOfUrlForSeveralCitysId: String {
+    static var beginningOfUrlForSeveralCitiesId: String {
         return "https://api.openweathermap.org/data/2.5/group?id="
     }
     
-    static func urlForSeveralCitysID(for presentedCitys: [PresentedCity]?) -> String {
-        guard let presentedCitys = presentedCitys else { return "" }
-        var citysIDStr: [String] = []
-        presentedCitys.forEach { presentedCity in
+    static func urlForSeveralCitiesID(for presentedCities: [PresentedCity]?) -> String {
+        guard let presentedCities = presentedCities else { return "" }
+        var citiesIDStr: [String] = []
+        presentedCities.forEach { presentedCity in
             if let cityData = presentedCity.cityData {
-                citysIDStr.append(String(cityData.id))
+                citiesIDStr.append(String(cityData.id))
             }
         }
         
-        return beginningOfUrlForSeveralCitysId + citysIDStr.joined(separator: ",") + apiKey
+        return beginningOfUrlForSeveralCitiesId + citiesIDStr.joined(separator: ",") + apiKey
     }
     
     static func urlForForecastWeatherIn5day(for cityData: CityData?) -> String {

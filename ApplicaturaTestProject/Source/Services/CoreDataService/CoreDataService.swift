@@ -50,13 +50,13 @@ extension CoreDataService {
         comletion?()
     }
     
-    func fetchPresentedCitys() -> [PresentedCity]? {
+    func fetchPresentedCities() -> [PresentedCity]? {
         let context = persistentContainer.viewContext
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
         
         do {
-            let presentedCitys = try context.fetch(fetchRequest)
-            return presentedCitys
+            let presentedCities = try context.fetch(fetchRequest)
+            return presentedCities
         } catch let fetchError {
             print("Failed to fetch companies: \(fetchError)")
         }
@@ -72,8 +72,8 @@ extension CoreDataService {
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
         do {
-            let presentedCitys = try context.fetch(fetchRequest)
-            return presentedCitys.first
+            let presentedCities = try context.fetch(fetchRequest)
+            return presentedCities.first
         } catch let fetchError {
             print("Failed to fetch companies: \(fetchError)")
         }
