@@ -40,7 +40,7 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
 //                    }
 //                }
                 
-                self.controller?.setWeatherData(cityWeaters)
+//                self.controller?.setWeatherData(cityWeaters)
             } else {
                 print(error)
             }

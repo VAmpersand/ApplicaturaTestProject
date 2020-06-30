@@ -79,7 +79,7 @@ extension MainRouter {
             ) { result, status, error in
                 if status {
                     print(result)
-//                    CoreDataService.shared.setDefaultCity(result)
+                    CoreDataService.shared.setPresentedCity(result)
                 } else {
                     print(error)
                 }

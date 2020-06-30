@@ -10,13 +10,13 @@ public final class WeatherTableController: BaseController {
     private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
     
-    private let locationManager = CLLocationManager()
-    
-    private var cityWeathers: [CityWeatherApi] = [] {
-        didSet {
-            weatherTableView.reloadData()
-        }
-    }
+//    private let locationManager = CLLocationManager()
+//
+//    private var cityWeathers: [CityWeatherApi] = [] {
+//        didSet {
+//            weatherTableView.reloadData()
+//        }
+//    }
     
     private var containerView: UIView = {
         let view = UIView()
@@ -77,9 +77,9 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
-    public func setWeatherData(_ cityWeathers: [CityWeatherApi]) {
-        self.cityWeathers = cityWeathers
-    }
+//    public func setWeatherData(_ cityWeathers: [CityWeatherApi]) {
+//        self.cityWeathers = cityWeathers
+//    }
 }
 
 // MARK: - UITableViewDataSource
@@ -102,13 +102,7 @@ extension WeatherTableController: UITableViewDataSource {
                                                   for: indexPath) as! CityWeatherCell
         
         let presentedCity = fetchResultsController.object(at: indexPath)
-
-        let currentWeather = cityWeathers.first { cityWeather in
-            guard let id = cityWeather.id else { return false }
-            return id == presentedCity.id
-        }
-        guard let weatherData = currentWeather else { return cell }
-        cell.setWeatherData(weatherData)
+        cell.setPresentedCityData(presentedCity)
         
         return cell
     }

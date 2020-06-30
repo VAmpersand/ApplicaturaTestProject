@@ -106,19 +106,25 @@ extension CoreDataService {
     }
     
     
-    func setDefaultCity(_ cityWeather: CityWeatherApi, comletion: (() -> Void)? = nil) {
+    func setPresentedCity(_ cityWeatherApi: CityWeatherApi?, comletion: (() -> Void)? = nil) {
+        guard let cityWeatherApi = cityWeatherApi else { return }
         let context = persistentContainer.viewContext
         
         let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
                                                                 into: context) as! PresentedCity
-        presentedCity.id = cityWeather.id ?? 0
-        presentedCity.name = cityWeather.name ?? "The city is not defined "
-        presentedCity.cityWeather?.clouds = cityWeather.clouds.all ?? 0
-        presentedCity.cityWeather?.feelsLike = cityWeather.main.feelsLike ?? 273
-        presentedCity.cityWeather?.temp = cityWeather.main.temp ?? 273
-        presentedCity.cityWeather?.pressure = cityWeather.main.pressure ?? 0
-        presentedCity.cityWeather?.humidity = cityWeather.main.humidity ?? 0
-        presentedCity.cityWeather?.windSpeed = cityWeather.wind.speed ?? 0
+        presentedCity.id = cityWeatherApi.id ?? 0
+        presentedCity.name = cityWeatherApi.name ?? "The city is not defined "
+        
+        let cityWeather = NSEntityDescription.insertNewObject(forEntityName: "CityWeather",
+                                                              into: context) as! CityWeather
+        cityWeather.clouds = cityWeatherApi.clouds.all ?? 0
+        cityWeather.feelsLike = cityWeatherApi.main.feelsLike ?? 273
+        cityWeather.temp = cityWeatherApi.main.temp ?? 273
+        cityWeather.pressure = cityWeatherApi.main.pressure ?? 0
+        cityWeather.humidity = cityWeatherApi.main.humidity ?? 0
+        cityWeather.windSpeed = cityWeatherApi.wind.speed ?? 0
+        
+        presentedCity.cityWeather = cityWeather
         
         do {
             try context.save()

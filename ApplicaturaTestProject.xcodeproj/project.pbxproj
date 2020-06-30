@@ -928,7 +928,7 @@
 			baseConfigurationReference = 90CDBE52CCB0896DDCF0F363 /* Pods-ApplicaturaTestProject.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ApplicaturaTestProject/ApplicaturaTestProject.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YL752VZ4SN;
 				INFOPLIST_FILE = "$(SRCROOT)/ApplicaturaTestProject/SupportingFiles/Info.plist";
@@ -949,7 +949,7 @@
 			baseConfigurationReference = AECA40071ECB291B43E12E99 /* Pods-ApplicaturaTestProject.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = ApplicaturaTestProject/ApplicaturaTestProject.entitlements;
+				CODE_SIGN_ENTITLEMENTS = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = YL752VZ4SN;
 				INFOPLIST_FILE = "$(SRCROOT)/ApplicaturaTestProject/SupportingFiles/Info.plist";

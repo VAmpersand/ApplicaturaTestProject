@@ -4,13 +4,9 @@ extension WeatherTableController {
     public class CityWeatherCell: BaseTableCell {
         public static let cellID = String(describing: CityWeatherCell.self)
         
-        private var cityWeather: CityWeatherApi! {
+        private var presentedCity: PresentedCity! {
             didSet {
-                let city = cityWeather.name ?? "The city is not defined"
-                let country = cityWeather.sys.country ?? "Сountry not defined"
-                
-                cityLabel.text = [country, city].joined(separator: " ")
-                
+                cityLabel.text = presentedCity.name ?? "The city is not defined"
                 parametersCollectionView.reloadData()
             }
         }
@@ -65,8 +61,8 @@ extension WeatherTableController.CityWeatherCell {
 }
 
 extension WeatherTableController.CityWeatherCell {
-    public func setWeatherData(_ cityWeather: CityWeatherApi) {
-        self.cityWeather = cityWeather
+    public func setPresentedCityData(_ presentedCity: PresentedCity) {
+        self.presentedCity = presentedCity
     }
 }
 
@@ -83,21 +79,22 @@ extension WeatherTableController.CityWeatherCell: UICollectionViewDataSource {
             for: indexPath
             ) as! WeatherTableController.ParameterCell
         
-        guard let cityWeather = cityWeather else { return cell }
+        guard let presentedCity = presentedCity,
+            let cityWeather = presentedCity.cityWeather else { return cell }
         
         switch indexPath.row {
         case 0:
-            cell.setupCell(with: "Temperature:", value: "\(((cityWeather.main.temp ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Temperature:", value: "\(((cityWeather.temp ?? 273) - 273).rounded()) C")
         case 1:
-            cell.setupCell(with: "Feels like:", value: "\(((cityWeather.main.feelsLike ?? 273) - 273).rounded()) C")
+            cell.setupCell(with: "Feels like:", value: "\(((cityWeather.feelsLike ?? 273) - 273).rounded()) C")
         case 2:
-            cell.setupCell(with: "Clouds:", value: "\(cityWeather.clouds.all ?? 0) %")
+            cell.setupCell(with: "Clouds:", value: "\(cityWeather.clouds ?? 0) %")
         case 3:
-            cell.setupCell(with: "Humidity", value: "\(cityWeather.main.humidity ?? 0) %")
+            cell.setupCell(with: "Humidity", value: "\(cityWeather.humidity ?? 0) %")
         case 4:
-            cell.setupCell(with: "Wind speed", value: "\(cityWeather.wind.speed ?? 0) m/s")
+            cell.setupCell(with: "Wind speed", value: "\(cityWeather.windSpeed ?? 0) m/s")
         case 5:
-            cell.setupCell(with: "Pressure", value: "\(cityWeather.main.pressure ?? 0) hPa")
+            cell.setupCell(with: "Pressure", value: "\(cityWeather.pressure ?? 0) hPa")
         default:
             break
         }
