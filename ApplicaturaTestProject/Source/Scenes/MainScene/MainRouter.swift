@@ -77,17 +77,13 @@ extension MainRouter {
                 from: url,
                 with: CityWeatherApi.self
             ) { result, status, error in
-                
-                
-                
-                print(result)
-                
+                if status {
+                    print(result)
+//                    CoreDataService.shared.setDefaultCity(result)
+                } else {
+                    print(error)
+                }
             }
-            
         }
-        
-        
-        
-        
     }
 }

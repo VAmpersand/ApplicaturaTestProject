@@ -23,14 +23,15 @@
     </entity>
     <entity name="PresentedCity" representedClassName=".PresentedCity" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
+        <attribute name="name" optional="YES" attributeType="String"/>
         <relationship name="cityData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityData"/>
         <relationship name="cityWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeather"/>
         <relationship name="coord" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="Coord"/>
     </entity>
     <elements>
         <element name="CityData" positionX="-63" positionY="-18" width="128" height="118"/>
-        <element name="Coord" positionX="-54" positionY="-9" width="128" height="88"/>
-        <element name="PresentedCity" positionX="-54" positionY="27" width="128" height="103"/>
         <element name="CityWeather" positionX="-54" positionY="36" width="128" height="148"/>
+        <element name="Coord" positionX="-54" positionY="-9" width="128" height="88"/>
+        <element name="PresentedCity" positionX="-54" positionY="27" width="128" height="118"/>
     </elements>
 </model>

@@ -11,13 +11,15 @@ import CoreData
 
 
 extension PresentedCity {
+
     @nonobjc public class func fetchRequest() -> NSFetchRequest<PresentedCity> {
         return NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
     }
 
     @NSManaged public var id: Int32
+    @NSManaged public var name: String?
     @NSManaged public var cityData: CityData?
-    @NSManaged public var coord: Coord?
     @NSManaged public var cityWeather: CityWeather?
+    @NSManaged public var coord: Coord?
 
 }
