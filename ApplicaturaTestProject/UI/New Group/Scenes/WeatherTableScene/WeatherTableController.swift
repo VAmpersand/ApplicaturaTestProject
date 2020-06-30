@@ -10,14 +10,6 @@ public final class WeatherTableController: BaseController {
     private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
     
-//    private let locationManager = CLLocationManager()
-//
-//    private var cityWeathers: [ApiCityWeather] = [] {
-//        didSet {
-//            weatherTableView.reloadData()
-//        }
-//    }
-    
     private var containerView: UIView = {
         let view = UIView()
         view.backgroundColor = #colorLiteral(red: 0.1019607857, green: 0.2784313858, blue: 0.400000006, alpha: 1).withAlphaComponent(0.3)
@@ -33,9 +25,19 @@ public final class WeatherTableController: BaseController {
                        forHeaderFooterViewReuseIdentifier: WeatherHeaderCell.cellID)
         table.delegate = self
         table.dataSource = self
+        table.refreshControl = self.refreshControll
         table.showsVerticalScrollIndicator = false
         
         return table
+    }()
+    
+    private lazy var refreshControll: UIRefreshControl = {
+        let controll = UIRefreshControl()
+        controll.addTarget(self,
+                           action: #selector(refreshControllHandle(sender:)),
+                           for: .valueChanged)
+        
+        return controll
     }()
 }
 
@@ -77,9 +79,14 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
-//    public func setWeatherData(_ cityWeathers: [ApiCityWeather]) {
-//        self.cityWeathers = cityWeathers
-//    }
+}
+
+// MARK: - Actions
+extension WeatherTableController {
+    @objc func refreshControllHandle(sender: UIRefreshControl) {
+        loadData()
+        sender.endRefreshing()
+    }
 }
 
 // MARK: - UITableViewDataSource

@@ -113,7 +113,7 @@ extension CoreDataService {
         let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
                                                                 into: context) as! PresentedCity
         presentedCity.id = cityWeatherApi.id ?? 0
-        presentedCity.name = cityWeatherApi.name ?? "The city is not defined "
+        presentedCity.name = cityWeatherApi.name ?? "Weather in your area"
         
         let cityWeather = NSEntityDescription.insertNewObject(forEntityName: "CityWeather",
                                                               into: context) as! CityWeather

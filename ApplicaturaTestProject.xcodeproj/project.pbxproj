@@ -43,7 +43,6 @@
 		77CD779624AB4A1300EC557B /* PresentedCity+CoreDataClass.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CD779424AB4A1200EC557B /* PresentedCity+CoreDataClass.swift */; };
 		77CD779724AB4A1300EC557B /* PresentedCity+CoreDataProperties.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77CD779524AB4A1300EC557B /* PresentedCity+CoreDataProperties.swift */; };
 		77D5BCF324AA6CA4000BEABF /* BaseTableCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BCF224AA6CA4000BEABF /* BaseTableCell.swift */; };
-		77D5BCF524AA7451000BEABF /* RepeatingTimer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */; };
 		77D5BCF924AA8931000BEABF /* LocationService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BCF824AA8931000BEABF /* LocationService.swift */; };
 		77D5BCFC24AA9FEC000BEABF /* MapKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 77D5BCFB24AA9FEB000BEABF /* MapKit.framework */; };
 		77D5BD0724AB2952000BEABF /* CityData.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 77D5BD0524AB2952000BEABF /* CityData.xcdatamodeld */; };
@@ -118,7 +117,6 @@
 		77CD779424AB4A1200EC557B /* PresentedCity+CoreDataClass.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataClass.swift"; sourceTree = "<group>"; };
 		77CD779524AB4A1300EC557B /* PresentedCity+CoreDataProperties.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "PresentedCity+CoreDataProperties.swift"; sourceTree = "<group>"; };
 		77D5BCF224AA6CA4000BEABF /* BaseTableCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseTableCell.swift; sourceTree = "<group>"; };
-		77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RepeatingTimer.swift; sourceTree = "<group>"; };
 		77D5BCF824AA8931000BEABF /* LocationService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocationService.swift; sourceTree = "<group>"; };
 		77D5BCFB24AA9FEB000BEABF /* MapKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = MapKit.framework; path = System/Library/Frameworks/MapKit.framework; sourceTree = SDKROOT; };
 		77D5BD0624AB2952000BEABF /* CityData.xcdatamodel */ = {isa = PBXFileReference; lastKnownFileType = wrapper.xcdatamodel; path = CityData.xcdatamodel; sourceTree = "<group>"; };
@@ -259,7 +257,6 @@
 				77165DD424A5FD7E00FC8F4F /* NetworkService */,
 				77F3647224A7739000C240CF /* JSONDecoderService */,
 				77D5BCF724AA891A000BEABF /* LocationManager */,
-				77D5BCF624AA7455000BEABF /* RepeatingTimer */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -448,14 +445,6 @@
 				77F3647C24AA0FF100C240CF /* CityWeather.swift */,
 			);
 			path = Model;
-			sourceTree = "<group>";
-		};
-		77D5BCF624AA7455000BEABF /* RepeatingTimer */ = {
-			isa = PBXGroup;
-			children = (
-				77D5BCF424AA7451000BEABF /* RepeatingTimer.swift */,
-			);
-			path = RepeatingTimer;
 			sourceTree = "<group>";
 		};
 		77D5BCF724AA891A000BEABF /* LocationManager */ = {
@@ -767,7 +756,6 @@
 				77D5BCF324AA6CA4000BEABF /* BaseTableCell.swift in Sources */,
 				77D5BCF924AA8931000BEABF /* LocationService.swift in Sources */,
 				77F3644F24A763F900C240CF /* Texts.swift in Sources */,
-				77D5BCF524AA7451000BEABF /* RepeatingTimer.swift in Sources */,
 				77F3645124A7657800C240CF /* CityWeatherCell.swift in Sources */,
 				77F3647D24AA0FF100C240CF /* CityWeather.swift in Sources */,
 				77F3648024AA170C00C240CF /* ParametrCell.swift in Sources */,

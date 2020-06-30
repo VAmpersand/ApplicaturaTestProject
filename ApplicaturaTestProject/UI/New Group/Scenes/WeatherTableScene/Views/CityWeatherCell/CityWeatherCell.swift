@@ -6,7 +6,7 @@ extension WeatherTableController {
         
         private var presentedCity: PresentedCity! {
             didSet {
-                cityLabel.text = presentedCity.name ?? "The city is not defined"
+                cityLabel.text = presentedCity.name ?? "Weather in your area"
                 parametersCollectionView.reloadData()
             }
         }
