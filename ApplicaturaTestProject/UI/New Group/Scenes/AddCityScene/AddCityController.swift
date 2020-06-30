@@ -135,17 +135,19 @@ extension AddCityController: NSFetchedResultsControllerDelegate {
         fetchRequest.fetchBatchSize = 20
         
         fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                     managedObjectContext: context,
-                                                     sectionNameKeyPath: nil,
-                                                     cacheName: nil)
+                                                            managedObjectContext: context,
+                                                            sectionNameKeyPath: nil,
+                                                            cacheName: nil)
         fetchResultsController.delegate = self
         
-        do {
-            try fetchResultsController.performFetch()
-        } catch {
-            print("Failed to fetch companies: \(error)")
+        DispatchQueue.global(qos: .utility).async {
+            do {
+                try self.fetchResultsController.performFetch()
+            } catch {
+                print("Failed to fetch companies: \(error)")
+            }
+            self.cityTableView.reloadData()
         }
-        cityTableView.reloadData()
     }
 }
 
