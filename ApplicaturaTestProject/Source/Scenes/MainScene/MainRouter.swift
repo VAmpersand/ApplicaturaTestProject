@@ -47,13 +47,14 @@ extension MainRouter {
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")
             
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
-                DispatchQueue.main.async {
+            
+            DispatchQueue.global(qos: .utility).async {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
                     JSONDecoderService.shared.saveCityDataToCoreData(fron: data)
+                } catch {
+                    print(error.localizedDescription)
                 }
-            } catch {
-                print(error.localizedDescription)
             }
             
             UserDefaults.cityDataWasSetup = true
