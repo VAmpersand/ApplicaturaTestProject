@@ -24,5 +24,10 @@ public enum URLs {
     static func urlForForecastWeatherIn5day(for cityData: CityData?) -> String {
         guard let cityData = cityData else { return "" }
         return "https://api.openweathermap.org/data/2.5/forecast?id=" + "\(cityData.id)" + apiKey
-    }    
+    }
+    
+    static func urlForCityWeatherByCoord(withLat lat: Double?, and lon: Double?) -> String {
+         guard let lat = lat, let lon = lon else { return "" }
+         return "https://api.openweathermap.org/data/2.5/weather?lat=" + "\(lat)" + "&lon=" + "\(lon)" + apiKey
+     }
 }
