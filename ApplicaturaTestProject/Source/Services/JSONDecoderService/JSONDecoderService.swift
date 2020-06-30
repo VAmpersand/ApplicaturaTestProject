@@ -17,17 +17,17 @@ extension JSONDecoderService {
         return nil
     }
     
-    func saveCityDataToCoreData(fron jsonData: Data){
+    func decodeCityData(from data: Data) -> [CityData] {
         do {
             let decoder = JSONDecoder(
                 context: CoreDataService.shared.persistentContainer.viewContext
             )
-
-            let resultData = try decoder.decode([CityData].self, from: jsonData)
-            CoreDataService.shared.saveInCoreDataWith(array: resultData)
-
+            
+            let resultData = try decoder.decode([CityData].self, from: data)
+            return resultData
         } catch {
             print("Error: \(error.localizedDescription)")
         }
+        return []
     }
 }

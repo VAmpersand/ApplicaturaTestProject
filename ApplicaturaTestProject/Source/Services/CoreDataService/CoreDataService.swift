@@ -1,4 +1,5 @@
 import CoreData
+import UIKit
 
 struct CoreDataService {
     static let shared = CoreDataService()
@@ -22,7 +23,7 @@ struct CoreDataService {
 }
 
 extension CoreDataService {
-    func saveInCoreDataWith(array: [CityData]) {
+    func saveInCoreData(array: [CityData]) {
         array.forEach { cityData in
             do {
                 try persistentContainer.viewContext.save()
@@ -82,14 +83,14 @@ extension CoreDataService {
     }
     
     func updateCityWeather(_ cityWeather: CityWeather) {
-         let context = persistentContainer.viewContext
-
-         do {
-             try context.save()
-         } catch let createError {
-             print("Failed to update: \(createError)")
-         }
-     }
+        let context = persistentContainer.viewContext
+        
+        do {
+            try context.save()
+        } catch let createError {
+            print("Failed to update: \(createError)")
+        }
+    }
     
     
     func deletePresentedCity(_ presentedCity: PresentedCity, comletion: (() -> Void)? = nil) {

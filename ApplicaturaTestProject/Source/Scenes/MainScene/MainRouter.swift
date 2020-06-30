@@ -24,8 +24,10 @@ extension MainRouter {
         setupWindow(in: scene)
         
         setupDefaultCityData() {
-            self.setupDefaultCity()
+            print("Finish")
+            
         }
+        setupDefaultCity()
     }
     
     private func setupWindow(in scene: UIScene) {
@@ -43,32 +45,34 @@ extension MainRouter {
 }
 
 extension MainRouter {
-    func setupDefaultCityData(completon: () -> Void) {
+    func setupDefaultCityData(completon: @escaping () -> Void) {
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")
             
-            
-            DispatchQueue.global(qos: .utility).async {
-                do {
-                    let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
-                    JSONDecoderService.shared.saveCityDataToCoreData(fron: data)
-                } catch {
-                    print(error.localizedDescription)
+            do {
+                let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
+                DispatchQueue.global(qos: .utility).async {
+                    let cityData = JSONDecoderService.shared.decodeCityData(from: data)
+                    CoreDataService.shared.saveInCoreData(array: cityData)
                 }
+            } catch {
+                print(error.localizedDescription)
             }
             
+            completon()
             UserDefaults.cityDataWasSetup = true
         }
-        completon()
     }
     
     func setupDefaultCity() {
         let presentedCities = CoreDataService.shared.fetchPresentedCities()
+        let location = LocationService.shared.getUserLocation()
         
         if let presentedCities = presentedCities,
             presentedCities.isEmpty {
-            let url = URLs.urlForCityWeatherByCoord(withLat: UserDefaults.lat,
-                                                    and: UserDefaults.lat)
+            let url = URLs.urlForCityWeatherByCoord(withLat: location.lat,
+                                                    and: location.lon)
+            
             dependencies.networkService.getJSONData(
                 from: url,
                 with: ApiCityWeather.self

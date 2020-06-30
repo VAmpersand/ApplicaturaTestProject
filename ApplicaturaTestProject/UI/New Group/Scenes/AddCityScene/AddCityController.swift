@@ -140,7 +140,7 @@ extension AddCityController: NSFetchedResultsControllerDelegate {
                                                             cacheName: nil)
         fetchResultsController.delegate = self
         
-        DispatchQueue.global(qos: .utility).async {
+        DispatchQueue.main.async {
             do {
                 try self.fetchResultsController.performFetch()
             } catch {
