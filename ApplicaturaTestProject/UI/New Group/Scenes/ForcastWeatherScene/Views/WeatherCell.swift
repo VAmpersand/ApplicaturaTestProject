@@ -13,7 +13,7 @@ extension ForecastWeatherController {
         }
         
         public static let cellID = String(describing: WeatherCell.self)
-        private var forecastWeather: CityWeatherApi!
+        private var forecastWeather: ApiCityWeather!
         
         public lazy var parameterTableView: UITableView = {
             let table = UITableView()
@@ -114,7 +114,7 @@ extension ForecastWeatherController.WeatherCell: UITableViewDelegate {
 }
 
 public extension ForecastWeatherController.WeatherCell {
-    func setupforecastWeather(_ forecastWeather: CityWeatherApi) {
+    func setupforecastWeather(_ forecastWeather: ApiCityWeather) {
         self.forecastWeather = forecastWeather
     }
 }

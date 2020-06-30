@@ -9,6 +9,11 @@ public enum URLs {
         return "https://api.openweathermap.org/data/2.5/group?id="
     }
     
+    static func urlForCityWeatherByID(for cityData: CityData?) -> String {
+          guard let cityData = cityData else { return "" }
+          return "https://api.openweathermap.org/data/2.5/weather?id=" + "\(cityData.id)" + apiKey
+      }
+    
     static func urlForSeveralCitiesID(for presentedCities: [PresentedCity]?) -> String {
         guard let presentedCities = presentedCities else { return "" }
         var citiesIDStr: [String] = []
@@ -18,12 +23,12 @@ public enum URLs {
             }
         }
         
-        return beginningOfUrlForSeveralCitiesId + citiesIDStr.joined(separator: ",") + apiKey
+        return "https://api.openweathermap.org/data/2.5/group?id=" + citiesIDStr.joined(separator: ",") + apiKey
     }
     
-    static func urlForForecastWeatherIn5day(for cityData: CityData?) -> String {
-        guard let cityData = cityData else { return "" }
-        return "https://api.openweathermap.org/data/2.5/forecast?id=" + "\(cityData.id)" + apiKey
+    static func urlForForecastWeatherIn5day(for presentedCity: PresentedCity?) -> String {
+        guard let presentedCity = presentedCity else { return "" }
+        return "https://api.openweathermap.org/data/2.5/forecast?id=" + "\(presentedCity.id)" + apiKey
     }
     
     static func urlForCityWeatherByCoord(withLat lat: Double?, and lon: Double?) -> String {

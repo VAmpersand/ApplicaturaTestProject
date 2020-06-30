@@ -20,7 +20,7 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
 
         dependencies.networkService.getJSONData(
             from: url,
-            with: CityWeathers.self
+            with: ApiCityWeathers.self
         ) { result, status, error in
             if status, let cityWeaters = result?.list {
                 
@@ -51,7 +51,7 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
         router.presentAddCityScene()
     }
     
-    func presentCityWeatherScene(with cityData: CityData) {
-        router.presentCityWeatherScene(with: cityData)
+    func presentCityWeatherScene(with presentedCity: PresentedCity) {
+        router.presentCityWeatherScene(with: presentedCity)
     }
 }

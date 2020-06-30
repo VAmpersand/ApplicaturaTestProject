@@ -118,11 +118,9 @@ extension AddCityController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let cityData = fetchResultsController.object(at: indexPath)
-        CoreDataService.shared.savePresentedCity(cityDate: cityData) {
-            NotificationCenter.default.post(name: .cityWasAdded, object: nil)
-            self.viewModel.handleClose()
-        }
-        tableView.deselectRow(at: indexPath, animated: true)
+        
+        viewModel.addPresentCity(with: cityData)
+        self.viewModel.handleClose()
     }
 }
 

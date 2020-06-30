@@ -26,8 +26,6 @@ extension MainRouter {
         setupDefaultCityData() {
             self.setupDefaultCity()
         }
-        
-        setupDefaultCity()
     }
     
     private func setupWindow(in scene: UIScene) {
@@ -59,8 +57,8 @@ extension MainRouter {
             }
             
             UserDefaults.cityDataWasSetup = true
-            completon()
         }
+        completon()
     }
     
     func setupDefaultCity() {
@@ -70,16 +68,14 @@ extension MainRouter {
             presentedCities.isEmpty {
             let url = URLs.urlForCityWeatherByCoord(withLat: UserDefaults.lat,
                                                     and: UserDefaults.lat)
-            
-            print(url)
-            
             dependencies.networkService.getJSONData(
                 from: url,
-                with: CityWeatherApi.self
+                with: ApiCityWeather.self
             ) { result, status, error in
                 if status {
-                    print(result)
-                    CoreDataService.shared.setPresentedCity(result)
+                    CoreDataService.shared.setPresentedCity(result) {
+                          NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                    }
                 } else {
                     print(error)
                 }

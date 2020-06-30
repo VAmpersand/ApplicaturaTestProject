@@ -1,6 +1,6 @@
 final class ForecastWeatherViewModel {
     
-    // weaver: cityData <= CityData
+    // weaver: presentedCity <= PresentedCity
     
     // weaver: networkService = NetworkService
     
@@ -17,14 +17,13 @@ final class ForecastWeatherViewModel {
 // MARK: - ForecastWeatherViewModelProtocol
 extension ForecastWeatherViewModel: ForecastWeatherViewModelProtocol {
     func viewDidLoad() {
-        controller?.setCityData(dependencies.cityData)
+        controller?.setPresentedCityData(dependencies.presentedCity)
         
-        let url = URLs.urlForForecastWeatherIn5day(for: dependencies.cityData)
-        
-        print(url)
+        let url = URLs.urlForForecastWeatherIn5day(for: dependencies.presentedCity)
+
         dependencies.networkService.getJSONData(
             from: url,
-            with: CityWeathers.self
+            with: ApiCityWeathers.self
         ) { result, status, error in
             if status, let forecastWeather = result?.list {
                 self.controller?.setforecastWeathers(forecastWeather)

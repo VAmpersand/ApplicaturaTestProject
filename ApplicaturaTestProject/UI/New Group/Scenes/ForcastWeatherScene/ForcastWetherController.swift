@@ -11,17 +11,15 @@ public final class ForecastWeatherController: BaseController {
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
-    private var cityData: CityData! {
+    private var presentedCity: PresentedCity! {
         didSet {
-            guard let city = cityData.name,
-                let country = cityData.country else { return }
+            guard let city = presentedCity.name else { return }
             navigationBar.title = [Texts.CityWeather.title,
-                                   city,
-                                   country].joined(separator: " ")
+                                   city].joined(separator: " ")
         }
     }
     
-    private var forecastWeathers: [CityWeatherApi] = [] {
+    private var forecastWeathers: [ApiCityWeather] = [] {
         didSet {
             weathersCollectionView.reloadData()
         }
@@ -78,11 +76,11 @@ extension ForecastWeatherController {
 
 // MARK: - ForecastWeatherControllerProtocol
 extension ForecastWeatherController: ForecastWeatherControllerProtocol {
-    public func setCityData(_ cityData: CityData) {
-        self.cityData = cityData
+    public func setPresentedCityData(_ presentedCite: PresentedCity) {
+        self.presentedCity = presentedCite
     }
-    
-    public func setforecastWeathers(_ forecastWeathers: [CityWeatherApi]) {
+
+    public func setforecastWeathers(_ forecastWeathers: [ApiCityWeather]) {
         self.forecastWeathers = forecastWeathers
     }
 }

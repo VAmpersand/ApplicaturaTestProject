@@ -106,7 +106,7 @@ extension CoreDataService {
     }
     
     
-    func setPresentedCity(_ cityWeatherApi: CityWeatherApi?, comletion: (() -> Void)? = nil) {
+    func setPresentedCity(_ cityWeatherApi: ApiCityWeather?, comletion: (() -> Void)? = nil) {
         guard let cityWeatherApi = cityWeatherApi else { return }
         let context = persistentContainer.viewContext
         

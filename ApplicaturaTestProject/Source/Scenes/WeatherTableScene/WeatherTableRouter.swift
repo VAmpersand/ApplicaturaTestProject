@@ -20,9 +20,9 @@ extension WeatherTableRouter: WeatherTableRouterProtocol {
         present(addCityScene, using: PopoverPresentation())
     }
     
-    func presentCityWeatherScene(with cityData: CityData) {
+    func presentCityWeatherScene(with presentedCity: PresentedCity) {
         let forecastWeatherScene = dependencies.forecastWeatherScene(parentRouter: self,
-                                                                     cityData: cityData)
+                                                                     presentedCity: presentedCity)
         present(forecastWeatherScene, using: PopoverPresentation())
     }
 }

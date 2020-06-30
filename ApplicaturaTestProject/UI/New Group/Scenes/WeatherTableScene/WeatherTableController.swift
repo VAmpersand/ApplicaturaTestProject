@@ -12,7 +12,7 @@ public final class WeatherTableController: BaseController {
     
 //    private let locationManager = CLLocationManager()
 //
-//    private var cityWeathers: [CityWeatherApi] = [] {
+//    private var cityWeathers: [ApiCityWeather] = [] {
 //        didSet {
 //            weatherTableView.reloadData()
 //        }
@@ -77,7 +77,7 @@ extension WeatherTableController {
 
 // MARK: - WeatherTableControllerProtocol
 extension WeatherTableController: WeatherTableControllerProtocol {
-//    public func setWeatherData(_ cityWeathers: [CityWeatherApi]) {
+//    public func setWeatherData(_ cityWeathers: [ApiCityWeather]) {
 //        self.cityWeathers = cityWeathers
 //    }
 }
@@ -130,10 +130,8 @@ extension WeatherTableController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let presentedCity = fetchResultsController.object(at: indexPath)
-        
-        guard let cityData = presentedCity.cityData else { return }
-        viewModel.presentCityWeatherScene(with: cityData)
-        
+        viewModel.presentCityWeatherScene(with: presentedCity)
+    
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
@@ -158,7 +156,8 @@ extension WeatherTableController: NSFetchedResultsControllerDelegate {
     func loadData() {
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
         
-        fetchRequest.sortDescriptors = []
+        let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [cityDescriptor]
         fetchRequest.fetchBatchSize = 20
         
         fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,

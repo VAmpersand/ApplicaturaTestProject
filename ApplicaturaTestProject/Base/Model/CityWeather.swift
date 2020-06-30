@@ -1,9 +1,9 @@
 import Foundation
 
-public struct CityWeathers: Codable {
-    public var list: [CityWeatherApi]
+public struct ApiCityWeathers: Codable {
+    public var list: [ApiCityWeather]
     
-    init(list: [CityWeatherApi]) {
+    init(list: [ApiCityWeather]) {
         self.list = list
     }
     
@@ -12,7 +12,7 @@ public struct CityWeathers: Codable {
     }
 }
 
-public struct CityWeatherApi: Codable {
+public struct ApiCityWeather: Codable {
     public var id: Int32?
     public var sys: System
     public var weather: [Weather]
