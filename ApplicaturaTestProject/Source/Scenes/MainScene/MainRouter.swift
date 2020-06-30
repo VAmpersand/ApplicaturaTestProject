@@ -53,13 +53,13 @@ extension MainRouter {
                 let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
                 DispatchQueue.global(qos: .utility).async {
                     let cityData = JSONDecoderService.shared.decodeCityData(from: data)
-                    CoreDataService.shared.saveInCoreData(array: cityData)
+                    CoreDataService.shared.saveInCoreData(citiesData: cityData)
                 }
             } catch {
                 print(error.localizedDescription)
             }
-            
             completon()
+            
             UserDefaults.cityDataWasSetup = true
         }
     }

@@ -23,13 +23,23 @@ struct CoreDataService {
 }
 
 extension CoreDataService {
-    func saveInCoreData(array: [CityData]) {
-        array.forEach { cityData in
-            do {
-                try persistentContainer.viewContext.save()
-            } catch let error {
-                print(error)
+    func saveInCoreData(citiesData: [CityData]) {
+        let contex = persistentContainer.viewContext
+        
+        persistentContainer.performBackgroundTask { contex in
+            citiesData.forEach { data in
+                let cityData = CityData(context: contex)
+                cityData.id = data.id
+                cityData.name = data.name
+                cityData.country = data.country
+                cityData.state = data.state
             }
+        }
+        
+        do {
+            try contex.save()
+        } catch let error {
+            print(error)
         }
     }
     
