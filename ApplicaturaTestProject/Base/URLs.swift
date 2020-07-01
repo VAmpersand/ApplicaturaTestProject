@@ -18,9 +18,7 @@ public enum URLs {
         guard let presentedCities = presentedCities else { return "" }
         var citiesIDStr: [String] = []
         presentedCities.forEach { presentedCity in
-            if let cityData = presentedCity.cityData {
-                citiesIDStr.append(String(cityData.id))
-            }
+            citiesIDStr.append(String(presentedCity.id))
         }
         
         return "https://api.openweathermap.org/data/2.5/group?id=" + citiesIDStr.joined(separator: ",") + apiKey

@@ -47,12 +47,6 @@ extension WeatherTableController {
             self.processAsynchronousFetchResult(asynchronousFetchResult: result)
         }
         addObservers()
-        
-//        if !UserDefaults.cityDataWasSetup {
-//
-//                SVProgressHUD.show(withStatus: "Loading cities")
-//
-//        }
     }
     
     override func addNavigationBar() {
@@ -91,10 +85,12 @@ extension WeatherTableController: WeatherTableControllerProtocol {
 // MARK: - Actions
 extension WeatherTableController {
     @objc func refreshControllHandle(sender: UIRefreshControl) {
-        CoreDataService.shared.loadPresentedCity() { result in
-            self.processAsynchronousFetchResult(asynchronousFetchResult: result)
-            DispatchQueue.main.async {
-                sender.endRefreshing()
+        viewModel.updataPresentedCities(presentedCities) {
+            CoreDataService.shared.loadPresentedCity() { result in
+                self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+                DispatchQueue.main.async {
+                    sender.endRefreshing()
+                }
             }
         }
     }
@@ -197,6 +193,6 @@ private extension WeatherTableController {
     }
     
     @objc func setDefaultCity() {
-        viewModel.viewDidLoad()
+        viewModel.setupDefaultCity()
     }
 }

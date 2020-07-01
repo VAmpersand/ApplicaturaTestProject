@@ -17,43 +17,45 @@ final class WeatherTableViewModel {
 
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
-    func viewDidLoad() {
-        LocationService.shared
-        print(LocationService.shared.getUserLocation())
+    func setupDefaultCity() {
         if let location = LocationService.shared.getUserLocation() {
             self.setupDefaultCity(withLat: location.lat, and: location.lon)
         }
+    }
+    
+    func updataPresentedCities(_ presentedCities: [PresentedCity],
+                               completion: @escaping () -> Void) {
+        let url = URLs.urlForSeveralCitiesID(for: presentedCities)
         
+        print(url)
         
-//        let url = URLs.urlForSeveralCitiesID(for: presentedCities)
-//
-//        dependencies.networkService.getJSONData(
-//            from: url,
-//            with: ApiCityWeathers.self
-//        ) { result, status, error in
-//            if status, let cityWeaters = result?.list {
-//
-//                cityWeaters.forEach { weather in
-//                    if let id = weather.id,
-//                        let presentedCity = CoreDataService.shared.fetchPresentedCity(with: Int32(id)),
-//                        let cityWeather = presentedCity.cityWeather {
-//                        
-//                        cityWeather.clouds = weather.clouds.all ?? 0
-//                        cityWeather.temp = weather.main.temp ?? 273
-//                        cityWeather.feelsLike = weather.main.feelsLike ?? 273
-//                        cityWeather.humidity = weather.main.humidity ?? 0
-//                        cityWeather.pressure = weather.main.pressure ?? 0
-//                        cityWeather.windSpeed = weather.wind.speed ?? 0
-//                        
-//                        CoreDataService.shared.updateCityWeather(cityWeather)
-//                    }
-//                }
+        dependencies.networkService.getJSONData(
+            from: url,
+            with: ApiCityWeathers.self
+        ) { result, status, error in
+            if status, let cityWeaters = result?.list {
+                print(cityWeaters)
+                cityWeaters.forEach { weather in
+                    if let id = weather.id,
+                        let presentedCity = presentedCities.first(where: { city in
+                            city.id == id
+                        }) {
+                        presentedCity.cityWeather?.clouds = weather.clouds.all ?? 0
+                        presentedCity.cityWeather?.temp = weather.main.temp ?? 273
+                        presentedCity.cityWeather?.feelsLike = weather.main.feelsLike ?? 273
+                        presentedCity.cityWeather?.humidity = weather.main.humidity ?? 0
+                        presentedCity.cityWeather?.pressure = weather.main.pressure ?? 0
+                        presentedCity.cityWeather?.windSpeed = weather.wind.speed ?? 0
+                        
+                        CoreDataService.shared.updateCityWeather(at: presentedCity)
+                    }
+                }
                 
-//                self.controller?.setWeatherData(cityWeaters)
-//            } else {
-//                print(error)
-//            }
-//        }
+                completion()
+            } else {
+                print(error)
+            }
+        }
     }
     
     func presentAddCityScene() {

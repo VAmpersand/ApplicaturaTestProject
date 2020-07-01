@@ -43,31 +43,7 @@ extension CoreDataService {
         
     }
     
-//    func fetchPresentedCity(with id: Int32,
-//                            completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
-//        let context = persistentContainer.viewContext
-//
-//        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-//        fetchRequest.fetchLimit = 1
-//        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-//
-//        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
-//            fetchRequest: fetchRequest
-//        ) { asynchronousFetchResult in
-//            DispatchQueue.global(qos: .userInitiated).async {
-//                completion(asynchronousFetchResult)
-//            }
-//        }
-//
-//        do {
-//            try context.execute(asynchronousFetchRequest)
-//        } catch {
-//            let fetchError = error as NSError
-//            print("Failed to fetch companie: \(fetchError)")
-//        }
-//    }
-    
-    func updateCityWeather(_ cityWeather: CityWeather) {
+    func updateCityWeather(at presentedCity: PresentedCity) {
         persistentContainer.performBackgroundTask { context in
             do {
                 try context.save()
