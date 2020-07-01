@@ -24,8 +24,11 @@ extension MainRouter {
         setupWindow(in: scene)
         
         setupDefaultCityData() {
+            DispatchQueue.main.async {
+                NotificationCenter.default.post(name: .cityDataWasSetup, object: nil)
+                UserDefaults.cityDataWasSetup = true
+            }
             print("Finish")
-            
         }
         setupDefaultCity()
     }
@@ -49,18 +52,16 @@ extension MainRouter {
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")
             
-            do {
-                let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
-                DispatchQueue.global(qos: .background).async {
+            DispatchQueue.global(qos: .utility).async {
+                do {
+                    let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
                     let cityData = JSONDecoderService.shared.decodeCityData(from: data)
                     CoreDataService.shared.saveInCoreData(citiesData: cityData)
+                } catch {
+                    print(error.localizedDescription)
                 }
-            } catch {
-                print(error.localizedDescription)
+                completon()
             }
-            completon()
-            
-            UserDefaults.cityDataWasSetup = true
         }
     }
     
