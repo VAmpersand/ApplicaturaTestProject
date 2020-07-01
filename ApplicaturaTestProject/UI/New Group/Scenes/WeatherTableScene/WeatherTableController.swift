@@ -7,8 +7,9 @@ public final class WeatherTableController: BaseController {
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
-    private var fetchResultsController: NSFetchedResultsController<PresentedCity>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
+    
+    private var presentedCities: [PresentedCity] = []
     
     private var containerView: UIView = {
         let view = UIView()
@@ -44,7 +45,9 @@ public final class WeatherTableController: BaseController {
 extension WeatherTableController {
     override func setupSelf() {
         super.setupSelf()
-        loadData()
+        CoreDataService.shared.loadPresentedCity() { result in
+            self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+        }
         addObservers()  
     }
     
@@ -84,32 +87,26 @@ extension WeatherTableController: WeatherTableControllerProtocol {
 // MARK: - Actions
 extension WeatherTableController {
     @objc func refreshControllHandle(sender: UIRefreshControl) {
-        loadData()
+        CoreDataService.shared.loadPresentedCity() { result in
+            self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+        }
         sender.endRefreshing()
     }
 }
 
 // MARK: - UITableViewDataSource
 extension WeatherTableController: UITableViewDataSource {
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = fetchResultsController.sections else { return 0 }
-        return sections.count
-    }
-    
-    
     public func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        return presentedCities.count
     }
     
     public func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell( withIdentifier: CityWeatherCell.cellID,
                                                   for: indexPath) as! CityWeatherCell
-        
-        let presentedCity = fetchResultsController.object(at: indexPath)
-        cell.setPresentedCityData(presentedCity)
+
+        cell.setPresentedCityData(presentedCities[indexPath.row])
         
         return cell
     }
@@ -136,18 +133,17 @@ extension WeatherTableController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let presentedCity = fetchResultsController.object(at: indexPath)
-        viewModel.presentCityWeatherScene(with: presentedCity)
+        viewModel.presentCityWeatherScene(with: presentedCities[indexPath.row])
     
         tableView.deselectRow(at: indexPath, animated: true)
     }
     
     public func tableView(_ tableView: UITableView, trailingSwipeActionsConfigurationForRowAt indexPath: IndexPath) -> UISwipeActionsConfiguration? {
         let delete = UIContextualAction(style: .destructive , title: "Delete") { (_, action, completion) in
-            
-            let presentedCity = self.fetchResultsController.object(at: indexPath)
-            CoreDataService.shared.deletePresentedCity(presentedCity) {
-                self.loadData()
+            CoreDataService.shared.deletePresentedCity(self.presentedCities[indexPath.row]) {
+                CoreDataService.shared.loadPresentedCity() { result in
+                    self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+                }
             }
             
             completion(true)
@@ -158,32 +154,14 @@ extension WeatherTableController: UITableViewDelegate {
     }
 }
 
-// MARK: - NSFetchedResultsControllerDelegate
-extension WeatherTableController: NSFetchedResultsControllerDelegate {
-    func loadData() {
-        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-        
-        let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [cityDescriptor]
-        fetchRequest.fetchBatchSize = 20
-        
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: context,
-                                                            sectionNameKeyPath: nil,
-                                                            cacheName: nil)
-        fetchResultsController.delegate = self
-        
-        do {
-            try fetchResultsController.performFetch()
-        } catch {
-            print("Failed to fetch companies: \(error)")
+extension WeatherTableController {
+    func processAsynchronousFetchResult(asynchronousFetchResult: NSAsynchronousFetchResult<PresentedCity>) {
+        if let result = asynchronousFetchResult.finalResult {
+            presentedCities = result
+            weatherTableView.reloadData()
         }
-        
-        viewModel.viewDidLoad()
-        weatherTableView.reloadData()
     }
 }
-
 
 // MARK: - WeatherHeaderCellDelegate
 extension WeatherTableController: WeatherHeaderCellDelegate {
@@ -201,6 +179,8 @@ private extension WeatherTableController {
     }
     
     @objc func cityWasAdded() {
-        loadData()
+        CoreDataService.shared.loadPresentedCity() { result in
+            self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+        }
     }
 }

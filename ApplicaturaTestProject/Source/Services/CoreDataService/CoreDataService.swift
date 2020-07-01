@@ -122,10 +122,34 @@ extension CoreDataService {
         do {
             try context.save()
         } catch let saveError {
-            print("Failed to delete: \(saveError)")
+            print("Failed to setup: \(saveError)")
         }
         
         comletion?()
     }
     
+    func loadPresentedCity(completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
+        
+        let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [cityDescriptor]
+        fetchRequest.fetchBatchSize = 20
+        
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
+            fetchRequest: fetchRequest
+        ) { asynchronousFetchResult in
+            DispatchQueue.main.async {
+                completion(asynchronousFetchResult)
+            }
+        }
+        
+        do {
+            try context.execute(asynchronousFetchRequest)
+        } catch {
+            let fetchError = error as NSError
+            print("Failed to fetch companie: \(fetchError)")
+        }
+    }
 }
