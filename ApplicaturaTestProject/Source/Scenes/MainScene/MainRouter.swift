@@ -55,7 +55,7 @@ extension MainRouter {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
                     let cityData = JSONDecoderService.shared.decodeCityData(from: data)
-                    CoreDataService.shared.saveInCoreData(citiesData: cityData)
+                    CoreDataService.shared.setupCitiesData(citiesData: cityData)
                 } catch {
                     print(error.localizedDescription)
                 }

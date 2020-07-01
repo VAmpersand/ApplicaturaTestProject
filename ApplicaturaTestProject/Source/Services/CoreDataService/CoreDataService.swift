@@ -23,7 +23,7 @@ struct CoreDataService {
 }
 
 extension CoreDataService {
-    func saveInCoreData(citiesData: [CityData]) {
+    func setupCitiesData(citiesData: [CityData]) {
         let contex = persistentContainer.viewContext
         
         persistentContainer.performBackgroundTask { contex in
