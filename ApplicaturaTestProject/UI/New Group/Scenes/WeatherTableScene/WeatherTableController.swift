@@ -43,6 +43,7 @@ public final class WeatherTableController: BaseController {
 extension WeatherTableController {
     override func setupSelf() {
         super.setupSelf()
+        viewModel.setupDefaultCity()
         CoreDataService.shared.loadPresentedCity() { result in
             self.processAsynchronousFetchResult(asynchronousFetchResult: result)
         }

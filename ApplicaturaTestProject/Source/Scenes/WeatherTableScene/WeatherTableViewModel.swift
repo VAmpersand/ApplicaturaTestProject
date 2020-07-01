@@ -18,10 +18,28 @@ final class WeatherTableViewModel {
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
     func setupDefaultCity() {
-        if let location = LocationService.shared.getUserLocation() {
-            self.setupDefaultCity(withLat: location.lat, and: location.lon)
+        if let location = LocationService.shared.getUserLocation(),
+            !UserDefaults.defaultCityWasSetup {
+            let url = URLs.urlForCityWeatherByCoord(withLat: location.lat,
+                                                    and: location.lon)
+            DispatchQueue.global(qos: .utility).async {
+                self.dependencies.networkService.getJSONData(
+                    from: url,
+                    with: ApiCityWeather.self
+                ) { result, status, error in
+                    if status {
+                        CoreDataService.shared.setPresentedCityData(result) {
+                            NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                            UserDefaults.defaultCityWasSetup = true
+                        }
+                    } else {
+                        print(error)
+                    }
+                }
+            }
         }
     }
+    
     
     func updataPresentedCities(_ presentedCities: [PresentedCity],
                                completion: @escaping () -> Void) {
@@ -67,26 +85,3 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
     }
 }
 
-extension WeatherTableViewModel {
-     func setupDefaultCity(withLat lat: Double, and lon: Double) {
-         if !UserDefaults.defaultCityWasSetup {
-             let url = URLs.urlForCityWeatherByCoord(withLat: lat,
-                                                     and: lon)
-             DispatchQueue.global(qos: .utility).async {
-                 self.dependencies.networkService.getJSONData(
-                     from: url,
-                     with: ApiCityWeather.self
-                 ) { result, status, error in
-                     if status {
-                         CoreDataService.shared.setPresentedCityData(result) {
-                             NotificationCenter.default.post(name: .cityWasAdded, object: nil)
-                             UserDefaults.defaultCityWasSetup = true
-                         }
-                     } else {
-                         print(error)
-                     }
-                 }
-             }
-         }
-     }
-}
