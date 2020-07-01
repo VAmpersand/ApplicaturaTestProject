@@ -33,12 +33,6 @@ extension CoreDataService {
                 cityData.name = data.name
                 cityData.country = data.country
                 cityData.state = data.state
-                
-//                let coord = Coord(context: contex)
-//                coord.lat = data.coord?.lat ?? 0
-//                coord.lon = data.coord?.lon ?? 0
-//                
-//                cityData.coord = coord
             }
         }
         
@@ -85,20 +79,19 @@ extension CoreDataService {
     
     
     func deletePresentedCity(_ presentedCity: PresentedCity, comletion: (() -> Void)? = nil) {
-        persistentContainer.performBackgroundTask { context in
-            context.delete(presentedCity)
-            
-            do {
-                try context.save()
-            } catch let saveError {
-                print("Failed to setup: \(saveError)")
-            }
+        let context = persistentContainer.viewContext
+        context.delete(presentedCity)
+        
+        do {
+            try context.save()
+        } catch let saveError {
+            print("Failed to setup: \(saveError)")
         }
         comletion?()
     }
     
     
-    func setPresentedCity(_ cityWeatherApi: ApiCityWeather?, comletion: (() -> Void)? = nil) {
+    func setPresentedCityData(_ cityWeatherApi: ApiCityWeather?, comletion: (() -> Void)? = nil) {
         guard let cityWeatherApi = cityWeatherApi else { return }
    
         persistentContainer.performBackgroundTask { context in

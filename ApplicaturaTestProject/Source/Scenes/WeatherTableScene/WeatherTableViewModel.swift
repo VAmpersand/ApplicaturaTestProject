@@ -1,3 +1,5 @@
+import UIKit
+
 final class WeatherTableViewModel {
     
     // weaver: networkService = NetworkService

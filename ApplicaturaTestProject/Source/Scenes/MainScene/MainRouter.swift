@@ -22,15 +22,14 @@ final class MainRouter: BaseRouter {
 extension MainRouter {
     func startApp(in scene: UIScene) {
         setupWindow(in: scene)
-        
         setupDefaultCityData() {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .cityDataWasSetup, object: nil)
                 UserDefaults.cityDataWasSetup = true
             }
             print("Finish")
+            self.setupDefaultCity()
         }
-        setupDefaultCity()
     }
     
     private func setupWindow(in scene: UIScene) {
@@ -71,18 +70,19 @@ extension MainRouter {
             
             let url = URLs.urlForCityWeatherByCoord(withLat: location.lat,
                                                     and: location.lon)
-            
-            dependencies.networkService.getJSONData(
-                from: url,
-                with: ApiCityWeather.self
-            ) { result, status, error in
-                if status {
-                    CoreDataService.shared.setPresentedCity(result) {
-                        NotificationCenter.default.post(name: .cityWasAdded, object: nil)
-                        UserDefaults.defaultCityWasSetup = true
+            DispatchQueue.global(qos: .utility).async {
+                self.dependencies.networkService.getJSONData(
+                    from: url,
+                    with: ApiCityWeather.self
+                ) { result, status, error in
+                    if status {
+                        CoreDataService.shared.setPresentedCityData(result) {
+                            NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                            UserDefaults.defaultCityWasSetup = true
+                        }
+                    } else {
+                        print(error)
                     }
-                } else {
-                    print(error)
                 }
             }
         }

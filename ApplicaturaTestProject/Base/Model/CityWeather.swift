@@ -119,8 +119,8 @@ public struct Main: Codable {
          humidity: Double,
          tempMin: Double,
          tempMax: Double,
-         seaLevel: Double?,
-         grndLevel: Double?) {
+         seaLevel: Double,
+         grndLevel: Double) {
         self.temp = temp
         self.feelsLike = feelsLike
         self.pressure = pressure
@@ -149,7 +149,7 @@ public struct Wind: Codable {
     public var deg: Double?
     
     init(speed: Double,
-         deg: Double?) {
+         deg: Double) {
         self.speed = speed
         self.deg = deg
     }

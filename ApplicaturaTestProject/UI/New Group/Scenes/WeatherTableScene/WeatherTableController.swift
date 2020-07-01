@@ -89,8 +89,10 @@ extension WeatherTableController {
     @objc func refreshControllHandle(sender: UIRefreshControl) {
         CoreDataService.shared.loadPresentedCity() { result in
             self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+            DispatchQueue.main.async {
+                sender.endRefreshing()
+            }
         }
-        sender.endRefreshing()
     }
 }
 
@@ -134,7 +136,6 @@ extension WeatherTableController: UITableViewDelegate {
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         viewModel.presentCityWeatherScene(with: presentedCities[indexPath.row])
-    
         tableView.deselectRow(at: indexPath, animated: true)
     }
     

@@ -24,7 +24,7 @@ extension AddCityViewModel: AddCityViewModelProtocol {
             with: ApiCityWeather.self
         ) { result, status, error in
             if status, let cityWeater = result {
-                CoreDataService.shared.setPresentedCity(cityWeater) {
+                CoreDataService.shared.setPresentedCityData(cityWeater) {
                     NotificationCenter.default.post(name: .cityWasAdded, object: nil)
                 }
             } else {
