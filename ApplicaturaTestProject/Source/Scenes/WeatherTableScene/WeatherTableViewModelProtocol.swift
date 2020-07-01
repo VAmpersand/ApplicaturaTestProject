@@ -1,5 +1,5 @@
 public protocol WeatherTableViewModelProtocol: class {
-    func viewDidLoad(with presentedCities: [PresentedCity])
+    func viewDidLoad()
     func presentAddCityScene()
     func presentCityWeatherScene(with presentedCity: PresentedCity)
 }

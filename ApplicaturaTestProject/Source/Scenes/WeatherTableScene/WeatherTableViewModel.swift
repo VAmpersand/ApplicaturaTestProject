@@ -17,15 +17,22 @@ final class WeatherTableViewModel {
 
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
-    func viewDidLoad(with presentedCities: [PresentedCity]) {
-        let url = URLs.urlForSeveralCitiesID(for: presentedCities)
-
-        dependencies.networkService.getJSONData(
-            from: url,
-            with: ApiCityWeathers.self
-        ) { result, status, error in
-            if status, let cityWeaters = result?.list {
-                
+    func viewDidLoad() {
+        LocationService.shared
+        print(LocationService.shared.getUserLocation())
+        if let location = LocationService.shared.getUserLocation() {
+            self.setupDefaultCity(withLat: location.lat, and: location.lon)
+        }
+        
+        
+//        let url = URLs.urlForSeveralCitiesID(for: presentedCities)
+//
+//        dependencies.networkService.getJSONData(
+//            from: url,
+//            with: ApiCityWeathers.self
+//        ) { result, status, error in
+//            if status, let cityWeaters = result?.list {
+//
 //                cityWeaters.forEach { weather in
 //                    if let id = weather.id,
 //                        let presentedCity = CoreDataService.shared.fetchPresentedCity(with: Int32(id)),
@@ -43,10 +50,10 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
 //                }
                 
 //                self.controller?.setWeatherData(cityWeaters)
-            } else {
-                print(error)
-            }
-        }
+//            } else {
+//                print(error)
+//            }
+//        }
     }
     
     func presentAddCityScene() {
@@ -56,4 +63,28 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
     func presentCityWeatherScene(with presentedCity: PresentedCity) {
         router.presentCityWeatherScene(with: presentedCity)
     }
+}
+
+extension WeatherTableViewModel {
+     func setupDefaultCity(withLat lat: Double, and lon: Double) {
+         if !UserDefaults.defaultCityWasSetup {
+             let url = URLs.urlForCityWeatherByCoord(withLat: lat,
+                                                     and: lon)
+             DispatchQueue.global(qos: .utility).async {
+                 self.dependencies.networkService.getJSONData(
+                     from: url,
+                     with: ApiCityWeather.self
+                 ) { result, status, error in
+                     if status {
+                         CoreDataService.shared.setPresentedCityData(result) {
+                             NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                             UserDefaults.defaultCityWasSetup = true
+                         }
+                     } else {
+                         print(error)
+                     }
+                 }
+             }
+         }
+     }
 }

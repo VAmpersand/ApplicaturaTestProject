@@ -86,6 +86,8 @@ extension WeatherTableController.WeatherHeaderCell {
 private extension WeatherTableController.WeatherHeaderCell {
     @objc func buttonPressed() {
         delegate?.addButtonPressed()
+        
+        print(LocationService.shared.getUserLocation())
     }
 }
 

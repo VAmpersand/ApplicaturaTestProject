@@ -6,9 +6,8 @@ public final class AddCityController: BaseController {
     private var navigationBar: StaticNavigationBar!
     private var closeButton: UIButton!
     
-    private var fetchResultsController: NSFetchedResultsController<CityData>!
     private var context = CoreDataService.shared.persistentContainer.viewContext
-
+    private var citiesData: [CityData] = []
     
     public lazy var cityTableView: UITableView = {
         let table = UITableView()
@@ -28,7 +27,9 @@ public final class AddCityController: BaseController {
 extension AddCityController {
     override func setupSelf() {
         super.setupSelf()
-        loadData()
+        CoreDataService.shared.loadCityData() { result in
+            self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+        }
     }
     
     override func addNavigationBar() {
@@ -63,34 +64,20 @@ extension AddCityController {
 
 // MARK: - AddCityControllerProtocol
 extension AddCityController: AddCityControllerProtocol {
-
 }
 
 // MARK: - UITableViewDataSource
 extension AddCityController: UITableViewDataSource {
-    public func numberOfSections(in tableView: UITableView) -> Int {
-        guard let sections = fetchResultsController.sections else { return 0 }
-        return sections.count
-    }
-    
     public func tableView(_ tableView: UITableView,
                           numberOfRowsInSection section: Int) -> Int {
-        guard let sections = fetchResultsController.sections else { return 0 }
-        return sections[section].numberOfObjects
+        return citiesData.count
     }
-    
-    public func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        guard let sections = fetchResultsController.sections else { return nil }
-        return sections[section].indexTitle ?? ""
-    }
-    
     
     public func tableView(_ tableView: UITableView,
                           cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: CityCell.cellID,
                                                  for: indexPath) as! CityCell
-        let cityData = fetchResultsController.object(at: indexPath)
-        cell.setCityLabel(cityData)
+        cell.setCityLabel(citiesData[indexPath.row])
         
         return cell
     }
@@ -117,37 +104,8 @@ extension AddCityController: UITableViewDelegate {
     }
     
     public func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let cityData = fetchResultsController.object(at: indexPath)
-        
-        viewModel.addPresentCity(with: cityData)
+        viewModel.addPresentCity(with: citiesData[indexPath.row])
         self.viewModel.handleClose()
-    }
-}
-
-// MARK: - NSFetchedResultsControllerDelegate
-extension AddCityController: NSFetchedResultsControllerDelegate {
-    func loadData() {
-        let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
-        
-        let countryDescriptor = NSSortDescriptor(key: "country", ascending: true)
-        let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
-        fetchRequest.sortDescriptors = [countryDescriptor, cityDescriptor]
-        fetchRequest.fetchBatchSize = 20
-        
-        fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                            managedObjectContext: context,
-                                                            sectionNameKeyPath: nil,
-                                                            cacheName: nil)
-        fetchResultsController.delegate = self
-        
-        DispatchQueue.main.async {
-            do {
-                try self.fetchResultsController.performFetch()
-            } catch {
-                print("Failed to fetch companies: \(error)")
-            }
-            self.cityTableView.reloadData()
-        }
     }
 }
 
@@ -155,31 +113,24 @@ extension AddCityController: NSFetchedResultsControllerDelegate {
 extension AddCityController: UISearchBarDelegate {
     public func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
         if !searchText.isEmpty {
-            let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
-            
-            let countryDescriptor = NSSortDescriptor(key: "country", ascending: true)
-            let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
-            fetchRequest.sortDescriptors = [countryDescriptor, cityDescriptor]
-            fetchRequest.fetchBatchSize = 20
-            
-            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText.lowercased())
-            
-            fetchResultsController = NSFetchedResultsController(fetchRequest: fetchRequest,
-                                                                 managedObjectContext: context,
-                                                                 sectionNameKeyPath: nil,
-                                                                 cacheName: nil)
-            
-            fetchResultsController.delegate = self
-            
-            do {
-                try fetchResultsController.performFetch()
-            } catch {
-                print("Failed to fetch companies: \(error)")
+            CoreDataService.shared.loadCityData(with: searchText) { result in
+                self.processAsynchronousFetchResult(asynchronousFetchResult: result)
             }
-            
-            cityTableView.reloadData()
         } else {
-            loadData()
+            CoreDataService.shared.loadCityData() { result in
+                self.processAsynchronousFetchResult(asynchronousFetchResult: result)
+            }
+        }
+    }
+}
+
+extension AddCityController {
+    func processAsynchronousFetchResult(asynchronousFetchResult: NSAsynchronousFetchResult<CityData>) {
+        if let result = asynchronousFetchResult.finalResult {
+            DispatchQueue.main.async {
+                self.citiesData = result
+                self.cityTableView.reloadData()
+            }
         }
     }
 }

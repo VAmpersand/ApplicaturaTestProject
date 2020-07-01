@@ -1,6 +1,5 @@
 import UIKit
 import CoreData
-import CoreLocation
 
 public final class WeatherTableController: BaseController {
     public var viewModel: WeatherTableViewModelProtocol!
@@ -8,7 +7,6 @@ public final class WeatherTableController: BaseController {
     private var closeButton: UIButton!
     
     private var context = CoreDataService.shared.persistentContainer.viewContext
-    
     private var presentedCities: [PresentedCity] = []
     
     private var containerView: UIView = {
@@ -48,7 +46,13 @@ extension WeatherTableController {
         CoreDataService.shared.loadPresentedCity() { result in
             self.processAsynchronousFetchResult(asynchronousFetchResult: result)
         }
-        addObservers()  
+        addObservers()
+        
+//        if !UserDefaults.cityDataWasSetup {
+//
+//                SVProgressHUD.show(withStatus: "Loading cities")
+//
+//        }
     }
     
     override func addNavigationBar() {
@@ -158,8 +162,8 @@ extension WeatherTableController: UITableViewDelegate {
 extension WeatherTableController {
     func processAsynchronousFetchResult(asynchronousFetchResult: NSAsynchronousFetchResult<PresentedCity>) {
         if let result = asynchronousFetchResult.finalResult {
-            presentedCities = result
             DispatchQueue.main.async {
+                self.presentedCities = result
                 self.weatherTableView.reloadData()
             }
         }
@@ -179,11 +183,20 @@ private extension WeatherTableController {
                                                selector: #selector(cityWasAdded),
                                                name: .cityWasAdded,
                                                object: nil)
+        
+        NotificationCenter.default.addObserver(self,
+                                               selector: #selector(setDefaultCity),
+                                               name: .locationServiceWasSetup,
+                                               object: nil)
     }
     
     @objc func cityWasAdded() {
         CoreDataService.shared.loadPresentedCity() { result in
             self.processAsynchronousFetchResult(asynchronousFetchResult: result)
         }
+    }
+    
+    @objc func setDefaultCity() {
+        viewModel.viewDidLoad()
     }
 }

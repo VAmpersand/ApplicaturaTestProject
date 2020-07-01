@@ -35,37 +35,37 @@ extension CoreDataService {
                 cityData.state = data.state
             }
         }
-        
         do {
             try contex.save()
         } catch let error {
             print(error)
         }
+        
     }
     
-    func fetchPresentedCity(with id: Int32,
-                            completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
-        let context = persistentContainer.viewContext
-        
-        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-        fetchRequest.fetchLimit = 1
-        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
-        
-        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
-            fetchRequest: fetchRequest
-        ) { asynchronousFetchResult in
-            DispatchQueue.global(qos: .userInitiated).async {
-                completion(asynchronousFetchResult)
-            }
-        }
-        
-        do {
-            try context.execute(asynchronousFetchRequest)
-        } catch {
-            let fetchError = error as NSError
-            print("Failed to fetch companie: \(fetchError)")
-        }
-    }
+//    func fetchPresentedCity(with id: Int32,
+//                            completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
+//        let context = persistentContainer.viewContext
+//
+//        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
+//        fetchRequest.fetchLimit = 1
+//        fetchRequest.predicate = NSPredicate(format: "id == %@", id)
+//
+//        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
+//            fetchRequest: fetchRequest
+//        ) { asynchronousFetchResult in
+//            DispatchQueue.global(qos: .userInitiated).async {
+//                completion(asynchronousFetchResult)
+//            }
+//        }
+//
+//        do {
+//            try context.execute(asynchronousFetchRequest)
+//        } catch {
+//            let fetchError = error as NSError
+//            print("Failed to fetch companie: \(fetchError)")
+//        }
+//    }
     
     func updateCityWeather(_ cityWeather: CityWeather) {
         persistentContainer.performBackgroundTask { context in
@@ -110,7 +110,7 @@ extension CoreDataService {
             cityWeather.windSpeed = cityWeatherApi.wind.speed ?? 0
             
             presentedCity.cityWeather = cityWeather
-        
+            
             do {
                 try context.save()
             } catch let saveError {
@@ -124,15 +124,44 @@ extension CoreDataService {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-        
         let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
         fetchRequest.sortDescriptors = [cityDescriptor]
         fetchRequest.fetchBatchSize = 20
+     
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
+            fetchRequest: fetchRequest
+        ) { asynchronousFetchResult in
+            DispatchQueue.main.async {
+                completion(asynchronousFetchResult)
+            }
+        }
+        
+        do {
+            try context.execute(asynchronousFetchRequest)
+        } catch {
+            let fetchError = error as NSError
+            print("Failed to fetch companie: \(fetchError)")
+        }
+    }
+    
+    func loadCityData(with searchText: String? = nil,
+                      completion: @escaping (NSAsynchronousFetchResult<CityData>) -> Void) {
+        let context = persistentContainer.viewContext
+        
+        let fetchRequest = NSFetchRequest<CityData>(entityName: "CityData")
+        let countryDescriptor = NSSortDescriptor(key: "country", ascending: true)
+        let cityDescriptor = NSSortDescriptor(key: "name", ascending: true)
+        fetchRequest.sortDescriptors = [countryDescriptor, cityDescriptor]
+        fetchRequest.fetchBatchSize = 20
+        
+        if let searchText = searchText  {
+            fetchRequest.predicate = NSPredicate(format: "name CONTAINS[cd] %@", searchText.lowercased())
+        }
         
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(
             fetchRequest: fetchRequest
         ) { asynchronousFetchResult in
-            DispatchQueue.global(qos: .userInitiated).async {
+            DispatchQueue.main.async {
                 completion(asynchronousFetchResult)
             }
         }

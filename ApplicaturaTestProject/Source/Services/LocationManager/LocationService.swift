@@ -2,25 +2,24 @@ import CoreLocation
 
 final class LocationService: NSObject {
     static let shared = LocationService()
+    let locationManager = CLLocationManager()
     
-    private let locationManager = CLLocationManager()
-    
-    @discardableResult
     override init() {
         super.init()
         checkLocationService()
     }
     
-    func getUserLocation() -> (lat: Double, lon: Double) {
+    func getUserLocation() -> (lat: Double, lon: Double)? {
         if let location = locationManager.location?.coordinate {
             return (location.latitude, location.longitude)
         }
-        return (0, 0)
+        return nil
     }
     
     func setupLocationService() {
         locationManager.delegate = self
         locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.allowsBackgroundLocationUpdates = true
     }
     
     func checkLocationService() {
@@ -33,11 +32,8 @@ final class LocationService: NSObject {
     func checkLocationAuthorisation() {
         switch CLLocationManager.authorizationStatus() {
         case .authorizedWhenInUse: locationManager.stopUpdatingLocation()
-        case .denied: break
         case .notDetermined: locationManager.requestWhenInUseAuthorization()
-        case .restricted: break
-        case .authorizedAlways: break
-        @unknown default: break
+        default: break
         }
     }
 }
@@ -48,6 +44,7 @@ extension LocationService: CLLocationManagerDelegate {
     
     func locationManager(_ manager: CLLocationManager, didChangeAuthorization status: CLAuthorizationStatus) {
         checkLocationAuthorisation()
+        NotificationCenter.default.post(name: .locationServiceWasSetup, object: nil)
     }
 }
 

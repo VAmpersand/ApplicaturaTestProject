@@ -22,13 +22,12 @@ final class MainRouter: BaseRouter {
 extension MainRouter {
     func startApp(in scene: UIScene) {
         setupWindow(in: scene)
+        
         setupDefaultCityData() {
             DispatchQueue.main.async {
                 NotificationCenter.default.post(name: .cityDataWasSetup, object: nil)
                 UserDefaults.cityDataWasSetup = true
             }
-            print("Finish")
-            self.setupDefaultCity()
         }
     }
     
@@ -51,7 +50,7 @@ extension MainRouter {
         if !UserDefaults.cityDataWasSetup {
             let path = Bundle.main.path(forResource: "city.list", ofType: "json")
             
-            DispatchQueue.global(qos: .utility).async {
+            DispatchQueue.global(qos: .utility).sync {
                 do {
                     let data = try Data(contentsOf: URL(fileURLWithPath: path ?? ""), options: .mappedIfSafe)
                     let cityData = JSONDecoderService.shared.decodeCityData(from: data)
@@ -60,30 +59,6 @@ extension MainRouter {
                     print(error.localizedDescription)
                 }
                 completon()
-            }
-        }
-    }
-    
-    func setupDefaultCity() {
-        if !UserDefaults.defaultCityWasSetup {
-            let location = LocationService.shared.getUserLocation()
-            
-            let url = URLs.urlForCityWeatherByCoord(withLat: location.lat,
-                                                    and: location.lon)
-            DispatchQueue.global(qos: .utility).async {
-                self.dependencies.networkService.getJSONData(
-                    from: url,
-                    with: ApiCityWeather.self
-                ) { result, status, error in
-                    if status {
-                        CoreDataService.shared.setPresentedCityData(result) {
-                            NotificationCenter.default.post(name: .cityWasAdded, object: nil)
-                            UserDefaults.defaultCityWasSetup = true
-                        }
-                    } else {
-                        print(error)
-                    }
-                }
             }
         }
     }
