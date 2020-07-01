@@ -18,12 +18,11 @@
     <entity name="PresentedCity" representedClassName=".PresentedCity" syncable="YES">
         <attribute name="id" optional="YES" attributeType="Integer 32" defaultValueString="0" usesScalarValueType="YES"/>
         <attribute name="name" optional="YES" attributeType="String"/>
-        <relationship name="cityData" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityData"/>
         <relationship name="cityWeather" optional="YES" maxCount="1" deletionRule="Nullify" destinationEntity="CityWeather"/>
     </entity>
     <elements>
         <element name="CityData" positionX="10.21875" positionY="-181.29296875" width="128" height="103"/>
         <element name="CityWeather" positionX="10.82421875" positionY="-35.21875" width="126.65234375" height="148"/>
-        <element name="PresentedCity" positionX="267.03125" positionY="-136.01171875" width="128" height="103"/>
+        <element name="PresentedCity" positionX="267.03125" positionY="-136.01171875" width="128" height="88"/>
     </elements>
 </model>

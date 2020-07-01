@@ -8,6 +8,5 @@ extension PresentedCity {
 
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
-    @NSManaged public var cityData: CityData?
     @NSManaged public var cityWeather: CityWeather?
 }
