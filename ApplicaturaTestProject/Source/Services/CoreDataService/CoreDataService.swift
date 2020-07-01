@@ -43,8 +43,15 @@ extension CoreDataService {
         
     }
     
-    func updateCityWeather(at presentedCity: PresentedCity) {
+    func updateCityWeather(at presentedCity: PresentedCity, whit cityWeather: ApiCityWeather) {
         persistentContainer.performBackgroundTask { context in
+            presentedCity.cityWeather?.clouds = cityWeather.clouds.all ?? 0
+            presentedCity.cityWeather?.temp = cityWeather.main.temp ?? 273
+            presentedCity.cityWeather?.feelsLike = cityWeather.main.feelsLike ?? 273
+            presentedCity.cityWeather?.humidity = cityWeather.main.humidity ?? 0
+            presentedCity.cityWeather?.pressure = cityWeather.main.pressure ?? 0
+            presentedCity.cityWeather?.windSpeed = cityWeather.wind.speed ?? 0
+            
             do {
                 try context.save()
             } catch let saveError {

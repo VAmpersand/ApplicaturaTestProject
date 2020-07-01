@@ -40,35 +40,24 @@ extension WeatherTableViewModel: WeatherTableViewModelProtocol {
         }
     }
     
-    
     func updataPresentedCities(_ presentedCities: [PresentedCity],
                                completion: @escaping () -> Void) {
         let url = URLs.urlForSeveralCitiesID(for: presentedCities)
-        
-        print(url)
         
         dependencies.networkService.getJSONData(
             from: url,
             with: ApiCityWeathers.self
         ) { result, status, error in
             if status, let cityWeaters = result?.list {
-                print(cityWeaters)
                 cityWeaters.forEach { weather in
                     if let id = weather.id,
                         let presentedCity = presentedCities.first(where: { city in
                             city.id == id
                         }) {
-                        presentedCity.cityWeather?.clouds = weather.clouds.all ?? 0
-                        presentedCity.cityWeather?.temp = weather.main.temp ?? 273
-                        presentedCity.cityWeather?.feelsLike = weather.main.feelsLike ?? 273
-                        presentedCity.cityWeather?.humidity = weather.main.humidity ?? 0
-                        presentedCity.cityWeather?.pressure = weather.main.pressure ?? 0
-                        presentedCity.cityWeather?.windSpeed = weather.wind.speed ?? 0
-                        
-                        CoreDataService.shared.updateCityWeather(at: presentedCity)
+                         CoreDataService.shared.updateCityWeather(at: presentedCity,
+                                                                  whit: weather)
                     }
                 }
-                
                 completion()
             } else {
                 print(error)
