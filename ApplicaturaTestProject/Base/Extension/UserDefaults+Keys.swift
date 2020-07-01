@@ -9,19 +9,11 @@ extension UserDefaults {
         }
     }
     
-    static var lat: Double? {
+    static var defaultCityWasSetup: Bool {
         get {
-            return UserDefaults.standard.double(forKey: "lat")
+            return UserDefaults.standard.bool(forKey: "defaultCityWasSetup")
         } set {
-            UserDefaults.standard.set(newValue, forKey: "lat")
-        }
-    }
-    
-    static var lon: Double? {
-        get {
-            return UserDefaults.standard.double(forKey: "lon")
-        } set {
-            UserDefaults.standard.set(newValue, forKey: "lon")
+            UserDefaults.standard.set(newValue, forKey: "defaultCityWasSetup")
         }
     }
 }

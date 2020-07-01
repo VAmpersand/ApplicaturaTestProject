@@ -99,6 +99,6 @@ private extension WeatherTableController.WeatherHeaderCell {
     
     @objc func updateView() {
         actyvityIndicator.stopAnimating()
-        addButton.isHidden = true
+        addButton.isHidden = false
     }
 }

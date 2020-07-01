@@ -33,6 +33,12 @@ extension CoreDataService {
                 cityData.name = data.name
                 cityData.country = data.country
                 cityData.state = data.state
+                
+//                let coord = Coord(context: contex)
+//                coord.lat = data.coord?.lat ?? 0
+//                coord.lon = data.coord?.lon ?? 0
+//                
+//                cityData.coord = coord
             }
         }
         
@@ -43,89 +49,82 @@ extension CoreDataService {
         }
     }
     
-    func fetchPresentedCities() -> [PresentedCity]? {
-        let context = persistentContainer.viewContext
-        let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
-        
-        do {
-            let presentedCities = try context.fetch(fetchRequest)
-            return presentedCities
-        } catch let fetchError {
-            print("Failed to fetch companies: \(fetchError)")
-        }
-        
-        return nil
-    }
-    
-    func fetchPresentedCity(with id: Int32) -> PresentedCity? {
+    func fetchPresentedCity(with id: Int32,
+                            completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
         let context = persistentContainer.viewContext
         
         let fetchRequest = NSFetchRequest<PresentedCity>(entityName: "PresentedCity")
         fetchRequest.fetchLimit = 1
         fetchRequest.predicate = NSPredicate(format: "id == %@", id)
         
-        do {
-            let presentedCities = try context.fetch(fetchRequest)
-            return presentedCities.first
-        } catch let fetchError {
-            print("Failed to fetch companies: \(fetchError)")
+        let asynchronousFetchRequest = NSAsynchronousFetchRequest(
+            fetchRequest: fetchRequest
+        ) { asynchronousFetchResult in
+            DispatchQueue.global(qos: .userInitiated).async {
+                completion(asynchronousFetchResult)
+            }
         }
         
-        return nil
+        do {
+            try context.execute(asynchronousFetchRequest)
+        } catch {
+            let fetchError = error as NSError
+            print("Failed to fetch companie: \(fetchError)")
+        }
     }
     
     func updateCityWeather(_ cityWeather: CityWeather) {
-        let context = persistentContainer.viewContext
-        
-        do {
-            try context.save()
-        } catch let createError {
-            print("Failed to update: \(createError)")
+        persistentContainer.performBackgroundTask { context in
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Failed to setup: \(saveError)")
+            }
         }
     }
     
     
     func deletePresentedCity(_ presentedCity: PresentedCity, comletion: (() -> Void)? = nil) {
-        let context = persistentContainer.viewContext
-        context.delete(presentedCity)
-        
-        do {
-            try context.save()
-        } catch let saveError {
-            print("Failed to delete: \(saveError)")
+        persistentContainer.performBackgroundTask { context in
+            context.delete(presentedCity)
+            
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Failed to setup: \(saveError)")
+            }
         }
-        
         comletion?()
     }
     
     
     func setPresentedCity(_ cityWeatherApi: ApiCityWeather?, comletion: (() -> Void)? = nil) {
         guard let cityWeatherApi = cityWeatherApi else { return }
-        let context = persistentContainer.viewContext
+   
+        persistentContainer.performBackgroundTask { context in
+            let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
+                                                                    into: context) as! PresentedCity
+            presentedCity.id = cityWeatherApi.id ?? 0
+            presentedCity.name = cityWeatherApi.name ?? "Weather in your area"
+            
+            let cityWeather = NSEntityDescription.insertNewObject(forEntityName: "CityWeather",
+                                                                  into: context) as! CityWeather
+            cityWeather.clouds = cityWeatherApi.clouds.all ?? 0
+            cityWeather.feelsLike = cityWeatherApi.main.feelsLike ?? 273
+            cityWeather.temp = cityWeatherApi.main.temp ?? 273
+            cityWeather.pressure = cityWeatherApi.main.pressure ?? 0
+            cityWeather.humidity = cityWeatherApi.main.humidity ?? 0
+            cityWeather.windSpeed = cityWeatherApi.wind.speed ?? 0
+            
+            presentedCity.cityWeather = cityWeather
         
-        let presentedCity = NSEntityDescription.insertNewObject(forEntityName: "PresentedCity",
-                                                                into: context) as! PresentedCity
-        presentedCity.id = cityWeatherApi.id ?? 0
-        presentedCity.name = cityWeatherApi.name ?? "Weather in your area"
-        
-        let cityWeather = NSEntityDescription.insertNewObject(forEntityName: "CityWeather",
-                                                              into: context) as! CityWeather
-        cityWeather.clouds = cityWeatherApi.clouds.all ?? 0
-        cityWeather.feelsLike = cityWeatherApi.main.feelsLike ?? 273
-        cityWeather.temp = cityWeatherApi.main.temp ?? 273
-        cityWeather.pressure = cityWeatherApi.main.pressure ?? 0
-        cityWeather.humidity = cityWeatherApi.main.humidity ?? 0
-        cityWeather.windSpeed = cityWeatherApi.wind.speed ?? 0
-        
-        presentedCity.cityWeather = cityWeather
-        
-        do {
-            try context.save()
-        } catch let saveError {
-            print("Failed to setup: \(saveError)")
+            do {
+                try context.save()
+            } catch let saveError {
+                print("Failed to setup: \(saveError)")
+            }
+            comletion?()
         }
-        
-        comletion?()
     }
     
     func loadPresentedCity(completion: @escaping (NSAsynchronousFetchResult<PresentedCity>) -> Void) {
@@ -140,7 +139,7 @@ extension CoreDataService {
         let asynchronousFetchRequest = NSAsynchronousFetchRequest(
             fetchRequest: fetchRequest
         ) { asynchronousFetchResult in
-            DispatchQueue.main.async {
+            DispatchQueue.global(qos: .userInitiated).async {
                 completion(asynchronousFetchResult)
             }
         }

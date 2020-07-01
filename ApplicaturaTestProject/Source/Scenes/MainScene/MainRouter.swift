@@ -66,11 +66,9 @@ extension MainRouter {
     }
     
     func setupDefaultCity() {
-        let presentedCities = CoreDataService.shared.fetchPresentedCities()
-        let location = LocationService.shared.getUserLocation()
-        
-        if let presentedCities = presentedCities,
-            presentedCities.isEmpty {
+        if !UserDefaults.defaultCityWasSetup {
+            let location = LocationService.shared.getUserLocation()
+            
             let url = URLs.urlForCityWeatherByCoord(withLat: location.lat,
                                                     and: location.lon)
             
@@ -80,7 +78,8 @@ extension MainRouter {
             ) { result, status, error in
                 if status {
                     CoreDataService.shared.setPresentedCity(result) {
-                          NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                        NotificationCenter.default.post(name: .cityWasAdded, object: nil)
+                        UserDefaults.defaultCityWasSetup = true
                     }
                 } else {
                     print(error)

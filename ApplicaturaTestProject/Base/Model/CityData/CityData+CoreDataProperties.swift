@@ -10,5 +10,5 @@ extension CityData {
     @NSManaged public var id: Int32
     @NSManaged public var name: String?
     @NSManaged public var state: String?
-    @NSManaged public var coord: Coord?
+//    @NSManaged public var coord: Coord?
 }

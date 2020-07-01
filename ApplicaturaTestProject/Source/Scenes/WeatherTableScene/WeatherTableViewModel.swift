@@ -15,8 +15,8 @@ final class WeatherTableViewModel {
 
 // MARK: - WeatherTableViewModelProtocol
 extension WeatherTableViewModel: WeatherTableViewModelProtocol {
-    func viewDidLoad() {
-        let url = URLs.urlForSeveralCitiesID(for: CoreDataService.shared.fetchPresentedCities())
+    func viewDidLoad(with presentedCities: [PresentedCity]) {
+        let url = URLs.urlForSeveralCitiesID(for: presentedCities)
 
         dependencies.networkService.getJSONData(
             from: url,

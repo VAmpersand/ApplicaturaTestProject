@@ -7,7 +7,7 @@ public class CityData: NSManagedObject, Decodable {
         case name = "name"
         case state = "state"
         case country = "country"
-        case coord = "coord"
+//        case coord = "coord"
     }
     
     required convenience public init(from decoder: Decoder) throws {
@@ -21,6 +21,6 @@ public class CityData: NSManagedObject, Decodable {
         name = try values.decode(String.self, forKey: .name)
         state = try values.decode(String.self, forKey: .state)
         country = try values.decode(String.self, forKey: .country)
-        coord = try values.decode(Coord.self, forKey: .coord)
+//        coord = try values.decode(Coord.self, forKey: .coord)
     }
 }

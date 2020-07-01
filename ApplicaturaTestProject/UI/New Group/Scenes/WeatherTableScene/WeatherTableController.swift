@@ -158,7 +158,9 @@ extension WeatherTableController {
     func processAsynchronousFetchResult(asynchronousFetchResult: NSAsynchronousFetchResult<PresentedCity>) {
         if let result = asynchronousFetchResult.finalResult {
             presentedCities = result
-            weatherTableView.reloadData()
+            DispatchQueue.main.async {
+                self.weatherTableView.reloadData()
+            }
         }
     }
 }
